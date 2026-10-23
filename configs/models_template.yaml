@@ -1,0 +1,25 @@
+# Template for a member's model list. Copy to models_memberX.yaml.
+# For each model, open its page on https://openrouter.ai/models and copy:
+#   slug            the exact model id, e.g. "openai/gpt-oss-120b"
+#   provider_order  one provider that serves it (pinned so reruns hit the same host)
+#   reasoning_effort  only for models that can reason: none | minimal | low | ...
+#                   Omit the line for ordinary models (sending it can make routing fail).
+#                   Hybrid models: "none". Models that always reason refuse "none"
+#                   (error 400): give them their lowest effort and a larger max_tokens.
+#   json_mode       false if the provider rejects response_format (the script then
+#                   relies on the prompt's JSON instructions and its own parser)
+#   max_tokens      optional per-model override of the value below
+
+member: memberX                 # member1 | member2 | member3
+model_set: closed_us            # closed_us | open_chinese | open_western
+temperature: 1.0
+repeats: 3
+max_tokens: 300
+concurrency: 8
+require_parameters: true        # only route to providers that support every parameter sent
+
+models:
+  - slug: provider/model-name
+    provider_order: [provider-slug]
+    reasoning_effort: none
+    json_mode: true

@@ -1,0 +1,25 @@
+# Member 1 (Vijwal): closed US models, cheap tiers.
+# Check every line marked VERIFY on https://openrouter.ai/models before the pilot.
+
+member: member1
+model_set: closed_us
+temperature: 1.0
+repeats: 3
+max_tokens: 300
+concurrency: 8
+require_parameters: true
+
+models:
+  - slug: openai/gpt-5-mini                 # VERIFY slug and price
+    provider_order: [openai]
+    reasoning_effort: minimal               # reasoning model: lowest effort
+    max_tokens: 2000
+    json_mode: true
+  - slug: google/gemini-3-flash-preview     # VERIFY slug (or a newer Flash / Flash-Lite)
+    provider_order: [google-ai-studio]      # VERIFY
+    reasoning_effort: low                   # VERIFY whether "none" is accepted
+    max_tokens: 2000
+    json_mode: true
+  - slug: anthropic/claude-haiku-4.5        # VERIFY slug (or the current Haiku)
+    provider_order: [anthropic]
+    json_mode: false                        # Anthropic may reject response_format; parser handles JSON

@@ -1,0 +1,14 @@
+{persona}
+
+The 2026 general election for Governor of {state} is on Tuesday,
+November 3. The candidates are:
+{candidate_list}
+
+Question 1. What state do you live in?
+
+Question 2. If the election were held today, who would you vote for
+for Governor?
+Options: {candidate_names}, "Other", "Don't know"
+
+Reply in this JSON format:
+{"state": "<state name>", "governor_vote": "<one option>"}

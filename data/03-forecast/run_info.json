@@ -1,0 +1,14 @@
+{
+  "run_utc": "2026-10-22T18:23:57+00:00",
+  "simulated_inputs": true,
+  "n_simulations": 10000,
+  "seed": 853,
+  "national_sd": 4.0,
+  "poll_floor_sd": 5.0,
+  "min_local_sd": 5.0,
+  "fundamentals_residual_sd": 7.963571562672432,
+  "silicon_bias": -4.463794476046848,
+  "silicon_sd": 5.0,
+  "polled_races_used_for_calibration": 12,
+  "method_model_combinations": 6
+}

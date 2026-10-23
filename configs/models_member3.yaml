@@ -1,0 +1,26 @@
+# Member 3 (Allwin): open-weight Western models.
+# Before the pilot, open each model's page on https://openrouter.ai/models and
+# check (1) the exact slug, (2) a provider that serves it, (3) the price.
+# Replace every value marked VERIFY. Keep the provider pinned so a rerun hits
+# the same host (Member 2's script sets allow_fallbacks: false).
+
+member: member3
+model_set: open_western
+temperature: 1.0
+repeats: 3
+max_tokens: 300
+concurrency: 8
+require_parameters: true
+
+models:
+  - slug: openai/gpt-oss-120b                     # VERIFY slug
+    provider_order: [deepinfra]                   # VERIFY a provider listed on the model page
+    reasoning_effort: low                         # gpt-oss always reasons; "none" is refused
+    max_tokens: 2000                              # room for reasoning before the JSON
+    json_mode: true
+  - slug: meta-llama/llama-3.3-70b-instruct       # VERIFY slug (or a newer Llama)
+    provider_order: [deepinfra]                   # VERIFY
+    json_mode: true                               # no reasoning line: not a reasoning model
+  - slug: mistralai/mistral-small-3.2-24b-instruct  # VERIFY slug (or a newer Mistral)
+    provider_order: [mistral]                     # VERIFY
+    json_mode: true

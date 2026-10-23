@@ -1,0 +1,7 @@
+Using only what you know, estimate the result of the 2026 election for
+Governor of {state}. The candidates are:
+{candidate_list}
+
+Reply in this JSON format:
+{"dem_two_party_share": <number 0-100>, "uncertainty_plus_minus": <number>,
+ "probability_dem_wins": <number 0-1>}
