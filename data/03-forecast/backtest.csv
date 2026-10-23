@@ -1,0 +1,2 @@
+races,rmse_margin,brier,log_score,winner_correct,is_simulated
+108,8.165137994128278,0.07282948302881909,-0.2300786939737604,0.8981481481481481,True

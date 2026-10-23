@@ -1,0 +1,40 @@
+race,type,incumbent,incumbent_party,first_elected,status,open_seat,last_race_pct,last_race_party,n_candidates,pvi,rating_cook,rating_ddhq,rating_fox,rating_ie,rating_rcp,rating_sabato,rating_silver,competitive
+Alabama,state,Kay Ivey,R,2017,Term-limited,True,66.9,R,2,-15.0,Solid R,Likely R,Solid R,Solid R,Solid R,Likely R,Solid R,False
+Alaska,state,Mike Dunleavy,R,2018,Term-limited,True,50.3,R,4,-6.0,Lean D (flip),Lean D (flip),Tossup,Tossup,Lean D (flip),Lean D (flip),Solid D (flip),False
+Arizona,state,Katie Hobbs,D,2022,Incumbent renominated,False,50.3,D,4,-2.0,Lean D,Lean D,Lean D,Tilt D,Lean D,Lean D,Solid D,True
+Arkansas,state,Sarah Huckabee Sanders,R,2022,Incumbent renominated,False,63.0,R,3,-15.0,Solid R,Safe R,Solid R,Solid R,Solid R,Safe R,Solid R,False
+California,state,Gavin Newsom,D,2018,Term-limited,True,59.2,D,2,12.0,Solid D,Safe D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Colorado,state,Jared Polis,D,2018,Term-limited,True,58.5,D,7,6.0,Solid D,Likely D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Connecticut,state,Ned Lamont,D,2018,Incumbent renominated,False,56.0,D,2,8.0,Solid D,Likely D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Florida,state,Ron DeSantis,R,2018,Term-limited,True,59.4,R,8,-5.0,Lean R,Lean R,Lean R,Lean R,Tossup,Lean R,Lean R,True
+Georgia,state,Brian Kemp,R,2018,Term-limited,True,53.4,R,2,-1.0,Tossup,Tossup,Tossup,Tossup,Tossup,Tossup,Tossup,True
+Hawaii,state,Josh Green,D,2022,Incumbent renominated,False,63.2,D,2,13.0,Solid D,Safe D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Idaho,state,Brad Little,R,2018,Incumbent renominated,False,60.5,R,5,-18.0,Solid R,Safe R,Solid R,Solid R,Solid R,Safe R,Solid R,False
+Illinois,state,JB Pritzker,D,2018,Incumbent renominated,False,54.9,D,3,6.0,Solid D,Likely D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Iowa,state,Kim Reynolds,R,2017,Incumbent retiring,True,58.0,R,3,-6.0,Lean D (flip),Lean D (flip),Lean D (flip),Tilt D (flip),Lean D (flip),Lean D (flip),Likely D (flip),False
+Kansas,state,Laura Kelly,D,2018,Term-limited,True,49.5,D,2,-8.0,Lean R (flip),Lean R (flip),Lean R (flip),Tilt R (flip),Tossup,Lean R (flip),Lean R (flip),True
+Maine,state,Janet Mills,D,2018,Term-limited,True,55.7,D,3,4.0,Solid D,Likely D,Solid D,Solid D,Likely D,Likely D,Solid D,True
+Maryland,state,Wes Moore,D,2022,Incumbent renominated,False,64.5,D,4,15.0,Solid D,Safe D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Massachusetts,state,Maura Healey,D,2022,Incumbent renominated,False,63.7,D,3,14.0,Solid D,Safe D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+Michigan,state,Gretchen Whitmer,D,2018,Term-limited,True,54.5,D,5,0.0,Lean D,Likely D,Lean D,Tilt D,Lean D,Likely D,Likely D,True
+Minnesota,state,Tim Walz,D,2018,Incumbent retiring,True,52.3,D,3,3.0,Solid D,Likely D,Likely D,Likely D,Likely D,Safe D,Solid D,True
+Nebraska,state,Jim Pillen,R,2022,Incumbent renominated,False,59.7,R,4,-10.0,Likely R,Likely R,Likely R,Likely R,Solid R,Likely R,Likely R,False
+Nevada,state,Joe Lombardo,R,2022,Incumbent renominated,False,48.8,R,3,-1.0,Tossup,Tossup,Tossup,Tilt R,Tossup,Tossup,Tossup,True
+New Hampshire,state,Kelly Ayotte,R,2024,Incumbent renominated,False,53.6,R,3,2.0,Likely R,Lean R,Likely R,Solid R,Lean R,Likely R,Solid R,True
+New Mexico,state,Michelle Lujan Grisham,D,2018,Term-limited,True,52.0,D,2,4.0,Solid D,Likely D,Solid D,Likely D,Lean D,Safe D,Solid D,True
+New York,state,Kathy Hochul,D,2021,Incumbent renominated,False,53.2,D,2,8.0,Solid D,Likely D,Solid D,Likely D,Solid D,Safe D,Solid D,False
+Ohio,state,Mike DeWine,R,2018,Term-limited,True,62.4,R,3,-5.0,Tossup,Tossup,Tossup,Tossup,Tossup,Lean D (flip),Likely D (flip),True
+Oklahoma,state,Kevin Stitt,R,2018,Term-limited,True,55.4,R,5,-17.0,Likely R,Safe R,Solid R,Likely R,Solid R,Likely R,Likely R,False
+Oregon,state,Tina Kotek,D,2022,Incumbent renominated,False,47.0,D,3,8.0,Lean D,Likely D,Lean D,Lean D,Tossup,Lean D,Likely D,False
+Pennsylvania,state,Josh Shapiro,D,2022,Incumbent renominated,False,56.5,D,3,-1.0,Solid D,Safe D,Solid D,Solid D,Solid D,Safe D,Solid D,True
+Rhode Island,state,Dan McKee,D,2021,Incumbent lost renomination,True,57.9,D,5,8.0,Solid D,Safe D,Solid D,Solid D,Solid D,Safe D,Solid D,False
+South Carolina,state,Henry McMaster,R,2017,Term-limited,True,58.1,R,4,-8.0,Solid R,Lean R,Solid R,Solid R,Likely R,Safe R,Solid R,False
+South Dakota,state,Larry Rhoden,R,2025,Incumbent nominated to full term,False,62.0,R,2,-15.0,Solid R,Safe R,Solid R,Solid R,Solid R,Safe R,Solid R,False
+Tennessee,state,Bill Lee,R,2018,Term-limited,True,64.9,R,15,-14.0,Solid R,Likely R,Solid R,Solid R,Solid R,Safe R,Solid R,False
+Texas,state,Greg Abbott,R,2014,Incumbent renominated,False,54.8,R,3,-6.0,Lean R,Lean R,Lean R,Lean R,Tossup,Lean R,Lean R,False
+Vermont,state,Phil Scott,R,2016,Incumbent renominated,False,73.4,R,5,17.0,Likely R,Likely R,Likely R,Likely R,Lean R,Likely R,Lean R,True
+Wisconsin,state,Tony Evers,D,2018,Incumbent retiring,True,51.2,D,2,0.0,Tossup,Lean D,Tossup,Tossup,Tossup,Lean D,Lean D,True
+Wyoming,state,Mark Gordon,R,2018,Term-limited,True,74.1,R,3,-23.0,Solid R,Safe R,Solid R,Solid R,Solid R,Safe R,Solid R,False
+Guam,territory,Lou Leon Guerrero,D,2018,Term-limited,True,55.5,D,2,,,,,,,,,False
+Northern Mariana Islands,territory,David M. Apatang,O,2025,Incumbent retiring,True,54.1,O,3,,,,,,,,,False
+U.S. Virgin Islands,territory,Albert Bryan,D,2018,Term-limited,True,56.0,D,5,,,,,,,,,False

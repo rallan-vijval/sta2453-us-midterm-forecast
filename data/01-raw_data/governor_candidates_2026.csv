@@ -1,0 +1,145 @@
+race,type,candidate,party,party_code,incumbent
+Alabama,state,Doug Jones,Democratic,D,False
+Alabama,state,Tommy Tuberville,Republican,R,False
+Alaska,state,Dave Bronson,Republican,R,False
+Alaska,state,Jonathan Kreiss-Tomkins,Democratic,D,False
+Alaska,state,Treg Taylor,Republican,R,False
+Alaska,state,Bernadette Wilson,Republican,R,False
+Arizona,state,Andy Biggs,Republican,R,False
+Arizona,state,Katie Hobbs,Democratic,D,True
+Arizona,state,Teri Hourihan,No Labels,O,False
+Arizona,state,Risa Lombardo,Green,O,False
+Arkansas,state,Fredrick Love,Democratic,D,False
+Arkansas,state,Sarah Huckabee Sanders,Republican,R,True
+Arkansas,state,Colt Shelby,Libertarian,O,False
+California,state,Xavier Becerra,Democratic,D,False
+California,state,Steve Hilton,Republican,R,False
+Colorado,state,Stephen Hamilton,American Constitution,O,False
+Colorado,state,Greg Lopez,Independent,O,False
+Colorado,state,Victor Marx,Republican,R,False
+Colorado,state,Eric Mulder,Libertarian,O,False
+Colorado,state,Jeff Peckman,Unity,O,False
+Colorado,state,Erik Underwood,Approval Voting,O,False
+Colorado,state,Phil Weiser,Democratic,D,False
+Connecticut,state,Ryan Fazio,Republican,R,False
+Connecticut,state,Ned Lamont,Democratic,D,True
+Florida,state,Dean Abrams,Independent,O,False
+Florida,state,Charles Burkett,Independent,O,False
+Florida,state,Jeffrey Datto,Independent,O,False
+Florida,state,Moe Dimanche,Independent,O,False
+Florida,state,Byron Donalds,Republican,R,False
+Florida,state,Scott Jewett,Libertarian,O,False
+Florida,state,David Jolly,Democratic,D,False
+Florida,state,Frank Russo,Independent,O,False
+Georgia,state,Keisha Lance Bottoms,Democratic,D,False
+Georgia,state,Rick Jackson,Republican,R,False
+Hawaii,state,Gary Cordery,Republican,R,False
+Hawaii,state,Josh Green,Democratic,D,True
+Idaho,state,Brad Little,Republican,R,True
+Idaho,state,Terri Pickens,Democratic,D,False
+Idaho,state,Pro-Life,Constitution,O,False
+Idaho,state,Paul Sand,Libertarian,O,False
+Idaho,state,John Stegner,Independent,O,False
+Illinois,state,Darren Bailey,Republican,R,False
+Illinois,state,Collin Corbett,Independent,O,False
+Illinois,state,JB Pritzker,Democratic,D,True
+Iowa,state,Zach Lahn,Republican,R,False
+Iowa,state,Rob Sand,Democratic,D,False
+Iowa,state,Sondra Wilson,Independent,O,False
+Kansas,state,Cindy Holscher,Democratic,D,False
+Kansas,state,Ty Masterson,Republican,R,False
+Maine,state,Rick Bennett,Independent,O,False
+Maine,state,Robert B. Charles,Republican,R,False
+Maine,state,Hannah Pingree,Democratic,D,False
+Maryland,state,Dan Cox,Republican,R,False
+Maryland,state,Andy Ellis,Green,O,False
+Maryland,state,Wes Moore,Democratic,D,True
+Maryland,state,Cathy White,Working Class,O,False
+Massachusetts,state,Maura Healey,Democratic,D,True
+Massachusetts,state,Andrea James,Independent,O,False
+Massachusetts,state,Mike Minogue,Republican,R,False
+Michigan,state,Jocelyn Benson,Democratic,D,False
+Michigan,state,Donna Brandenburg,U.S. Taxpayers,O,False
+Michigan,state,Douglas Campbell,Green,O,False
+Michigan,state,Anthony Hudson,Libertarian,O,False
+Michigan,state,John James,Republican,R,False
+Minnesota,state,Lisa Demuth,Republican,R,False
+Minnesota,state,Amy Klobuchar,DFL,D,False
+Minnesota,state,Steven Young,Green,O,False
+Nebraska,state,Rick Beard,Legal Marijuana Now,O,False
+Nebraska,state,Brett Lindstrom,America First,O,False
+Nebraska,state,Jim Pillen,Republican,R,True
+Nebraska,state,Lynne Walz,Democratic,D,False
+Nevada,state,Aaron Ford,Democratic,D,False
+Nevada,state,Danielle Ford,Independent,O,False
+Nevada,state,Joe Lombardo,Republican,R,True
+New Hampshire,state,Kelly Ayotte,Republican,R,True
+New Hampshire,state,Jon Kiper,Community First,O,False
+New Hampshire,state,Cinde Warmington,Democratic,D,False
+New Mexico,state,Deb Haaland,Democratic,D,False
+New Mexico,state,Gregg Hull,Republican,R,False
+New York,state,Bruce Blakeman,Republican,R,False
+New York,state,Kathy Hochul,Democratic,D,True
+Ohio,state,Amy Acton,Democratic,D,False
+Ohio,state,Donald Kissick,Libertarian,O,False
+Ohio,state,Vivek Ramaswamy,Republican,R,False
+Oklahoma,state,Robert Brooks Sr.,Independent,O,False
+Oklahoma,state,Orlando Bush,Independent,O,False
+Oklahoma,state,Jerry Griffin,Independent,O,False
+Oklahoma,state,Mike Mazzei,Republican,R,False
+Oklahoma,state,Cyndi Munson,Democratic,D,False
+Oregon,state,Christine Drazan,Republican,R,False
+Oregon,state,Tina Kotek,Democratic,D,True
+Oregon,state,Brett Smith,Pacific Green,O,False
+Pennsylvania,state,Stacy Garrity,Republican,R,False
+Pennsylvania,state,Ken Krawchuk,Libertarian,O,False
+Pennsylvania,state,Josh Shapiro,Democratic,D,True
+Rhode Island,state,Ken Block,Independent,O,False
+Rhode Island,state,Helena Foulkes,Democratic,D,False
+Rhode Island,state,Jasjit Gotra,Independent,O,False
+Rhode Island,state,Aaron Guckian,Republican,R,False
+Rhode Island,state,CD Reynolds,Independent,O,False
+South Carolina,state,Michael Addison,United Citizens,O,False
+South Carolina,state,Walid Hakim,Green,O,False
+South Carolina,state,Jermaine Johnson,Democratic,D,False
+South Carolina,state,Alan Wilson,Republican,R,False
+South Dakota,state,Dan Ahlers,Democratic,D,False
+South Dakota,state,Larry Rhoden,Republican,R,True
+Tennessee,state,Misam Abidi,Independent,O,False
+Tennessee,state,Santiago Asconape,Independent,O,False
+Tennessee,state,Marsha Blackburn,Republican,R,False
+Tennessee,state,Dean Brewer,Independent,O,False
+Tennessee,state,Ray Brown,Independent,O,False
+Tennessee,state,Jerri Green,Democratic,D,False
+Tennessee,state,Taylor Hafley,Independent,O,False
+Tennessee,state,David Hatley,Independent,O,False
+Tennessee,state,Wendell Jackson,Independent,O,False
+Tennessee,state,Charles Van Morgan,Independent,O,False
+Tennessee,state,Eddie Lee Murphy,Independent,O,False
+Tennessee,state,Lauren Pinkston,Independent,O,False
+Tennessee,state,Karl Smithson,Independent,O,False
+Tennessee,state,L. Webb Taylor,Independent,O,False
+Tennessee,state,Robert Vick,Independent,O,False
+Texas,state,Greg Abbott,Republican,R,True
+Texas,state,Pat Dixon,Libertarian,O,False
+Texas,state,Gina Hinojosa,Democratic,D,False
+Vermont,state,June Goodband,Green Mountain,O,False
+Vermont,state,Amanda Janoo,Democratic,D,False
+Vermont,state,Brian Judd,Independent,O,False
+Vermont,state,Phil Scott,Republican,R,True
+Vermont,state,Dean Roy,Freedom and Unity,O,False
+Wisconsin,state,David Crowley,Democratic,D,False
+Wisconsin,state,Tom Tiffany,Republican,R,False
+Wyoming,state,Eric Barlow,Republican,R,False
+Wyoming,state,Kenneth Casner,Democratic,D,False
+Wyoming,state,Joseph Kibler,Constitution,O,False
+Guam,territory,Vicente Ada,Republican,R,False
+Guam,territory,Therese Terlaje,Democratic,D,False
+Northern Mariana Islands,territory,Blas T. Attao,Independent,O,False
+Northern Mariana Islands,territory,Lawrence Camacho,Independent,O,False
+Northern Mariana Islands,territory,Ralph Torres,Republican,R,False
+U.S. Virgin Islands,territory,Oakland Benta,Independent,O,False
+U.S. Virgin Islands,territory,Adlah Donastorg Jr.,Independent,O,False
+U.S. Virgin Islands,territory,Gustav James,Independent,O,False
+U.S. Virgin Islands,territory,Warren Mosler,Independent,O,False
+U.S. Virgin Islands,territory,Stacey Plaskett,Democratic,D,False

@@ -1,0 +1,109 @@
+year,race,incumbent,incumbent_party,incumbent_ran,dem_pct,rep_pct,winner,winner_party,pvi
+2014,Alabama,Robert J. Bentley,R,True,36.2,63.6,Robert J. Bentley,R,-14.0
+2014,Alaska,Sean Parnell,R,True,0.0,45.9,Bill Walker,O,-12.0
+2014,Arizona,Jan Brewer,R,False,41.6,53.4,Doug Ducey,R,-7.0
+2014,Arkansas,Mike Beebe,D,False,41.5,55.4,Asa Hutchinson,R,-14.0
+2014,California,Jerry Brown,D,True,60.0,40.0,Jerry Brown,D,9.0
+2014,Colorado,John Hickenlooper,D,True,49.3,46.0,John Hickenlooper,D,1.0
+2014,Connecticut,Dannel Malloy,D,True,50.7,48.2,Dannel Malloy,D,7.0
+2014,Florida,Rick Scott,R,True,47.1,48.1,Rick Scott,R,-2.0
+2014,Georgia,Nathan Deal,R,True,44.9,52.7,Nathan Deal,R,-6.0
+2014,Hawaii,Neil Abercrombie,D,False,49.5,37.1,David Ige,D,20.0
+2014,Idaho,Butch Otter,R,True,38.6,53.5,Butch Otter,R,-18.0
+2014,Illinois,Pat Quinn,D,True,46.4,50.3,Bruce Rauner,R,8.0
+2014,Iowa,Terry Branstad,R,True,37.3,59.0,Terry Branstad,R,1.0
+2014,Kansas,Sam Brownback,R,True,46.1,49.8,Sam Brownback,R,-12.0
+2014,Maine,Paul LePage,R,True,43.4,48.2,Paul LePage,R,6.0
+2014,Maryland,Martin O'Malley,D,False,47.3,51.0,Larry Hogan,R,10.0
+2014,Massachusetts,Deval Patrick,D,False,46.5,48.4,Charlie Baker,R,10.0
+2014,Michigan,Rick Snyder,R,True,46.9,50.9,Rick Snyder,R,4.0
+2014,Minnesota,Mark Dayton,D,True,50.1,44.5,Mark Dayton,D,2.0
+2014,Nebraska,Dave Heineman,R,False,39.2,57.2,Pete Ricketts,R,-12.0
+2014,Nevada,Brian Sandoval,R,True,23.9,70.6,Brian Sandoval,R,2.0
+2014,New Hampshire,Maggie Hassan,D,True,52.4,47.4,Maggie Hassan,D,1.0
+2014,New Mexico,Susana Martinez,R,True,42.8,57.2,Susana Martinez,R,4.0
+2014,New York,Andrew Cuomo,D,True,54.3,40.3,Andrew Cuomo,D,11.0
+2014,Ohio,John Kasich,R,True,33.0,63.6,John Kasich,R,-1.0
+2014,Oklahoma,Mary Fallin,R,True,41.0,55.8,Mary Fallin,R,-19.0
+2014,Oregon,John Kitzhaber,D,True,49.9,44.1,John Kitzhaber,D,5.0
+2014,Pennsylvania,Tom Corbett,R,True,54.9,45.1,Tom Wolf,D,1.0
+2014,Rhode Island,Lincoln Chafee,D,False,40.7,36.2,Gina Raimondo,D,11.0
+2014,South Carolina,Nikki Haley,R,True,41.4,55.9,Nikki Haley,R,-8.0
+2014,South Dakota,Dennis Daugaard,R,True,25.4,70.5,Dennis Daugaard,R,-10.0
+2014,Tennessee,Bill Haslam,R,True,22.8,70.3,Bill Haslam,R,-12.0
+2014,Texas,Rick Perry,R,False,38.9,59.3,Greg Abbott,R,-10.0
+2014,Vermont,Peter Shumlin,D,True,46.4,45.1,Peter Shumlin,D,16.0
+2014,Wisconsin,Scott Walker,R,True,46.6,52.3,Scott Walker,R,2.0
+2014,Wyoming,Matt Mead,R,True,27.3,59.4,Matt Mead,R,-22.0
+2018,Alabama,Kay Ivey,R,True,40.4,59.5,Kay Ivey,R,-14.0
+2018,Alaska,Bill Walker,O,True,44.4,51.4,Mike Dunleavy,R,-9.0
+2018,Arizona,Doug Ducey,R,True,41.8,56.0,Doug Ducey,R,-5.0
+2018,Arkansas,Asa Hutchinson,R,True,31.8,65.3,Asa Hutchinson,R,-15.0
+2018,California,Jerry Brown,D,False,61.9,38.1,Gavin Newsom,D,12.0
+2018,Colorado,John Hickenlooper,D,False,53.4,42.8,Jared Polis,D,1.0
+2018,Connecticut,Dannel Malloy,D,False,49.4,46.2,Ned Lamont,D,6.0
+2018,Florida,Rick Scott,R,False,49.2,49.6,Ron DeSantis,R,-2.0
+2018,Georgia,Nathan Deal,R,False,48.8,50.2,Brian Kemp,R,-5.0
+2018,Hawaii,David Ige,D,True,62.7,33.7,David Ige,D,18.0
+2018,Idaho,Butch Otter,R,False,38.2,59.8,Brad Little,R,-19.0
+2018,Illinois,Bruce Rauner,R,True,54.5,38.8,J. B. Pritzker,D,7.0
+2018,Iowa,Kim Reynolds,R,True,47.5,50.3,Kim Reynolds,R,-3.0
+2018,Kansas,Jeff Colyer,R,False,48.0,43.0,Laura Kelly,D,-13.0
+2018,Maine,Paul LePage,R,False,50.9,43.2,Janet Mills,D,3.0
+2018,Maryland,Larry Hogan,R,True,43.5,55.3,Larry Hogan,R,12.0
+2018,Massachusetts,Charlie Baker,R,True,33.1,66.6,Charlie Baker,R,12.0
+2018,Michigan,Rick Snyder,R,False,53.3,43.7,Gretchen Whitmer,D,1.0
+2018,Minnesota,Mark Dayton,D,False,53.8,42.4,Tim Walz,D,1.0
+2018,Nebraska,Pete Ricketts,R,True,41.0,59.0,Pete Ricketts,R,-14.0
+2018,Nevada,Brian Sandoval,R,False,49.4,45.3,Steve Sisolak,D,1.0
+2018,New Hampshire,Chris Sununu,R,True,45.7,52.8,Chris Sununu,R,0.0
+2018,New Mexico,Susana Martinez,R,False,57.2,42.8,Michelle Lujan Grisham,D,3.0
+2018,New York,Andrew Cuomo,D,True,59.6,36.2,Andrew Cuomo,D,12.0
+2018,Ohio,John Kasich,R,False,46.7,50.4,Mike DeWine,R,-3.0
+2018,Oklahoma,Mary Fallin,R,False,42.2,54.3,Kevin Stitt,R,-20.0
+2018,Oregon,Kate Brown,D,True,50.0,43.6,Kate Brown,D,5.0
+2018,Pennsylvania,Tom Wolf,D,True,57.8,40.7,Tom Wolf,D,0.0
+2018,Rhode Island,Gina Raimondo,D,True,52.6,37.2,Gina Raimondo,D,10.0
+2018,South Carolina,Henry McMaster,R,True,45.9,54.0,Henry McMaster,R,-8.0
+2018,South Dakota,Dennis Daugaard,R,False,47.6,51.0,Kristi Noem,R,-14.0
+2018,Tennessee,Bill Haslam,R,False,38.5,59.6,Bill Lee,R,-14.0
+2018,Texas,Greg Abbott,R,True,42.5,55.8,Greg Abbott,R,-8.0
+2018,Vermont,Phil Scott,R,True,40.2,55.2,Phil Scott,R,15.0
+2018,Wisconsin,Scott Walker,R,True,49.5,48.4,Tony Evers,D,0.0
+2018,Wyoming,Matt Mead,R,False,27.5,67.1,Mark Gordon,R,-25.0
+2022,Alabama,Kay Ivey,R,True,29.2,66.9,Kay Ivey,R,-15.0
+2022,Alaska,Mike Dunleavy,R,True,24.2,54.8,Mike Dunleavy,R,-8.0
+2022,Arizona,Doug Ducey,R,False,50.3,49.7,Katie Hobbs,D,-2.0
+2022,Arkansas,Asa Hutchinson,R,False,35.2,63.0,Sarah Huckabee Sanders,R,-16.0
+2022,California,Gavin Newsom,D,True,59.2,40.8,Gavin Newsom,D,13.0
+2022,Colorado,Jared Polis,D,True,58.5,39.2,Jared Polis,D,4.0
+2022,Connecticut,Ned Lamont,D,True,56.0,43.1,Ned Lamont,D,7.0
+2022,Florida,Ron DeSantis,R,True,40.0,59.4,Ron DeSantis,R,-3.0
+2022,Georgia,Brian Kemp,R,True,45.9,53.4,Brian Kemp,R,-3.0
+2022,Hawaii,David Ige,D,False,63.2,36.8,Josh Green,D,14.0
+2022,Idaho,Brad Little,R,True,20.3,60.5,Brad Little,R,-18.0
+2022,Illinois,J. B. Pritzker,D,True,54.9,42.4,J. B. Pritzker,D,7.0
+2022,Iowa,Kim Reynolds,R,True,39.5,58.0,Kim Reynolds,R,-6.0
+2022,Kansas,Laura Kelly,D,True,49.5,47.3,Laura Kelly,D,-10.0
+2022,Maine,Janet Mills,D,True,55.7,42.4,Janet Mills,D,2.0
+2022,Maryland,Larry Hogan,R,False,64.5,32.1,Wes Moore,D,14.0
+2022,Massachusetts,Charlie Baker,R,False,63.7,34.6,Maura Healey,D,15.0
+2022,Michigan,Gretchen Whitmer,D,True,54.5,43.9,Gretchen Whitmer,D,-1.0
+2022,Minnesota,Tim Walz,D,True,52.3,44.6,Tim Walz,D,1.0
+2022,Nebraska,Pete Ricketts,R,False,36.3,59.7,Jim Pillen,R,-13.0
+2022,Nevada,Steve Sisolak,D,True,47.3,48.8,Joe Lombardo,R,-1.0
+2022,New Hampshire,Chris Sununu,R,True,41.6,57.1,Chris Sununu,R,1.0
+2022,New Mexico,Michelle Lujan Grisham,D,True,52.0,45.6,Michelle Lujan Grisham,D,3.0
+2022,New York,Kathy Hochul,D,True,53.2,46.8,Kathy Hochul,D,10.0
+2022,Ohio,Mike DeWine,R,True,37.4,62.4,Mike DeWine,R,-6.0
+2022,Oklahoma,Kevin Stitt,R,True,41.8,55.4,Kevin Stitt,R,-20.0
+2022,Oregon,Kate Brown,D,False,47.0,43.6,Tina Kotek,D,6.0
+2022,Pennsylvania,Tom Wolf,D,False,56.5,41.7,Josh Shapiro,D,-2.0
+2022,Rhode Island,Dan McKee,D,True,57.9,38.9,Dan McKee,D,8.0
+2022,South Carolina,Henry McMaster,R,True,40.7,58.1,Henry McMaster,R,-8.0
+2022,South Dakota,Kristi Noem,R,True,35.2,62.0,Kristi Noem,R,-16.0
+2022,Tennessee,Bill Lee,R,True,32.9,64.9,Bill Lee,R,-14.0
+2022,Texas,Greg Abbott,R,True,43.9,54.8,Greg Abbott,R,-5.0
+2022,Vermont,Phil Scott,R,True,23.9,70.9,Phil Scott,R,16.0
+2022,Wisconsin,Tony Evers,D,True,51.2,47.8,Tony Evers,D,-2.0
+2022,Wyoming,Mark Gordon,R,True,15.8,74.1,Mark Gordon,R,-25.0

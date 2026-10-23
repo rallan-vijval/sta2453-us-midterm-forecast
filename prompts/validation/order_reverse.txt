@@ -1,0 +1,22 @@
+{persona}
+
+The 2026 general election for Governor of {state} is on Tuesday,
+November 3. The candidates are:
+{candidate_list_reversed}
+
+Question 1. How likely are you to vote in this election?
+Options: "Definitely will vote", "Probably will vote",
+"Unlikely to vote", "Will not vote"
+
+Question 2. If the election were held today, who would you vote for
+for Governor?
+Options: {candidate_names}, "Other", "Don't know"
+
+Question 3. In the election for the U.S. House of Representatives in your
+district, which party's candidate would you vote for?
+Options: "The Democratic Party candidate", "The Republican Party
+candidate", "Other", "Don't know"
+
+Reply in this JSON format:
+{"turnout": "<one option>", "governor_vote": "<one option>",
+ "house_vote": "<one option>"}

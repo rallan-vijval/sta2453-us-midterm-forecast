@@ -1,0 +1,24 @@
+# Member 2 (Shrey): open-weight Chinese models.
+# The Week 5 demo used DeepSeek V4 and GLM-5.3. Check every VERIFY line on
+# https://openrouter.ai/models and pin the developer's own API where offered.
+
+member: member2
+model_set: open_chinese
+temperature: 1.0
+repeats: 3
+max_tokens: 300
+concurrency: 8
+require_parameters: true
+
+models:
+  - slug: deepseek/deepseek-v4              # VERIFY slug
+    provider_order: [deepseek]              # VERIFY
+    reasoning_effort: none
+    json_mode: true
+  - slug: z-ai/glm-5.3                      # VERIFY slug
+    provider_order: [z-ai]                  # VERIFY
+    reasoning_effort: none
+    json_mode: true
+  - slug: qwen/qwen3-235b-a22b-2507         # VERIFY slug (or a newer Qwen instruct model)
+    provider_order: [deepinfra]             # VERIFY
+    json_mode: true

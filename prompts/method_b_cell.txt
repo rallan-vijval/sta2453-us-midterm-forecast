@@ -1,0 +1,11 @@
+Consider the following group of {cell_description} in {state}.
+
+The 2026 general election for Governor of {state} is on Tuesday,
+November 3. The candidates are:
+{candidate_list}
+
+Estimate what percentage of people in this group who vote would vote for
+each option. Percentages must sum to 100.
+
+Reply in this JSON format:
+{"distribution": {distribution_template}, "turnout_percent": <number between 0 and 100>}
