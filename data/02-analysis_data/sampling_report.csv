@@ -1,0 +1,37 @@
+state,available_2025,available_2024,sampled_2025,sampled_2024,sampled_total,target_met
+Alabama,230,823,100,0,100,True
+Alaska,21,120,21,79,100,True
+Arizona,358,1381,100,0,100,True
+Arkansas,113,441,100,0,100,True
+California,1460,4495,100,0,100,True
+Colorado,274,985,100,0,100,True
+Connecticut,153,536,100,0,100,True
+Florida,1139,4055,100,0,100,True
+Georgia,537,1886,100,0,100,True
+Hawaii,59,162,59,41,100,True
+Idaho,67,281,67,33,100,True
+Illinois,534,2143,100,0,100,True
+Iowa,143,571,100,0,100,True
+Kansas,104,450,100,0,100,True
+Maine,65,272,65,35,100,True
+Maryland,255,1000,100,0,100,True
+Massachusetts,240,1033,100,0,100,True
+Michigan,476,1856,100,0,100,True
+Minnesota,243,960,100,0,100,True
+Nebraska,73,324,73,27,100,True
+Nevada,169,679,100,0,100,True
+New Hampshire,50,274,50,50,100,True
+New Mexico,110,380,100,0,100,True
+New York,982,3150,100,0,100,True
+Ohio,508,2333,100,0,100,True
+Oklahoma,166,611,100,0,100,True
+Oregon,269,956,100,0,100,True
+Pennsylvania,677,2830,100,0,100,True
+Rhode Island,42,191,42,58,100,True
+South Carolina,240,907,100,0,100,True
+South Dakota,48,153,48,52,100,True
+Tennessee,282,1246,100,0,100,True
+Texas,1208,4246,100,0,100,True
+Vermont,22,117,22,78,100,True
+Wisconsin,286,1213,100,0,100,True
+Wyoming,21,80,21,79,100,True
