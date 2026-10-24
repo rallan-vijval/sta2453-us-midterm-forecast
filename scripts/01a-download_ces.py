@@ -1,4 +1,5 @@
 
+
 from datetime import datetime, timezone
 import hashlib
 import json
@@ -47,19 +48,64 @@ def main():
     for name, details in FILES.items():
         file_id = details["file_id"]
         destination = CES_DIR / details["filename"]
+
         url = f"{BASE_URL}/api/access/datafile/{file_id}"
+        if name == "ces_2025":
+            url += "?format=original"
 
         if destination.exists() and destination.stat().st_size > 0:
+            if name == "ces_2025":
+                print(
+                    f"CES 2025 destination already exists: {destination.name}"
+                )
+                print(
+                    "Skipping it to avoid assuming the existing file "
+                    "is a valid Stata file."
+                )
+                raise FileExistsError(
+                    f"Please rename or move {destination} before downloading "
+                    "a fresh copy."
+                )
+
             print(f"Already exists; skipping download: {destination.name}")
             status = "existing_file_checksum_recorded"
+
         else:
             print(f"Downloading {name} (file ID: {file_id})...")
 
-            response = api.get_datafile(file_id, is_pid=False)
+            if name == "ces_2025":
+                response = api.get_datafile(
+                    file_id,
+                    data_format="original",
+                    is_pid=False,
+                )
+            else:
+                response = api.get_datafile(
+                    file_id,
+                    is_pid=False,
+                )
+
             response.raise_for_status()
 
             if not response.content:
                 raise RuntimeError(f"Downloaded file is empty: {name}")
+
+            # Check the Stata file signature before saving CES 2025.
+            # Stata .dta files begin with a format-specific header.
+            if name == "ces_2025":
+                valid_stata_header = (
+                    response.content.startswith(b"<stata_dta>")
+                    or response.content[:1] in (b"\x6c", b"\x72", b"\x73")
+                )
+
+                if not valid_stata_header:
+                    raise RuntimeError(
+                        "CES 2025 response does not appear to be a Stata "
+                        ".dta file. The file was NOT saved. "
+                        f"First 32 bytes: {response.content[:32]!r}. "
+                        f"Content-Type: "
+                        f"{response.headers.get('Content-Type')!r}"
+                    )
 
             # Write to a temporary file before replacing the destination.
             temporary_file = destination.with_suffix(
