@@ -26,7 +26,7 @@ FC = ROOT / "data" / "03-forecast"
 PROMPTS = ROOT / "prompts"
 CONFIG = ROOT / "config"
 
-SEED = 853
+SEED = 2453
 
 # ---------------------------------------------------------------------------
 # Races
