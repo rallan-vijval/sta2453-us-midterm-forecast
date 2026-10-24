@@ -1586,6 +1586,15 @@ wheels = [
 ]
 
 [[package]]
+name = "narwhals"
+version = "2.27.1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/bf/21/f64d6b2dbea7bf3f8c38cdc786dcc6ef012ca3d173ad208c782c9a7bedf6/narwhals-2.27.1.tar.gz", hash = "sha256:aed93076a3ea42d9c32c88e4eb5ea422a21937011cbe1f480f9572a523c82094", size = 735013, upload-time = "2026-10-10T06:52:18.113Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d1/89/5d4c86da1130d9059681e5b6cd7645df5c10279a6a079c5c37dcb2cc6f3f/narwhals-2.27.1-py3-none-any.whl", hash = "sha256:d057df13f5852b8e157596e82eb5e955fad267425df5e420e0ee9863da483b31", size = 483211, upload-time = "2026-10-10T06:52:16.32Z" },
+]
+
+[[package]]
 name = "nbclient"
 version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
@@ -2241,6 +2250,38 @@ wheels = [
 ]
 
 [[package]]
+name = "pyreadstat"
+version = "1.3.7"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "narwhals" },
+    { name = "numpy" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/36/66/3f9533d6845c10debd885d28e8703f7fd028ae347d68f0a2c111d283dc8d/pyreadstat-1.3.7.tar.gz", hash = "sha256:c15cc9f58edfd96afb850f65de252c52f5466ff27ce44772d3389d3a0c11b5ca", size = 549654, upload-time = "2026-10-21T16:03:13.66Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/4c/b8/94c8009a34b684e0b78c20590923867761d47f56d11c2c197166ee63a2eb/pyreadstat-1.3.7-cp312-cp312-macosx_10_13_x86_64.whl", hash = "sha256:f44a858c383912c1e7509010538b78acb833aeb3ace37ae9d81f613db1f38647", size = 844740, upload-time = "2026-10-21T16:02:36.1Z" },
+    { url = "https://files.pythonhosted.org/packages/c9/87/a40251ed655259ecdd838b079b8a5042db930cfbfdc41afdc457a1fed376/pyreadstat-1.3.7-cp312-cp312-macosx_11_0_arm64.whl", hash = "sha256:4e03e9e409189ccda8dc57b3df9705199be03104b56790dcee14e6c91073335d", size = 804799, upload-time = "2026-10-21T16:02:37.685Z" },
+    { url = "https://files.pythonhosted.org/packages/5b/be/4c8884c7ada3936e01e21f610148494c6b4fbf395fc22e96ffc88cc190bc/pyreadstat-1.3.7-cp312-cp312-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:ae67176c2e3fc92d6deaaa0da4d6420dfdda4568421cf518ef5121dd023569b7", size = 2842257, upload-time = "2026-10-21T16:02:39.941Z" },
+    { url = "https://files.pythonhosted.org/packages/77/ed/89efff03aef68767aafd2a55bbffb509fe45714174a723a6d191ee1a02f5/pyreadstat-1.3.7-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:c9868d917c3d25a5518c9970877c24cc242684d265bc02562450a609561f6094", size = 2923988, upload-time = "2026-10-21T16:02:41.89Z" },
+    { url = "https://files.pythonhosted.org/packages/c1/dc/e3af26deacfac51979af12d807b7224416bfe919847e84fb9d6003d8e8d8/pyreadstat-1.3.7-cp312-cp312-win_amd64.whl", hash = "sha256:7b65bd28c402376c5bafa44c691acf726904611621e09404bbf4827de78b4609", size = 2081728, upload-time = "2026-10-21T16:02:43.792Z" },
+    { url = "https://files.pythonhosted.org/packages/91/ec/684627be8c1d94f988c1fc0adc294c5c7a37c13f503d2e3c3b74d5977a04/pyreadstat-1.3.7-cp313-cp313-macosx_10_13_x86_64.whl", hash = "sha256:7ed8b53e2fd302d43dbf77fef368dbcd8242a74ad4420401f230f98d7049e96a", size = 845411, upload-time = "2026-10-21T16:02:45.335Z" },
+    { url = "https://files.pythonhosted.org/packages/65/6c/44c342bd65ee25cbd8b758bf1ea4b3170f597658ada402b96ce9ac2c10ce/pyreadstat-1.3.7-cp313-cp313-macosx_11_0_arm64.whl", hash = "sha256:9867efe92d1598db71a305994547926b5ad5053905a18013c6e854a572b47c76", size = 804772, upload-time = "2026-10-21T16:02:46.954Z" },
+    { url = "https://files.pythonhosted.org/packages/78/43/d1e9bd7bd5a3eef652782255f58f27dfd2a2f452a7eaf245b06b31db142c/pyreadstat-1.3.7-cp313-cp313-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:267c9782f683a6c1ce8536b32c7cc18b5554657acc886bef73af68a670b1c55e", size = 2819631, upload-time = "2026-10-21T16:02:48.884Z" },
+    { url = "https://files.pythonhosted.org/packages/55/e9/be92ed1a850b097378cbbd6d91f51051c38f18885456402174aeb19fd81b/pyreadstat-1.3.7-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:57b4471a8784bd394561759b9f66db76d5665a63ed61e390aae6538b49c24e84", size = 2897169, upload-time = "2026-10-21T16:02:51.188Z" },
+    { url = "https://files.pythonhosted.org/packages/88/c1/5d1f419b84934bc0e298b95793c2ac3629b7c9f6f2f97683557e6a39fdc4/pyreadstat-1.3.7-cp313-cp313-win_amd64.whl", hash = "sha256:9f3fb8df2d913db244f1a4f233fdc0f1fc17508dede0daee0b0b521d23c580d1", size = 2080728, upload-time = "2026-10-21T16:02:52.971Z" },
+    { url = "https://files.pythonhosted.org/packages/21/b6/798ef6d5303320e9320a58a4c17301f539fd70fd27234a56cfd0484e95b1/pyreadstat-1.3.7-cp314-cp314-macosx_10_15_x86_64.whl", hash = "sha256:ca00ebb62223a3b0640e51c33620699b38390b21a40a2b1730418f6f1fee53d6", size = 853237, upload-time = "2026-10-21T16:02:54.509Z" },
+    { url = "https://files.pythonhosted.org/packages/42/17/435f3962595d9130f6fc9b98344ee8a19b4f25437c176b84c985e60925f6/pyreadstat-1.3.7-cp314-cp314-macosx_11_0_arm64.whl", hash = "sha256:1df14a7cc11f13bf2e6ca1a91b05b02740bcb2b26f4e39342f679d08544d2075", size = 813857, upload-time = "2026-10-21T16:02:55.747Z" },
+    { url = "https://files.pythonhosted.org/packages/d0/7d/c19d96d727829f6cb08a4cd8a5dd758fe177797e3cd0df0fb06076aafefa/pyreadstat-1.3.7-cp314-cp314-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:a67bc5a1d6992e7e20823bd87286ee81c1fdf6742b38ab440ba77638af09c062", size = 2819241, upload-time = "2026-10-21T16:02:58.383Z" },
+    { url = "https://files.pythonhosted.org/packages/5c/12/113692909586722c7b81e8816d5a197bc50411197596709cb7347ed0afcc/pyreadstat-1.3.7-cp314-cp314-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:41bf96cd5313ceaca11777af8cd21c749157d38afa28d31fc03074c9efce18e5", size = 2883902, upload-time = "2026-10-21T16:03:00.598Z" },
+    { url = "https://files.pythonhosted.org/packages/fd/a2/5686e6d3236434c8feb4f20de3deb7ccb4c4aa9c58117b20a9df96781c32/pyreadstat-1.3.7-cp314-cp314-win_amd64.whl", hash = "sha256:7bcf62cc723290a62f2da2784e4dce06881a384c7f08c63579ede8fa726766b8", size = 2103803, upload-time = "2026-10-21T16:03:02.578Z" },
+    { url = "https://files.pythonhosted.org/packages/ae/71/05982234d407407b5acd18eb9e572cc82d590d9554754a1737ccd6de5058/pyreadstat-1.3.7-cp315-cp315-macosx_10_15_x86_64.whl", hash = "sha256:d0ecd0c799ae81e2b5cd414316e7d046b6c9f60ae09732d66be24d8d6a7f6330", size = 852672, upload-time = "2026-10-21T16:03:04.156Z" },
+    { url = "https://files.pythonhosted.org/packages/7b/40/364824b5d70c37598b9d9687ad52fdebdc860f9a95b6a945ea0ac60ba01d/pyreadstat-1.3.7-cp315-cp315-macosx_11_0_arm64.whl", hash = "sha256:328dd8163345b9ff216e96bafb89d3344732d98b6c8871b55c718155ff9e5862", size = 814462, upload-time = "2026-10-21T16:03:06.216Z" },
+    { url = "https://files.pythonhosted.org/packages/29/f0/fbb92df2aae676efda198336e9d4bc2e702f90e1a42bb7ff108b214e78e2/pyreadstat-1.3.7-cp315-cp315-manylinux2014_aarch64.manylinux_2_17_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:46d5329d8a830e2420304460abe8ab85d5bdca2b845ae7426c71ab10de8212b2", size = 2826596, upload-time = "2026-10-21T16:03:08.145Z" },
+    { url = "https://files.pythonhosted.org/packages/19/b7/a59debec3961455cd1826d978b9a40f652cdd3acb2df8bbb48076f9dc531/pyreadstat-1.3.7-cp315-cp315-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:f673e17a8d4e2065b2355e7920616bedb6386af2bf6401ea56d6697ba8754b8d", size = 2906393, upload-time = "2026-10-21T16:03:10.535Z" },
+    { url = "https://files.pythonhosted.org/packages/6c/ce/186301fbd163381a299cead5b489b8f631097e4ba10d522aa5c60cdb9f69/pyreadstat-1.3.7-cp315-cp315-win_amd64.whl", hash = "sha256:1426ef1a1d3e51c2b1327a261fbd8d84b88615b8f817173770cbdbd44a44a1dd", size = 2103623, upload-time = "2026-10-21T16:03:12.199Z" },
+]
+
+[[package]]
 name = "pytest"
 version = "9.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -2708,6 +2749,7 @@ dependencies = [
     { name = "pandas" },
     { name = "pandera" },
     { name = "pyarrow" },
+    { name = "pyreadstat" },
     { name = "python-dotenv" },
     { name = "pyyaml" },
     { name = "requests" },
@@ -2733,6 +2775,7 @@ requires-dist = [
     { name = "pandas", specifier = ">=3.1.0" },
     { name = "pandera", specifier = ">=0.34.1" },
     { name = "pyarrow", specifier = ">=26.0.0" },
+    { name = "pyreadstat", specifier = ">=1.3.7" },
     { name = "python-dotenv", specifier = ">=1.2.4" },
     { name = "pyyaml", specifier = ">=6.0.3" },
     { name = "requests", specifier = ">=2.34.2" },
