@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# US midterm forecasting project data
+
+# Raw CES survey data
+data/01-raw_data/ces/CCES24_Common_OUTPUT_vv_topost_final.csv
+data/01-raw_data/ces/CES25_Common.dta
