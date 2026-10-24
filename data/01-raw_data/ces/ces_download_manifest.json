@@ -1,0 +1,22 @@
+{
+  "source": "https://dataverse.harvard.edu",
+  "created_at_utc": "2026-10-24T18:52:00.215935+00:00",
+  "files": {
+    "ces_2024": {
+      "file_id": 12050325,
+      "url": "https://dataverse.harvard.edu/api/access/datafile/12050325",
+      "filename": "CCES24_Common_OUTPUT_vv_topost_final.csv",
+      "size_bytes": 183679005,
+      "sha256": "8a5e9fbc982961ad910bad9aed8d521fa0a85e85cded43fb308cce0ab22ba5d9",
+      "status": "downloaded"
+    },
+    "ces_2025": {
+      "file_id": 13600926,
+      "url": "https://dataverse.harvard.edu/api/access/datafile/13600926?format=original",
+      "filename": "CES25_Common.dta",
+      "size_bytes": 59374305,
+      "sha256": "516135d80d9fb5dbcbcea9c952c56b0847b644791d918c4ea6f1255d785033e5",
+      "status": "downloaded"
+    }
+  }
+}
