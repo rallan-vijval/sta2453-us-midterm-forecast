@@ -359,3 +359,9 @@ def test_simulations_keep_the_14_fixed_seats():
     sims, not_up = load("simulations"), load("governors_not_up")
     fixed_d = (not_up["party"] == "D").sum()
     assert sims["dem_governors"].between(fixed_d, fixed_d + len(STATES)).all()
+
+def test_method_c_covers_every_race_model_and_repeat():
+    c = load("method_c_responses")
+    races = STATES + TERRITORIES  # C needs no personas, so it covers territories too
+    assert set(c["race"]) == set(races)
+    assert len(c) == len(races) * c["model_slug"].nunique() * REPEATS
