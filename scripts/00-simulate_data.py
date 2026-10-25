@@ -123,7 +123,8 @@ territories = pd.DataFrame(
         "competitive": False,
     }
 )
-races = pd.concat([states, territories], ignore_index=True)
+races = states.copy()  # 36 state races only; territories are out of scope 
+# races = pd.concat([states, territories], ignore_index=True)
 
 # A "true" 2026 Democratic two-party margin per race (percentage points), used
 # only to make the simulated answers and polls hang together.

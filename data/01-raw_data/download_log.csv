@@ -164,3 +164,10 @@ year,url,file,source,retrieved_utc,bytes,script
 2026,https://en.wikipedia.org/wiki/2026_Vermont_gubernatorial_election,Vermont.html,snapshot,,512956,01b-download_polls.py
 2026,https://en.wikipedia.org/wiki/2026_Wisconsin_gubernatorial_election,Wisconsin.html,snapshot,,1328941,01b-download_polls.py
 2026,https://en.wikipedia.org/wiki/2026_Wyoming_gubernatorial_election,Wyoming.html,snapshot,,432928,01b-download_polls.py
+2026,https://en.wikipedia.org/wiki/2026_United_States_gubernatorial_elections,gubernatorial_2026.html,snapshot,,1944089,01c-download_governor_data.py
+2014,https://en.wikipedia.org/wiki/2014_United_States_gubernatorial_elections,gubernatorial_2014.html,snapshot,,2025721,01c-download_governor_data.py
+2018,https://en.wikipedia.org/wiki/2018_United_States_gubernatorial_elections,gubernatorial_2018.html,snapshot,,2507255,01c-download_governor_data.py
+2022,https://en.wikipedia.org/wiki/2022_United_States_gubernatorial_elections,gubernatorial_2022.html,snapshot,,2634826,01c-download_governor_data.py
+2023,https://en.wikipedia.org/wiki/2023_United_States_gubernatorial_elections,gubernatorial_2023.html,snapshot,,386896,01c-download_governor_data.py
+2024,https://en.wikipedia.org/wiki/2024_United_States_gubernatorial_elections,gubernatorial_2024.html,snapshot,,1043203,01c-download_governor_data.py
+2025,https://en.wikipedia.org/wiki/2025_United_States_gubernatorial_elections,gubernatorial_2025.html,snapshot,,364275,01c-download_governor_data.py
