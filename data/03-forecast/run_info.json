@@ -1,14 +1,26 @@
 {
-  "run_utc": "2026-10-22T18:23:57+00:00",
-  "simulated_inputs": true,
+  "run_utc": "2026-10-25T19:00:21+00:00",
+  "simulated_inputs": false,
   "n_simulations": 10000,
   "seed": 853,
   "national_sd": 4.0,
   "poll_floor_sd": 5.0,
   "min_local_sd": 5.0,
-  "fundamentals_residual_sd": 7.963571562672432,
-  "silicon_bias": -4.463794476046848,
-  "silicon_sd": 5.0,
-  "polled_races_used_for_calibration": 12,
-  "method_model_combinations": 6
+  "fundamentals_residual_sd": 12.853689849528585,
+  "silicon_gap_to_polls": -2.568816540043217,
+  "calibration_intercept": 3.2620438738577477,
+  "calibration_slope": 0.5442514075341102,
+  "silicon_sd": 7.36411039945097,
+  "polled_races_used_for_calibration": 33,
+  "method_model_combinations": 6,
+  "polls_used": 280,
+  "poll_start": "2026-08-01",
+  "dem_governors_median": 27.0,
+  "dem_governors_80": [
+    21.0,
+    32.0
+  ],
+  "p_dem_majority": 0.6013,
+  "p_rep_majority": 0.2971,
+  "flips_median": 6.0
 }
