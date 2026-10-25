@@ -29,9 +29,10 @@ Notes   : - Pages change, so each page is saved once and re-read from the snapsh
             Republican nominee are hypothetical and dropped.
           - partisan is "D" or "R" when Wikipedia tags the pollster or sponsor as
             partisan, e.g. "Public Policy Polling (D)"; such polls often lean to their side.
-            "D/R" marks a bipartisan pair of firms, usually a media poll; blank means neither.
-          - Only polls whose fieldwork ended between 1 August 2026 and election day
-            are kept.
+            "D/R" marks a bipartisan pair of firms, usually a media poll; "none" means neither.
+          - Every general-election poll on the page is kept, however old. How much
+            older polls count is a modelling choice left to the forecast script.
+            Rows whose end date cannot be read are dropped.
 Run     : uv run python scripts/01b-download_polls.py [--refresh] [--download-only]
 """
 
@@ -59,7 +60,7 @@ HEADERS = {
     "User-Agent": "STA2453-silicon-forecast/1.0 (University of Toronto course project; "
     "shrey.sati@mail.utoronto.ca)"
 }
-EARLIEST, ELECTION_DAY = pd.Timestamp("2026-08-01"), pd.Timestamp("2026-11-03")
+ELECTION_DAY = pd.Timestamp("2026-11-03")
 MONTHS = {
     m.lower(): i
     for i, m in enumerate(
@@ -298,7 +299,7 @@ def poll_tables(
 
 
 def partisan(pollster: str) -> str:
-    """'Public Policy Polling (D)' -> 'D'; sponsored by both sides -> 'D/R'; none -> ''."""
+    """'Public Policy Polling (D)' -> 'D'; sponsored by both sides -> 'D/R'; neither -> 'none'."""
     tags = sorted(set(re.findall(r"\((D|R)\)", pollster)))
     return "/".join(tags) or "none"
 
@@ -391,7 +392,8 @@ def main(refresh: bool, download_only: bool):
 
     polls = pd.DataFrame(rows)
     before = len(polls)
-    polls = polls[polls["end_date"].between(EARLIEST, ELECTION_DAY)]
+    # Keep every poll up to election day. This also drops rows with an unreadable date.
+    polls = polls[polls["end_date"] <= ELECTION_DAY]
     # A poll is often listed more than once (likely and registered voters, with and
     # without leaners, with and without minor candidates). Keep one row per poll:
     # likely voters first, then the version naming every candidate, then the first listed.
@@ -411,8 +413,9 @@ def main(refresh: bool, download_only: bool):
     polls["end_date"] = polls["end_date"].dt.date
     polls.to_csv(RAW / "governor_polls_2026.csv", index=False)
     print(
-        f"Kept {len(polls)} of {before} poll rows (fieldwork ending {EARLIEST.date()} to "
-        f"{ELECTION_DAY.date()}), in {polls['race'].nunique()} states. "
+        f"Kept {len(polls)} of {before} poll rows (fieldwork ending "
+        f"{polls['end_date'].min()} to {polls['end_date'].max()}), "
+        f"in {polls['race'].nunique()} states. "
         f"No polls found for: {sorted(set(STATES_2026) - set(polls['race']))}"
     )
 
