@@ -1,0 +1,4 @@
+member,model_set,model_slug,answers,split_rate
+shrey,all,deepseek/deepseek-v4.1-flash,10102,0.00910710750346466
+shrey,all,mistralai/mistral-small-24b-instruct-2501,9777,0.013807916538815588
+shrey,all,openai/gpt-6-luna,9891,0.011020119300374078

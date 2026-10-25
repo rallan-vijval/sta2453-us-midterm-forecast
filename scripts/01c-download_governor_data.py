@@ -316,6 +316,10 @@ def main(refresh: bool):
     log = []
 
     races, cands = build_2026(fetch(YEAR_NOW, refresh, log))
+    
+    # Scope: the 36 state races only. The three territories are dropped (team decision).
+    races = races[races["type"] == "state"].reset_index(drop=True)
+    cands = cands[cands["type"] == "state"].reset_index(drop=True)
     n_states = (races["type"] == "state").sum()
     assert n_states == 36, f"Expected 36 state races in 2026, found {n_states}"
     missing = set(STATES_2026) - set(races["race"])
@@ -353,7 +357,7 @@ def main(refresh: bool):
     cands.to_csv(RAW / "governor_candidates_2026.csv", index=False)
     history.to_csv(RAW / "governor_results_history.csv", index=False)
     not_up.to_csv(RAW / "governors_not_up_2026.csv", index=False)
-    territory_results.to_csv(RAW / "territory_results.csv", index=False)
+    # territory_results.to_csv(RAW / "territory_results.csv", index=False)
 
     log_path = RAW / "download_log.csv"
     new_log = pd.DataFrame(log).assign(script="01c-download_governor_data.py")
