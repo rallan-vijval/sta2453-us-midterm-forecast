@@ -7,7 +7,7 @@ Date    : 2026-10-24
 Inputs  : data/01-raw_data/governor_candidates_2026.csv   (01c)
           data/02-analysis_data/personas.parquet   (02-clean_data.py: one row per sampled
           CES respondent, 100 per state; columns age, gender, state, race_ethnicity,
-          education, income, party_alignment, ideology, optional weight)
+          education, income, party_alignment, ideology)
 Outputs : data/02-analysis_data/ces_sample.parquet  an unchanged copy of 02's output
           data/02-analysis_data/personas.parquet  the same people, one row per persona, with persona_text
           data/02-analysis_data/cells.parquet     24 groups per state (party x age x degree)
@@ -21,7 +21,8 @@ Notes   : The persona sentence is built with an f-string. The CES labels are
           yourself ... and your views are ...", which the party-drop validation
           check relies on.
           10 personas per state are flagged for the validation checks.
-          The frame uses the survey weight if 02 kept it, otherwise equal weights.
+          02 draws personas in proportion to the CES weight, so the frame counts
+          each persona equally.
 Run     : uv run python scripts/03-build_prompts.py
 """
 
@@ -36,9 +37,19 @@ from common import AGE_GROUPS, ANA, PARTY_GROUP_WORDS, PARTY_GROUPS, RAW, SEED, 
 
 N_VALIDATION = 10
 # Candidates named in the prompts: both major-party nominees everywhere (Alaska's
-# top-four ballot has three Republicans), plus independents running a serious
-# campaign. Every other minor candidate is covered by the "Other" option.
-PROMPT_INDEPENDENTS = {"Maine": ["Rick Bennett"]}
+# top-four ballot has three Republicans), plus every other candidate shown in the
+# race's Wikipedia infobox, whatever their party.
+# Voters for anyone else can answer "Other".
+PROMPT_EXTRA_CANDIDATES = {
+    "Maine": ["Rick Bennett"],
+    "Arkansas": ["Colt Shelby"],
+    "Idaho": ["John Stegner"],
+    "Nebraska": ["Rick Beard", "Brett Lindstrom"],
+    "Rhode Island": ["Ken Block"],
+}
+# Spell out party abbreviations so the prompt is unambiguous; the raw file keeps
+# Wikipedia's label. Minnesota's DFL is the state's Democratic Party.
+PARTY_LABEL_FIX = {"DFL": "Democratic-Farmer-Labor"}
 MIN_CELL_N = 3
 NEEDED = ["age", "gender", "state", "race_ethnicity", "education", "income", "party_alignment", "ideology"]
 
@@ -181,8 +192,6 @@ def main():
     df["education_text"] = df["education"].map(education_words)
     df["income_text"] = df["income"].map(income_words)
     party = df["party_alignment"].map(party_words)
-    #df["party_text"] = party.str[0]
-    #df["party_group"] = party.str[1]
     df["party_text"] = [t[0] for t in party]  # (phrase, group) pairs; .str[0] fails on pandas 3
     df["party_group"] = [t[1] for t in party]
     df["ideology_text"] = df["ideology"].map(ideology_words)
@@ -215,9 +224,8 @@ def main():
         df.loc[pick, "validation"] = True
 
     if "weight" not in df.columns:
-        print("Note: no survey weight in 02's output, so the frame uses equal weights. "
-              "Ask Vijwal to keep commonweight as a 'weight' column.")
-        df["weight"] = 1.0
+        print("Note: 02 drew personas in proportion to the CES weight, so each persona counts equally here.")
+        df["weight"] = 1.0  
 
     keep = ["persona_id", "race", "age", "age_group", "gender", "race_ethnicity", "education", "degree", "income",
             "party_alignment", "party_group", "ideology", "weight", "validation", "persona_text"]
@@ -250,12 +258,13 @@ def main():
     # Candidate list for the prompts (read by common.load_candidates).
     cands = pd.read_csv(RAW / "governor_candidates_2026.csv")
     cands = cands[cands["race"].isin(STATES_2026)].rename(columns={"party": "party_label"})
-    extra = {(race, name) for race, names in PROMPT_INDEPENDENTS.items() for name in names}
+    cands["party_label"] = cands["party_label"].replace(PARTY_LABEL_FIX)
+    extra = {(race, name) for race, names in PROMPT_EXTRA_CANDIDATES.items() for name in names}
     named = pd.Series([(r, c) in extra for r, c in zip(cands["race"], cands["candidate"])], index=cands.index)
     cands["include_in_prompt"] = cands["party_code"].isin(["D", "R"]) | named
     missing_extra = extra - set(zip(cands["race"], cands["candidate"]))
     if missing_extra:
-        raise SystemExit(f"PROMPT_INDEPENDENTS names not on the candidate list: {sorted(missing_extra)}")
+        raise SystemExit(f"PROMPT_EXTRA_CANDIDATES names not on the candidate list: {sorted(missing_extra)}")
     short = cands[cands["include_in_prompt"]].groupby("race")["party_code"].agg(set)
     assert all({"D", "R"} <= s for s in short), "every state needs a Democrat and a Republican in the prompt"
     cands[["race", "candidate", "party_label", "party_code", "incumbent", "include_in_prompt"]].to_parquet(
