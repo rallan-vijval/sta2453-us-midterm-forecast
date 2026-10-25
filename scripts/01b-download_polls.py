@@ -300,7 +300,7 @@ def poll_tables(
 def partisan(pollster: str) -> str:
     """'Public Policy Polling (D)' -> 'D'; sponsored by both sides -> 'D/R'; none -> ''."""
     tags = sorted(set(re.findall(r"\((D|R)\)", pollster)))
-    return "/".join(tags)
+    return "/".join(tags) or "none"
 
 
 def read_polls(
