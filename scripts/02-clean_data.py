@@ -4,6 +4,7 @@
 # ============================================================
 
 import pandas as pd
+import numpy as np
 
 from common import (
     ROOT,
@@ -497,6 +498,19 @@ if combined["respondent_id"].duplicated().any():
 sampled_groups = []
 sampling_report_rows = []
 
+rng = np.random.default_rng(RANDOM_SEED)
+
+
+def weighted_sample(df, n):
+    """Draw n respondents without replacement, with probability proportional to
+    their CES survey weight (commonweight), so the sample resembles the state's
+    registered voters. Takes everyone if n covers the whole pool."""
+    if n >= len(df):
+        return df
+    p = df["commonweight"].fillna(0).to_numpy(dtype=float)
+    idx = rng.choice(len(df), size=n, replace=False, p=p / p.sum())
+    return df.iloc[idx]
+
 for state in target_states:
     state_data = combined[combined["_state_name"] == state]
 
@@ -504,17 +518,12 @@ for state in target_states:
     available24 = state_data[state_data["survey_year"] == 2024]
 
     n25 = min(TARGET_PER_STATE, len(available25))
-    sample25 = (
-        available25.sample(n=n25, random_state=RANDOM_SEED)
-        if n25 else available25.head(0)
-    )
+    sample25 = weighted_sample(available25, n25)
 
     remaining = TARGET_PER_STATE - len(sample25)
+    
     n24 = min(remaining, len(available24))
-    sample24 = (
-        available24.sample(n=n24, random_state=RANDOM_SEED)
-        if n24 else available24.head(0)
-    )
+    sample24 = weighted_sample(available24, n24)
 
     state_sample = pd.concat(
         [sample25, sample24],
