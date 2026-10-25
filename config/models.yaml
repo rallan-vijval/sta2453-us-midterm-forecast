@@ -1,0 +1,25 @@
+# All models for the governor forecast, run by Shrey through one OpenRouter key.
+# Providers checked on https://openrouter.ai (endpoints list), 25 Oct 2026.
+
+member: shrey
+model_set: all
+temperature: 1.0
+repeats: 3
+max_tokens: 300
+concurrency: 8
+require_parameters: true
+
+models:
+  - slug: openai/gpt-6-luna
+    provider_order: [openai]
+    reasoning_effort: minimal
+    max_tokens: 2000
+    temperature: null          # OpenAI reasoning models reject a temperature setting
+    json_mode: true
+  - slug: deepseek/deepseek-v4.1-flash
+    provider_order: [deepinfra/fp8]        # if "no endpoints found": try [deepinfra]
+    reasoning_effort: none
+    json_mode: true
+  - slug: mistralai/mistral-small-24b-instruct-2501
+    provider_order: [deepinfra/fp8]        # if "no endpoints found": try [deepinfra]
+    json_mode: true
