@@ -1,4 +1,24 @@
-
+"""
+Purpose : Download the official 2024 and 2025 Cooperative Election Study (CES)
+          files from Harvard Dataverse so the cleaning pipeline can use them.
+Author  : Vijval Rallan 
+Date    : 2026-10-24
+Inputs  : Harvard Dataverse data files configured in FILES:
+          - CES 2024: CCES24_Common_OUTPUT_vv_topost_final.csv (file ID 12050325)
+          - CES 2025: CES25_Common.dta (file ID 13600926)
+          No local input data files are required; internet access and pyDataverse are required.
+Outputs : data/01-raw_data/ces/CCES24_Common_OUTPUT_vv_topost_final.csv
+          data/01-raw_data/ces/CES25_Common.dta
+          data/01-raw_data/ces/ces_download_manifest.json, including file IDs, source URLs,
+          file sizes, SHA-256 checksums, and download/existing-file status.
+Notes   : Creates the CES directory if needed. Checks that downloads are non-empty and
+          checks the 2025 response for a Stata-file signature before saving. Writes through
+          a temporary file before replacing the destination. Records SHA-256 checksums.
+          An existing non-empty 2024 file is reused and checksummed. An existing non-empty
+          2025 file currently raises FileExistsError rather than silently reusing it.
+          This script downloads the full source files; it does not create development samples.
+Run     : uv run python scripts/01a-download_ces.py
+"""
 
 from datetime import datetime, timezone
 import hashlib

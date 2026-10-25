@@ -1,3 +1,30 @@
+"""
+Purpose : Combine and clean the 2024 and 2025 Cooperative Election Study (CES) records,
+          select registered voters in the 36 target 2026 gubernatorial-race states, and
+          draw a reproducible sample for downstream persona-prompt construction.
+Author  : Vijval Rallan 
+Date    : 2026-10-24
+Inputs  : data/01-raw_data/ces/CCES24_Common_OUTPUT_vv_topost_final.csv  (01a)
+          data/01-raw_data/ces/CES25_Common.dta                            (01a)
+          data/01-raw_data/governor_races_2026.csv, with `race` and `type` columns
+          Required CES columns include birthyr, gender4, educ, race, hispanic, votereg,
+          pid7, ideo5, faminc_new, caseid, inputstate, and commonweight.
+Outputs : data/02-analysis_data/personas.parquet  one row per sampled respondent; columns:
+          age, gender, state, race_ethnicity, education, income, party_alignment, ideology
+          data/02-analysis_data/sampling_report.csv  per-state eligible counts and sample sizes
+          data/02-analysis_data/eligible_counts.csv  eligible registered-voter counts by state
+Notes   : Uses only rows marked as registered voters and only target rows whose `type` is
+          `state` (territories are excluded). Stops if the race file does not identify exactly
+          36 target states or if a target state is missing from either CES year. Samples up to
+          100 respondents per state using `commonweight` as the sampling probability, without
+          replacement, prioritising CES 2025 and supplementing from CES 2024 if needed. The
+          random seed is 2453. If fewer than 100 eligible respondents are available for a state,
+          the report records that the target was not met. Produces approximate age using the
+          survey year minus birth year, and combines Hispanic ethnicity with the race field.
+          The final Parquet file contains the eight persona attributes only; audit reports are
+          saved separately. This is a constructed sample, not a census of voters or a forecast.
+Run     : uv run python scripts/02-clean_data.py
+"""
 
 # ============================================================
 # 1. File paths and settings
@@ -511,6 +538,7 @@ def weighted_sample(df, n):
     idx = rng.choice(len(df), size=n, replace=False, p=p / p.sum())
     return df.iloc[idx]
 
+
 for state in target_states:
     state_data = combined[combined["_state_name"] == state]
 
@@ -521,7 +549,7 @@ for state in target_states:
     sample25 = weighted_sample(available25, n25)
 
     remaining = TARGET_PER_STATE - len(sample25)
-    
+
     n24 = min(remaining, len(available24))
     sample24 = weighted_sample(available24, n24)
 
