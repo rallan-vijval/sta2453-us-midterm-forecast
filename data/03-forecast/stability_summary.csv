@@ -1,0 +1,7 @@
+method,model_slug,quantity,n_days,within_day_sd,between_day_sd,changed_vs_first_day_pct,n_pairs
+B,deepseek/deepseek-v4.1-flash,Democratic two-party margin (points),1,2.4218265601509414,,,
+B,mistralai/mistral-small-24b-instruct-2501,Democratic two-party margin (points),1,4.759757640774627,,,
+B,openai/gpt-6-luna,Democratic two-party margin (points),1,1.4881350922343974,,,
+C,deepseek/deepseek-v4.1-flash,Democratic two-party share (points),1,1.3545674991213796,,,
+C,mistralai/mistral-small-24b-instruct-2501,Democratic two-party share (points),1,2.574630339657949,,,
+C,openai/gpt-6-luna,Democratic two-party share (points),1,1.1082997354991928,,,

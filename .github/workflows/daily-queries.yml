@@ -78,6 +78,7 @@ jobs:
           uv run python scripts/05b-method_b.py
           uv run python scripts/05-forecast.py
           uv run python scripts/07-plot_forecast.py
+          uv run python scripts/06-validation_checks.py
 
       - uses: quarto-dev/quarto-actions/setup@v2
         if: ${{ !cancelled() && steps.check.outputs.run == 'true' && hashFiles('website/index.qmd') != '' }}
