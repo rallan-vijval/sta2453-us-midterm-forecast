@@ -8,10 +8,14 @@ Inputs  : data/01-raw_data/governor_candidates_2026.csv   (01c)
           data/02-analysis_data/personas.parquet   (02-clean_data.py: one row per sampled
           CES respondent, 100 per state; columns age, gender, state, race_ethnicity,
           education, income, party_alignment, ideology)
+          data/02-analysis_data/frame_source.parquet  (02-clean_data.py: every eligible
+          CES respondent with their survey weight)
 Outputs : data/02-analysis_data/ces_sample.parquet  an unchanged copy of 02's output
           data/02-analysis_data/personas.parquet  the same people, one row per persona, with persona_text
           data/02-analysis_data/cells.parquet     24 groups per state (party x age x degree)
           data/02-analysis_data/frame.parquet     each group's share of the state's registered voters
+          data/02-analysis_data/frame_states.csv  per state: respondents, effective sample size,
+                                                  party mix, and the 2024 and 2025 Republican shares
           data/02-analysis_data/candidates.parquet  candidate list, with include_in_prompt
 Notes   : The persona sentence is built with an f-string. The CES labels are
           turned into plain English first ("Lean Democrat" -> "an independent
@@ -21,8 +25,12 @@ Notes   : The persona sentence is built with an f-string. The CES labels are
           yourself ... and your views are ...", which the party-drop validation
           check relies on.
           10 personas per state are flagged for the validation checks.
-          02 draws personas in proportion to the CES weight, so the frame counts
-          each persona equally.
+          The frame comes from every eligible CES respondent, weighted, not from
+          the 100 personas: the personas show how each kind of voter votes, the
+          frame says how many of each kind the state has. Built from the personas
+          alone, an unlucky sample (Arkansas: 50 Democrats of 100) would be copied
+          into the frame instead of corrected. Respondents are grouped with the
+          same functions as the personas, so the groups always line up.
 Run     : uv run python scripts/03-build_prompts.py
 """
 
@@ -179,6 +187,50 @@ def load_sample() -> pd.DataFrame:
     raise SystemExit("No CES sample found: run 02-clean_data.py first.")
 
 
+FRAME_KEYS = ["race", "party_group", "age_group", "degree"]
+
+
+def load_frame_source() -> pd.DataFrame:
+    """Every eligible CES respondent from 02, sorted into party x age x degree
+    groups by the same functions used for the personas."""
+    path = ANA / "frame_source.parquet"
+    if not path.exists():
+        raise SystemExit("No frame_source.parquet: run 02-clean_data.py first.")
+    src = pd.read_parquet(path).rename(columns={"state": "race"})
+    src = src[src["race"].isin(STATES_2026)].copy()
+    src["party_group"] = [party_words(x)[1] for x in src["party_alignment"]]
+    bad = {
+        "party_alignment": src.loc[src["party_group"].isna(), "party_alignment"],
+        "education": src.loc[src["education"].map(education_words).isna(), "education"],
+    }
+    bad = {k: sorted(v.astype(str).unique()) for k, v in bad.items() if len(v)}
+    if bad:
+        raise SystemExit("frame_source labels not recognised (add them to the matching *_words function):\n"
+                         + "\n".join(f"  {k}: {v}" for k, v in bad.items()))
+    src["age_group"] = age_group(pd.to_numeric(src["age"]))
+    src["degree"] = src["education"].map(has_degree)
+    return src
+
+
+def state_summary(src: pd.DataFrame) -> pd.DataFrame:
+    """Per state: how many respondents the frame rests on, its effective sample size
+    after weighting, the weighted party mix, and the Republican share in each survey
+    year (if the years disagree a lot, pooling them needs a second look)."""
+    w = src["weight"]
+    g = src.assign(w2=w**2, **{f"w_{p}": w * (src["party_group"] == p) for p in PARTY_GROUPS})
+    s = g.groupby("race").agg(n_respondents=("weight", "size"), w=("weight", "sum"), w2=("w2", "sum"),
+                              **{f"w_{p}": (f"w_{p}", "sum") for p in PARTY_GROUPS})
+    s["n_effective"] = (s["w"] ** 2 / s["w2"]).round(0)
+    for p in PARTY_GROUPS:
+        s[f"share_{p}"] = (100 * s[f"w_{p}"] / s["w"]).round(1)
+    by_year = (g.groupby(["race", "survey_year"])[["w_R", "weight"]].sum()
+               .assign(r=lambda d: 100 * d["w_R"] / d["weight"])["r"].unstack())
+    for year in by_year.columns:
+        s[f"share_R_{year}"] = by_year[year].round(1)
+    s["share_from_2024"] = (100 * g[g["survey_year"] == 2024].groupby("race")["weight"].sum() / s["w"]).round(1)
+    return s.drop(columns=["w", "w2"] + [f"w_{p}" for p in PARTY_GROUPS]).reset_index()
+
+
 def main():
     raw = load_sample()
     lost = [c for c in NEEDED if c not in raw.columns]
@@ -224,8 +276,7 @@ def main():
         df.loc[pick, "validation"] = True
 
     if "weight" not in df.columns:
-        print("Note: 02 drew personas in proportion to the CES weight, so each persona counts equally here.")
-        df["weight"] = 1.0  
+        df["weight"] = 1.0  # 02 drew personas in proportion to the CES weight
 
     keep = ["persona_id", "race", "age", "age_group", "gender", "race_ethnicity", "education", "degree", "income",
             "party_alignment", "party_group", "ideology", "weight", "validation", "persona_text"]
@@ -233,20 +284,27 @@ def main():
     personas = df[keep]
     personas.to_parquet(ANA / "personas.parquet", index=False)
 
-    # Frame: weighted share of each party x age x degree group within each state.
+    # Frame: weighted share of each party x age x degree group within each state,
+    # from every eligible CES respondent. n_personas counts the AI personas in each
+    # group; small_cell flags groups with too few personas to stand on their own.
+    src = load_frame_source()
     full = pd.MultiIndex.from_product([STATES_2026, PARTY_GROUPS, AGE_GROUPS, [True, False]],
-                                      names=["race", "party_group", "age_group", "degree"]).to_frame(index=False)
-    agg = (personas.groupby(["race", "party_group", "age_group", "degree"])
+                                      names=FRAME_KEYS).to_frame(index=False)
+    agg = (src.groupby(FRAME_KEYS)
            .agg(weight=("weight", "sum"), n_respondents=("weight", "size")).reset_index())
-    frame = full.merge(agg, how="left", on=["race", "party_group", "age_group", "degree"])
-    frame[["weight", "n_respondents"]] = frame[["weight", "n_respondents"]].fillna(0)
+    n_personas = personas.groupby(FRAME_KEYS).size().rename("n_personas").reset_index()
+    frame = full.merge(agg, how="left", on=FRAME_KEYS).merge(n_personas, how="left", on=FRAME_KEYS)
+    frame[["weight", "n_respondents", "n_personas"]] = frame[["weight", "n_respondents", "n_personas"]].fillna(0)
+    frame[["n_respondents", "n_personas"]] = frame[["n_respondents", "n_personas"]].astype(int)
     frame["share"] = (frame["weight"] / frame.groupby("race")["weight"].transform("sum")).fillna(0)
-    frame["small_cell"] = frame["n_respondents"] < MIN_CELL_N
+    frame["small_cell"] = frame["n_personas"] < MIN_CELL_N
     frame["cell_id"] = (frame["race"].str.replace(" ", "") + "-" + frame["party_group"] + "-"
                         + frame["age_group"].str.replace("+", "plus") + "-"
                         + np.where(frame["degree"], "deg", "nodeg"))
     frame = frame.drop(columns="weight")
     frame.to_parquet(ANA / "frame.parquet", index=False)
+    states = state_summary(src)
+    states.to_csv(ANA / "frame_states.csv", index=False)
 
     cells = frame[["race", "cell_id", "party_group", "age_group", "degree", "small_cell"]].copy()
     cells["cell_description"] = (
@@ -274,6 +332,13 @@ def main():
           f"{int(personas.validation.sum())} flagged for validation")
     print(f"party groups: {personas.party_group.value_counts().to_dict()}")
     print(f"groups: {len(cells)}; groups with fewer than {MIN_CELL_N} personas: {int(frame.small_cell.sum())}")
+    print(f"frame: {len(src):,} CES respondents; effective sample size per state from "
+          f"{states['n_effective'].min():.0f} to {states['n_effective'].max():.0f}")
+    gap = (states.get("share_R_2024", np.nan) - states.get("share_R_2025", np.nan)).abs()
+    if gap.notna().any():
+        print("largest 2024 vs 2025 gaps in the Republican share (points):\n"
+              + states.assign(gap=gap.round(1)).nlargest(5, "gap")[["race", "share_R_2024", "share_R_2025", "gap"]]
+              .to_string(index=False))
     print("\nExample persona:\n" + personas["persona_text"].iloc[0])
 
 

@@ -32,7 +32,6 @@ STATES = [
     "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina",
     "South Dakota", "Tennessee", "Texas", "Vermont", "Wisconsin", "Wyoming",
 ]  # fmt: skip
-TERRITORIES = ["Guam", "Northern Mariana Islands", "U.S. Virgin Islands"]
 PARTY7 = [
     "a strong Democrat", "a not very strong Democrat",
     "an independent who leans Democratic", "an independent",
@@ -99,7 +98,6 @@ def sums_to(total, *cols):
 # A percentage, allowing for floating-point rounding (100 - 60 - 40 can be -1e-14).
 share = Column(float, Check.in_range(-1e-9, 100 + 1e-9))
 state = Column(str, Check.isin(STATES))
-race_or_territory = Column(str, Check.isin(STATES + TERRITORIES))
 party_group = Column(str, Check.isin(["D", "I", "R"]))
 age_group = Column(str, Check.isin(AGE_GROUPS))
 # Who ran the model, and which call this is: shared by every model-output table.
@@ -123,17 +121,16 @@ estimate_cols = {
 # ---------------------------------------------------------------------------
 SCHEMAS = {
     "races": schema({
-        "race": Column(str, Check.isin(STATES + TERRITORIES), unique=True),
-        "type": Column(str, Check.isin(["state", "territory"])),
-        "pvi": Column(float, Check.in_range(-50, 50), nullable=True),
+        "race": Column(str, Check.isin(STATES), unique=True),
+        "type": Column(str, Check.eq("state")),
+        "pvi": Column(float, Check.in_range(-50, 50)),
         "incumbent_party": Column(str, Check.isin(["D", "R", "I"])),
         "open_seat": Column(bool),
         "competitive": Column(bool),
         "true_margin": Column(float),  # simulation only
-    }, checks=Check(lambda d: d["pvi"].notna() | (d["type"] == "territory"),
-                    error="every state needs a PVI; only territories may lack one")),
+    }),
     "candidates": schema({
-        "race": race_or_territory,
+        "race": state,
         "candidate": Column(str, Check.str_length(min_value=1)),
         "party": Column(str, Check.isin(["D", "R", "O"])),
         "incumbent": Column(bool),
@@ -228,7 +225,7 @@ SCHEMAS = {
     }, checks=sums_to(100, "dem_share", "rep_share", "other_share"),
        unique=["race", "model_slug", "repeat"]),
     "method_c_responses": schema({
-        "race": race_or_territory,
+        "race": state,
         **model_cols,
         "dem_two_party_share": share,
         "uncertainty_plus_minus": Column(int, Check.gt(0)),
@@ -360,8 +357,8 @@ def test_simulations_keep_the_14_fixed_seats():
     fixed_d = (not_up["party"] == "D").sum()
     assert sims["dem_governors"].between(fixed_d, fixed_d + len(STATES)).all()
 
+
 def test_method_c_covers_every_race_model_and_repeat():
     c = load("method_c_responses")
-    races = STATES + TERRITORIES  # C needs no personas, so it covers territories too
-    assert set(c["race"]) == set(races)
-    assert len(c) == len(races) * c["model_slug"].nunique() * REPEATS
+    assert set(c["race"]) == set(STATES)
+    assert len(c) == len(STATES) * c["model_slug"].nunique() * REPEATS
