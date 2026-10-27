@@ -13,6 +13,8 @@ Outputs : data/02-analysis_data/personas.parquet  one row per sampled respondent
           age, gender, state, race_ethnicity, education, income, party_alignment, ideology
           data/02-analysis_data/sampling_report.csv  per-state eligible counts and sample sizes
           data/02-analysis_data/eligible_counts.csv  eligible registered-voter counts by state
+          data/02-analysis_data/frame_source.parquet  every eligible respondent with their weight;
+          03 builds the weighting frame from it (state, age, education, party, weight, year)
 Notes   : Uses only rows marked as registered voters and only target rows whose `type` is
           `state` (territories are excluded). Stops if the race file does not identify exactly
           36 target states or if a target state is missing from either CES year. Samples up to
@@ -773,3 +775,43 @@ print("\nFirst five personas:")
 print(personas.head().to_string(index=False))
 print("\nMissing values:")
 print(personas.isna().sum())
+
+
+# ============================================================
+# FRAME SOURCE: every eligible respondent, with their weight
+# ============================================================
+# The 100 personas per state are the people the models answer as. How much
+# each kind of voter counts (party x age x degree) is learned from everyone
+# eligible here, not from those 100, so an unlucky sample is corrected rather
+# than copied. 03-build_prompts.py groups these people into the frame.
+# Weights are rescaled to average 1 within each survey year, so when the two
+# years are pooled each counts in proportion to its number of respondents.
+frame_source = pd.DataFrame({
+    "state": combined["_state_name"],
+    "age": combined["survey_year"]
+    - pd.to_numeric(combined["birthyr"], errors="coerce"),
+    "education": combined["educ"],
+    "party_alignment": combined["pid7"],
+    "weight": pd.to_numeric(combined["commonweight"], errors="coerce"),
+    "survey_year": combined["survey_year"],
+})
+unusable = (
+    frame_source["age"].isna()
+    | (frame_source["age"] < 18)
+    | ~(frame_source["weight"] > 0)
+)
+frame_source = frame_source[~unusable].copy()
+frame_source["weight"] = frame_source["weight"] / frame_source.groupby(
+    "survey_year"
+)["weight"].transform("mean")
+
+frame_source_file = OUTPUT_DIR / "frame_source.parquet"
+frame_source.to_parquet(frame_source_file, index=False)
+print(f"\nFrame source: {len(frame_source):,} respondents saved to {frame_source_file.name} "
+      f"({int(unusable.sum())} dropped for a missing age or weight)")
+print("Share of each state's weight from 2024 (lowest five):")
+from_2024 = (
+    frame_source.assign(w24=frame_source["weight"] * (frame_source["survey_year"] == 2024))
+    .groupby("state")[["w24", "weight"]].sum()
+)
+print((100 * from_2024["w24"] / from_2024["weight"]).round(1).sort_values().head().to_string())
