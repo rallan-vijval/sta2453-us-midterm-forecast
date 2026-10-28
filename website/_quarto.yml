@@ -5,8 +5,6 @@
 project:
   type: default
   output-dir: ../docs
-  resources:
-    - fonts/
 
 format:
   html:
