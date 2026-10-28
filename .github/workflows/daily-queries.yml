@@ -13,8 +13,12 @@
 name: Daily model queries
 
 on:
+  # GitHub can delay or drop a scheduled run, so there is a second, later slot.
+  # The second run asks nothing if the first already saved today's answers
+  # (04 skips anything saved for the day) and then commits nothing.
   schedule:
-    - cron: "23 14 * * *" # 14:23 UTC = 10:23 in Toronto, every day
+    - cron: "23 14 * * *" # 14:23 UTC = 10:23 in Toronto (9:23 after 1 Nov)
+    - cron: "47 19 * * *" # 19:47 UTC = 15:47 in Toronto, backup
   workflow_dispatch: # adds a "Run workflow" button in the Actions tab
 
 permissions:
@@ -33,6 +37,7 @@ jobs:
       CONFIG: config/models.yaml
       LAST_DAY: "2026-11-01"
       CLOSE_RACES: AZ,GA,KS,MI,NV,OH,WI # toss-up and lean races (Cook, Sabato)
+      PYTHONUNBUFFERED: "1" # show progress lines in the log as they happen
 
     steps:
       - name: Check the date
@@ -89,9 +94,25 @@ jobs:
           QUARTO_PYTHON: ${{ github.workspace }}/.venv/bin/python # the uv environment
         run: quarto render website
 
+      # Saved with the run even if the push below fails, so no day's answers are lost:
+      # download the zip from the run's Summary page and commit the files by hand.
+      - name: Keep today's answers even if the push fails
+        if: ${{ always() && steps.check.outputs.run == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: answers-${{ github.run_id }}
+          path: |
+            data/02-analysis_data/responses/
+            data/02-analysis_data/run_log.csv
+          retention-days: 14
+
       - name: Commit the answers, forecast and website
         if: ${{ !cancelled() && steps.check.outputs.run == 'true' }}
         run: |
+          if [ -z "$(git status --porcelain data/02-analysis_data/responses)" ]; then
+            echo "No new answers (already saved by an earlier run): nothing to commit."
+            exit 0
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/02-analysis_data data/03-forecast other/charts
