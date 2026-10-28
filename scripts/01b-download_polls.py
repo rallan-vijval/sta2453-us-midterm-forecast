@@ -208,6 +208,9 @@ def page_tables(html: str) -> tuple[list[pd.DataFrame], int]:
     Some pages carry malformed markup such as rowspan='2"' that stops pandas from
     reading any table on the page, so each cell's rowspan/colspan is reduced to its
     digits, and each table is read on its own so one bad table cannot hide the rest.
+    A data cell spanning several columns (e.g. one "6%" under both "Other" and
+    "Undecided") would be copied into each column by pandas and counted twice, so
+    it is split: the value goes in the last column it spans, the others are blank.
     Returns the tables and the number that still could not be read.
     """
     soup = BeautifulSoup(html, "lxml")
@@ -221,6 +224,11 @@ def page_tables(html: str) -> tuple[list[pd.DataFrame], int]:
                         cell[attr] = digits.group(0)
                     else:
                         del cell[attr]
+        for cell in tag.find_all("td", colspan=True):
+            span = int(cell["colspan"])
+            del cell["colspan"]
+            for _ in range(span - 1):
+                cell.insert_before(soup.new_tag("td"))
         try:
             tables += pd.read_html(StringIO(str(tag)))
         except ValueError:
