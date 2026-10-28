@@ -1,0 +1,287 @@
+/*-- scss:defaults --*/
+// One palette for the page, the tables (website/page.py) and the charts
+// (scripts/07-plot_forecast.py): a dark slate page, light text, and party
+// colours that grow stronger as a race grows safer. Blue and red mean only
+// Democratic and Republican; links and controls stay neutral.
+$ground: #1A1F26;
+$surface: #222934;
+$rule: #343C48;
+$text: #E6E8EB;
+$muted: #9AA3AF;
+$dem: #6A9BE0;
+$rep: #E8776A;
+$toss: #E3B341;
+
+$body-bg: $ground;
+$body-color: $text;
+$link-color: $text;
+$border-color: $rule;
+$code-bg: $surface;
+$code-color: $text;
+// Karla for words, Lekton (a typewriter monospace) for numbers, dates and code.
+$font-family-sans-serif: "Karla", "Helvetica Neue", Arial, sans-serif;
+$font-family-monospace: "Lekton", ui-monospace, Menlo, Consolas, monospace;
+$font-family-serif: $font-family-sans-serif;
+$headings-font-family: $font-family-sans-serif;
+$headings-font-weight: 650;
+$headings-color: $text;
+$table-color: $text;
+$table-bg: transparent;
+
+/*-- scss:rules --*/
+// Self-hosted fonts (SIL Open Font License; see website/fonts/).
+@font-face { font-family: "Karla"; font-weight: 400; font-display: swap; src: url("fonts/karla-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Karla"; font-weight: 500; font-display: swap; src: url("fonts/karla-latin-500-normal.woff2") format("woff2"); }
+@font-face { font-family: "Karla"; font-weight: 600; font-display: swap; src: url("fonts/karla-latin-600-normal.woff2") format("woff2"); }
+@font-face { font-family: "Karla"; font-weight: 700; font-display: swap; src: url("fonts/karla-latin-700-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lekton"; font-weight: 400; font-display: swap; src: url("fonts/lekton-latin-400-normal.woff2") format("woff2"); }
+@font-face { font-family: "Lekton"; font-weight: 700; font-display: swap; src: url("fonts/lekton-latin-700-normal.woff2") format("woff2"); }
+
+:root {
+  --ground: #{$ground}; --surface: #{$surface}; --rule: #{$rule};
+  --text: #{$text}; --muted: #{$muted};
+  --dem: #{$dem}; --rep: #{$rep}; --toss: #{$toss};
+  --wide: 68rem;      // charts, tables, the ratings strip
+  --measure: 42rem;   // prose
+}
+
+html { scroll-padding-top: 4.5rem; }
+body {
+  background: var(--ground);
+  color: var(--text);
+  font-family: $font-family-sans-serif;
+  font-size: 16px;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ---------------------------------------------------------------------------
+// Layout: one left-aligned column; prose at a reading measure, figures wider
+// ---------------------------------------------------------------------------
+// Quarto's custom layout puts the whole page in one div.
+.page-layout-custom {
+  max-width: calc(var(--wide) + 2.5rem);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+// Running text, at a reading measure.
+section > p, section > ul, section > ol, section > blockquote {
+  max-width: var(--measure);
+  font-size: 1.125rem;
+  line-height: 1.6;
+}
+section > ul li, section > ol li { margin-bottom: .35rem; }
+
+h1, h2, h3 { font-family: $font-family-sans-serif; letter-spacing: -0.012em; }
+h2 {
+  font-size: 1.75rem; font-weight: 650; line-height: 1.2;
+  margin: 4.5rem 0 1rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--rule); border-bottom: none;
+}
+h3 { font-size: 1.2rem; font-weight: 600; margin: 2.5rem 0 .75rem; }
+a { text-decoration: underline; text-decoration-color: var(--muted); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--text); }
+:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; border-radius: 2px; }
+
+// Quarto's own title block is not used: the header below carries the title.
+#title-block-header { display: none; }
+
+// ---------------------------------------------------------------------------
+// Top bar
+// ---------------------------------------------------------------------------
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; gap: 1.5rem; align-items: baseline; flex-wrap: wrap;
+  padding: .85rem 0;
+  background: rgba(26, 31, 38, .94);
+  backdrop-filter: blur(6px);
+  border-bottom: 1px solid var(--rule);
+  font-size: .9rem;
+  a { text-decoration: none; color: var(--muted); }
+  a:hover, a:focus-visible { color: var(--text); }
+  .site-name { color: var(--text); font-weight: 600; margin-right: auto; }
+}
+
+// ---------------------------------------------------------------------------
+// Header
+// ---------------------------------------------------------------------------
+.hero { padding: 3.5rem 0 1rem; }
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.1rem);
+  font-weight: 700; line-height: 1.08; letter-spacing: -0.025em;
+  max-width: 22ch; margin: 0 0 1.25rem;
+}
+.hero .disclosure {
+  font-size: 1.3rem; line-height: 1.5;
+  max-width: var(--measure); color: var(--text); margin-bottom: 1rem;
+}
+.hero .updated p { color: var(--muted); font-family: $font-family-monospace; font-size: 1rem; margin-bottom: 2.25rem; }
+.hero .disclosure p { margin: 0; }
+
+.seat-bar {
+  display: grid; grid-template-columns: repeat(25, 1fr) 6px repeat(25, 1fr);
+  gap: 3px; max-width: var(--wide); margin: 0 0 .6rem;
+}
+.seat { aspect-ratio: 1; border-radius: 2px; background: var(--c, var(--muted)); }
+.seat-held { background: transparent; }
+.seat-held-D { box-shadow: inset 0 0 0 1.5px var(--dem); }
+.seat-held-R { box-shadow: inset 0 0 0 1.5px var(--rep); }
+.seat-majority { width: 2px; justify-self: center; background: var(--text); margin: -4px 0; }
+.seat-key p { display: flex; justify-content: space-between; gap: 1rem; color: var(--muted); font-size: .85rem; margin: 0; }
+
+.key-numbers {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 1.5rem 2.5rem; margin: 2.25rem 0 0; max-width: var(--wide);
+}
+.key-numbers div { border-left: 2px solid var(--rule); padding-left: 1rem; }
+.key-numbers p { margin: 0; }
+.key-numbers strong { display: block; font-family: $font-family-monospace; font-size: 2.6rem; font-weight: 700; line-height: 1.05; }
+.key-numbers span { color: var(--muted); font-size: .92rem; }
+
+// ---------------------------------------------------------------------------
+// The ratings strip (website/page.py: ratings_strip)
+// ---------------------------------------------------------------------------
+.ratings { max-width: var(--wide); margin-top: 1.5rem; }
+.ratings-controls { display: grid; gap: .9rem; margin-bottom: 1.25rem; }
+#race-search {
+  width: 100%; padding: .6rem .8rem; font: inherit;
+  color: var(--text); background: var(--surface);
+  border: 1px solid var(--rule); border-radius: 6px;
+}
+#race-search::placeholder { color: var(--muted); }
+.pills { display: flex; flex-wrap: wrap; gap: .45rem; justify-content: center; }
+.pill {
+  font: inherit; font-size: .9rem; font-weight: 500;
+  color: var(--c, var(--text)); background: transparent;
+  border: 1px solid var(--rule); border-radius: 6px; padding: .35rem .7rem; cursor: pointer;
+  span { color: var(--muted); margin-left: .2rem; font-family: $font-family-monospace; }
+}
+.pill[aria-pressed="true"] { background: var(--surface); border-color: var(--c, var(--text)); }
+
+.ratings-head, .race summary {
+  display: grid; grid-template-columns: 10.5rem minmax(0, 1fr) 5.5rem; align-items: center; gap: .75rem;
+}
+.ratings-head { color: var(--muted); font-size: .8rem; font-weight: 600; padding-bottom: .4rem; border-bottom: 1px solid var(--rule); }
+.ratings-head span:last-child { text-align: right; }
+.ratings-head .axis { display: grid; grid-template-columns: 1fr 1fr; }
+.ratings-head .axis span:first-child { text-align: right; padding-right: .75rem; color: var(--dem); }
+.ratings-head .axis span:last-child { text-align: left; padding-left: .75rem; color: var(--rep); }
+
+.ratings-list { list-style: none; padding: 0; margin: 0; }
+.race { border-bottom: 1px solid var(--rule); }
+.race summary { list-style: none; min-height: 2.75rem; cursor: pointer; }
+.race summary::-webkit-details-marker { display: none; }
+.race summary:hover { background: rgba(255, 255, 255, .025); }
+.race-name { font-weight: 600; }
+.race-name::after { content: "+"; color: var(--muted); margin-left: .4rem; font-weight: 400; }
+.race details[open] .race-name::after { content: "\2212"; }
+.race-track { position: relative; height: 2.75rem; }
+.race-track::before {           // the coin-flip line
+  content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--muted); opacity: .55;
+}
+.race-track::after {
+  content: ""; position: absolute; left: 4%; right: 4%; top: 50%; height: 1px;
+  background: linear-gradient(to right, transparent, var(--rule) 15%, var(--rule) 85%, transparent);
+}
+.race-dot {
+  position: absolute; left: var(--x); top: 50%; z-index: 1;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--c); transform: translate(-50%, -50%);
+  b { position: absolute; top: 50%; transform: translateY(-50%); color: var(--t, var(--c)); font-family: $font-family-monospace; font-size: .95rem; font-weight: 700; white-space: nowrap; }
+}
+.race-dot.left b { right: 17px; }
+.race-dot.right b { left: 17px; }
+.race-dot.left.inside b { right: auto; left: 17px; }   // safe races: label towards the centre
+.race-dot.right.inside b { left: auto; right: 17px; }
+.race-rating { text-align: right; font-weight: 600; color: var(--c); font-size: .92rem; }
+.ratings-empty { color: var(--muted); padding: 1rem 0; }
+
+.race-detail { background: var(--surface); padding: 1.1rem 1.25rem 1.25rem; margin-bottom: .75rem; border-radius: 0 0 6px 6px; }
+.race-detail .race-note { font-family: $font-family-sans-serif; font-size: .92rem; line-height: 1.5; color: var(--text); max-width: none; margin: .9rem 0 1rem; }
+table.cands { width: 100%; max-width: 36rem; border-collapse: collapse; font-size: .92rem; }
+table.cands th, table.cands td { padding: .3rem .5rem .3rem 0; border-bottom: 1px solid var(--rule); text-align: right; }
+table.cands td { font-family: $font-family-monospace; font-size: 1rem; }
+table.cands thead th { color: var(--muted); font-weight: 500; }
+table.cands th:first-child { text-align: left; font-weight: 600; }
+table.cands tbody th span { display: block; color: var(--muted); font-weight: 400; font-size: .8rem; }
+svg.sources { width: 100%; max-width: 38rem; height: auto; display: block; font-family: $font-family-sans-serif; }
+svg.sources .val, svg.sources .tick { font-family: $font-family-monospace; font-size: 12px !important; }
+svg.sources .lab, svg.sources .tick, svg.sources .val, svg.sources .none { fill: var(--muted); font-size: 11px; }
+svg.sources .tick { text-anchor: middle; }
+svg.sources .val { text-anchor: end; fill: var(--text); }
+svg.sources .grid { stroke: var(--rule); stroke-width: 1; }
+svg.sources .grid.zero { stroke: var(--muted); }
+svg.sources .pt.d { fill: var(--dem); }
+svg.sources .pt.r { fill: var(--rep); }
+svg.sources .fc { stroke: var(--text); stroke-width: 1.5; }
+svg.sources .fc.d { fill: var(--dem); }
+svg.sources .fc.r { fill: var(--rep); }
+svg.sources .range { stroke: var(--text); stroke-width: 3; stroke-linecap: round; opacity: .45; }
+
+// ---------------------------------------------------------------------------
+// Figures, tables, captions
+// ---------------------------------------------------------------------------
+.quarto-figure, .cell-output-display { max-width: var(--wide); }
+.quarto-figure img, .cell-output-display img { max-width: 100%; height: auto; border-radius: 4px; }
+figcaption, .figure-caption, .table-caption, caption, .quarto-float-caption {
+  color: var(--muted) !important; font-family: $font-family-sans-serif;
+  font-size: .9rem; line-height: 1.45; text-align: left !important; max-width: var(--measure);
+  caption-side: top; margin-left: 0 !important; padding-left: 0 !important;
+}
+.credit p { color: var(--muted); font-size: .9rem; line-height: 1.45; max-width: var(--measure); margin-top: .25rem; }
+.gt_table { margin: .5rem 0 1rem !important; }
+.gt_table td.gt_right { font-family: $font-family-monospace !important; font-size: 15px !important; }
+.gt_col_heading { vertical-align: bottom !important; }
+.cell-output-display { overflow-x: auto; }
+details.more { max-width: var(--wide); margin: 1rem 0 2rem; }
+details.more > summary { cursor: pointer; color: var(--muted); font-weight: 500; }
+details.more > summary:hover { color: var(--text); }
+
+pre, code { font-family: $font-family-monospace; font-size: .95rem; }
+pre.commands {
+  white-space: pre; overflow-x: auto; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; padding: 1rem; max-width: var(--wide); color: var(--text);
+}
+.prompt-label { font-size: .85rem; color: var(--muted); margin: 1rem 0 .35rem; }
+pre.prompt {
+  white-space: pre-wrap; background: var(--surface); border: 1px solid var(--rule);
+  border-radius: 6px; padding: 1rem; max-width: var(--measure); color: var(--text);
+}
+
+// Notes for the team while drafting. Delete each one once its paragraph is written.
+span.todo { display: inline-block; padding: 0 .4rem; margin-right: .3rem; font-size: .8rem; }
+.todo {
+  border: 1px dashed var(--toss); border-radius: 6px; padding: .75rem 1rem; margin: 1rem 0;
+  max-width: var(--measure); color: var(--toss); font-size: .9rem;
+  p, li { font-size: .9rem !important; color: var(--toss); }
+}
+
+// References and footer
+#refs, .references { font-size: .95rem; max-width: var(--measure); }
+.csl-entry { margin-bottom: .6rem; }
+.site-footer {
+  border-top: 1px solid var(--rule); margin: 5rem 0 0; padding: 1.5rem 0 3rem;
+  color: var(--muted); font-size: .9rem;
+  p { font-size: .9rem !important; max-width: none; margin: .25rem 0; }
+}
+
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+// ---------------------------------------------------------------------------
+// Narrow screens
+// ---------------------------------------------------------------------------
+@media (max-width: 640px) {
+  .ratings-head, .race summary { grid-template-columns: 6.6rem minmax(0, 1fr) 4.4rem; gap: .4rem; }
+  .race-name, .race-rating { font-size: .85rem; }
+  .race-dot b { font-size: .72rem; }
+  .ratings-head .axis span { font-size: .7rem; }
+  .topbar { position: static; gap: .9rem; font-size: .82rem; }
+  .topbar .site-name { flex-basis: 100%; }
+  .seat-bar { gap: 2px; }
+  section > p, section > ul, section > ol { font-size: 1.05rem; }
+  .key-numbers strong { font-size: 2.1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}

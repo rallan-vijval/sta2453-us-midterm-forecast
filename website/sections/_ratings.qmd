@@ -1,0 +1,37 @@
+## Every race, closest first {#ratings}
+
+Each row is one of the 36 races, from the closest to the safest.
+
+```{python}
+P.ratings_strip()
+```
+
+::: {.credit}
+Each row opens to show the candidates and every source's estimate. The layout of this strip is adapted from the Decision Desk HQ governor ratings page.
+:::
+
+```{python}
+#| label: fig-map
+#| fig-cap: "The favoured party in each race and its chance of winning. Grey states have no governor's race in 2026. Ratings follow the strip above."
+P.chart("forecast_map", scale=0.6)
+```
+
+```{python}
+#| label: fig-seats
+#| fig-cap: "Democratic governorships after the election across 10,000 simulated elections, counting the 14 seats not on the ballot. Bars at 26 or more are a Democratic majority; gold bars are counts where neither party reaches 26."
+P.chart("seat_count")
+```
+
+```{=html}
+<details class="more"><summary>Show the full forecast table</summary>
+```
+
+```{python}
+#| label: tbl-forecast
+#| tbl-cap: "The forecast for all 36 races, closest first. Margins are the Democrat's lead in points of the two-party vote (D+5 means ahead by five); the 80% range covers 8 in 10 simulated elections. Polls counts those with fieldwork ending on or after 1 August 2026."
+P.tbl_forecast()
+```
+
+```{=html}
+</details>
+```

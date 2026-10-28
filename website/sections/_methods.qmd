@@ -1,0 +1,89 @@
+## How the forecast is made {#methods}
+
+This section describes the data, the personas, the questions put to the models and how the answers become a forecast.
+
+### Data
+
+The data come from the Cooperative Election Study [@ces2024; @ces2025], the polls listed on Wikipedia, and past governor results.
+
+```{=html}
+<details class="more"><summary>Show the polls by state</summary>
+```
+
+```{python}
+#| label: tbl-polls
+#| tbl-cap: "Polls used in the forecast, by state, with fieldwork ending on or after 1 August 2026. Likely voters is the share of those polls that report a likely-voter sample. The average weights each poll by its sample size and by how recent it is (half weight for a poll a month older)."
+P.tbl_polls()
+```
+
+```{=html}
+</details>
+```
+
+### Personas and the weighting frame
+
+Each state's AI survey uses 100 personas built from real survey respondents, weighted to match the state's voters.
+
+```{python}
+#| label: tbl-composition
+#| tbl-cap: "The 3,600 personas against the weighted frame they are weighted to, averaged over the 36 states. The frame counts every eligible CES respondent with their survey weight; the personas count each person once."
+P.tbl_composition()
+```
+
+```{=html}
+<details class="more"><summary>Show the frame for each state</summary>
+```
+
+```{python}
+#| label: tbl-frame
+#| tbl-cap: "The weighting frame by state, smallest effective sample first. The effective sample is the number of unweighted respondents that would give the same precision; the last two columns compare the 2024 and 2025 surveys, which the frame pools."
+P.tbl_frame_states()
+```
+
+```{=html}
+</details>
+```
+
+### Asking the models
+
+Three language models from three companies answered as each persona.
+
+```{python}
+#| label: tbl-models
+#| tbl-cap: "The three models, how they were called, and the share of all their answers (every method, every day) that could be used."
+P.tbl_models()
+```
+
+```{=html}
+<details class="more"><summary>Show the exact prompt one persona received, and the reply</summary>
+```
+
+```{python}
+P.example_prompt()
+```
+
+```{=html}
+</details>
+```
+
+```{python}
+#| label: tbl-responses
+#| tbl-cap: "Method A answers to the governor question by model, over three repeats of all 3,600 personas. Independent or third party counts named candidates such as Ken Block in Rhode Island; Other is the model writing in someone not listed; Unusable answers failed the format checks even after a retry."
+P.tbl_response_distribution()
+```
+
+```{python}
+#| label: tbl-ticket
+#| tbl-cap: "Ticket splitting in Method A: the share of personas who chose a major-party candidate for governor and the other party for the House."
+P.tbl_ticket_splitting()
+```
+
+### Combining the sources and simulating the election
+
+The corrected AI surveys, the polls and past results are blended, and the election is simulated 10,000 times.
+
+```{python}
+#| label: tbl-fundamentals
+#| tbl-cap: "The past-results regression: the Democratic margin in the 2014, 2018 and 2022 governor races on state lean, incumbency and the president's party."
+P.tbl_fundamentals()
+```

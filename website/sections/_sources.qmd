@@ -1,0 +1,25 @@
+## Where the AI surveys agree with the polls {#sources}
+
+The forecast combines three sources: past results, the AI surveys and the polls. This section compares them.
+
+```{python}
+#| label: fig-silicon-polls
+#| fig-cap: "AI-survey margin (Methods A and B averaged, before correction) against the poll average, one dot per state with polls. On the solid line they agree; the dashed line is the fitted correction used in the forecast."
+P.chart("silicon_vs_polls", scale=0.75)
+```
+
+```{python}
+#| label: fig-sources
+#| fig-cap: "What each source says about every race, beside the forecast that combines them. The AI surveys are shown after the correction in the figure above."
+P.chart("sources")
+```
+
+### Asking the model for a forecast instead
+
+We also asked the same models to act as forecasters. Their answers are shown here for comparison and are not used in the forecast.
+
+```{python}
+#| label: tbl-sources
+#| tbl-cap: "Every source's margin for every race. Methods A and B are the AI surveys before correction; Method C is the models asked as forecasters, averaged over models, repeats and days, and not used in the forecast."
+P.tbl_sources()
+```

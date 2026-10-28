@@ -1,0 +1,82 @@
+---
+pagetitle: "Governors 2026: a forecast from synthetic voters"
+---
+
+```{python}
+#| include: false
+import page as P
+
+h = P.headline()
+info = P.run_info()
+```
+
+```{=html}
+<nav class="topbar" aria-label="Sections">
+  <a class="site-name" href="#top">Governors 2026</a>
+  <a href="#ratings">Ratings</a>
+  <a href="#sources">AI surveys and polls</a>
+  <a href="#methods">Methods</a>
+  <a href="#validation">Validation and costs</a>
+  <a href="#uncertainty">Uncertainty</a>
+  <a href="#discussion">Discussion</a>
+</nav>
+```
+
+::: {.hero #top}
+
+# `{python} h["lead_party"]` are favoured in `{python} h["lead_count"]` of `{python} h["n_races"]` governor's races
+
+::: {.disclosure}
+Every number on this page starts from synthetic survey answers: three language models answering as 3,600 real respondents to the Cooperative Election Study. We combine those answers with published polls and past results, then simulate the election `{python} h["n_sims"]` times.
+:::
+
+::: {.updated}
+Updated `{python} h["updated"]`. The models are asked again every day until 1 November.
+:::
+
+```{python}
+P.seat_bar()
+```
+
+::: {.seat-key}
+[Democratic governors not up this year]{} [Republican governors not up this year]{}
+:::
+
+::: {.key-numbers}
+::: {}
+**`{python} h["dem_median"]`**
+[Democratic governors after the election, median of `{python} h["n_sims"]` simulations (80% range `{python} h["dem_lo80"]` to `{python} h["dem_hi80"]`)]{}
+:::
+::: {}
+**`{python} h["p_dem_majority"]`**
+[chance Democrats hold 26 or more of the 50 governorships]{}
+:::
+::: {}
+**`{python} h["p_rep_majority"]`**
+[chance Republicans hold 26 or more]{}
+:::
+:::
+
+:::
+
+{{< include sections/_ratings.qmd >}}
+
+{{< include sections/_sources.qmd >}}
+
+{{< include sections/_methods.qmd >}}
+
+{{< include sections/_validation.qmd >}}
+
+{{< include sections/_uncertainty.qmd >}}
+
+{{< include sections/_discussion.qmd >}}
+
+{{< include sections/_reproducibility.qmd >}}
+
+```{=html}
+<footer class="site-footer">
+  <p>By Vijval Rallan, Shrey Sati and Allwin Steve Paul Justin Anantharaj, for STA2453 at the University of Toronto, fall 2026.</p>
+  <p>Code and data: <a href="https://github.com/rallan-vijval/sta2453-us-midterm-forecast">github.com/rallan-vijval/sta2453-us-midterm-forecast</a></p>
+  <p>Every forecast on this page comes from synthetic survey answers written by language models, combined with real polls and past results. They are not answers from real voters.</p>
+</footer>
+```

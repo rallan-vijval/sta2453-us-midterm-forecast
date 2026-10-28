@@ -90,9 +90,10 @@ jobs:
 
       - name: Rebuild the website into docs/
         if: ${{ !cancelled() && steps.check.outputs.run == 'true' && hashFiles('website/index.qmd') != '' }}
+        working-directory: website
         env:
           QUARTO_PYTHON: ${{ github.workspace }}/.venv/bin/python # the uv environment
-        run: quarto render website
+        run: quarto render
 
       # Saved with the run even if the push below fails, so no day's answers are lost:
       # download the zip from the run's Summary page and commit the files by hand.
