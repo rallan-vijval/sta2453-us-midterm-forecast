@@ -1,3 +1,32 @@
+"""
+Purpose : Combine and clean the 2024 and 2025 Cooperative Election Study (CES) records,
+          select registered voters in the 36 target 2026 gubernatorial-race states, and
+          draw a reproducible sample for downstream persona-prompt construction.
+Author  : Vijval Rallan 
+Date    : 2026-10-24
+Inputs  : data/01-raw_data/ces/CCES24_Common_OUTPUT_vv_topost_final.csv  (01a)
+          data/01-raw_data/ces/CES25_Common.dta                            (01a)
+          data/01-raw_data/governor_races_2026.csv, with `race` and `type` columns
+          Required CES columns include birthyr, gender4, educ, race, hispanic, votereg,
+          pid7, ideo5, faminc_new, caseid, inputstate, and commonweight.
+Outputs : data/02-analysis_data/personas.parquet  one row per sampled respondent; columns:
+          age, gender, state, race_ethnicity, education, income, party_alignment, ideology
+          data/02-analysis_data/sampling_report.csv  per-state eligible counts and sample sizes
+          data/02-analysis_data/eligible_counts.csv  eligible registered-voter counts by state
+          data/02-analysis_data/frame_source.parquet  every eligible respondent with their weight;
+          03 builds the weighting frame from it (state, age, education, party, weight, year)
+Notes   : Uses only rows marked as registered voters and only target rows whose `type` is
+          `state` (territories are excluded). Stops if the race file does not identify exactly
+          36 target states or if a target state is missing from either CES year. Samples up to
+          100 respondents per state using `commonweight` as the sampling probability, without
+          replacement, prioritising CES 2025 and supplementing from CES 2024 if needed. The
+          random seed is 2453. If fewer than 100 eligible respondents are available for a state,
+          the report records that the target was not met. Produces approximate age using the
+          survey year minus birth year, and combines Hispanic ethnicity with the race field.
+          The final Parquet file contains the eight persona attributes only; audit reports are
+          saved separately. This is a constructed sample, not a census of voters or a forecast.
+Run     : uv run python scripts/02-clean_data.py
+"""
 
 # ============================================================
 # 1. File paths and settings
@@ -511,6 +540,7 @@ def weighted_sample(df, n):
     idx = rng.choice(len(df), size=n, replace=False, p=p / p.sum())
     return df.iloc[idx]
 
+
 for state in target_states:
     state_data = combined[combined["_state_name"] == state]
 
@@ -521,7 +551,7 @@ for state in target_states:
     sample25 = weighted_sample(available25, n25)
 
     remaining = TARGET_PER_STATE - len(sample25)
-    
+
     n24 = min(remaining, len(available24))
     sample24 = weighted_sample(available24, n24)
 
@@ -745,3 +775,43 @@ print("\nFirst five personas:")
 print(personas.head().to_string(index=False))
 print("\nMissing values:")
 print(personas.isna().sum())
+
+
+# ============================================================
+# FRAME SOURCE: every eligible respondent, with their weight
+# ============================================================
+# The 100 personas per state are the people the models answer as. How much
+# each kind of voter counts (party x age x degree) is learned from everyone
+# eligible here, not from those 100, so an unlucky sample is corrected rather
+# than copied. 03-build_prompts.py groups these people into the frame.
+# Weights are rescaled to average 1 within each survey year, so when the two
+# years are pooled each counts in proportion to its number of respondents.
+frame_source = pd.DataFrame({
+    "state": combined["_state_name"],
+    "age": combined["survey_year"]
+    - pd.to_numeric(combined["birthyr"], errors="coerce"),
+    "education": combined["educ"],
+    "party_alignment": combined["pid7"],
+    "weight": pd.to_numeric(combined["commonweight"], errors="coerce"),
+    "survey_year": combined["survey_year"],
+})
+unusable = (
+    frame_source["age"].isna()
+    | (frame_source["age"] < 18)
+    | ~(frame_source["weight"] > 0)
+)
+frame_source = frame_source[~unusable].copy()
+frame_source["weight"] = frame_source["weight"] / frame_source.groupby(
+    "survey_year"
+)["weight"].transform("mean")
+
+frame_source_file = OUTPUT_DIR / "frame_source.parquet"
+frame_source.to_parquet(frame_source_file, index=False)
+print(f"\nFrame source: {len(frame_source):,} respondents saved to {frame_source_file.name} "
+      f"({int(unusable.sum())} dropped for a missing age or weight)")
+print("Share of each state's weight from 2024 (lowest five):")
+from_2024 = (
+    frame_source.assign(w24=frame_source["weight"] * (frame_source["survey_year"] == 2024))
+    .groupby("state")[["w24", "weight"]].sum()
+)
+print((100 * from_2024["w24"] / from_2024["weight"]).round(1).sort_values().head().to_string())

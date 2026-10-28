@@ -1,0 +1,126 @@
+# Daily model queries for the 2026 governor forecast
+#
+# Once a day this asks the same three models the same Method B, C and V questions
+# (scripts/04-query_models.py), saving one file per method per day, e.g.
+# data/02-analysis_data/responses/shrey_B_2026-10-28.parquet. It then reruns
+# Method B, the forecast and the charts on everything saved so far, rebuilds the
+# website into docs/, and commits the lot.
+# Comparing the days shows how much the models' answers move when nothing changes.
+#
+# Needs the repository secret OPENROUTER_API_KEY
+# After LAST_DAY it does nothing; DISABLE it in the Actions tab on 1 Nov 2026.
+
+name: Daily model queries
+
+on:
+  # GitHub can delay or drop a scheduled run, so there is a second, later slot.
+  # The second run asks nothing if the first already saved today's answers
+  # (04 skips anything saved for the day) and then commits nothing.
+  schedule:
+    - cron: "23 14 * * *" # 14:23 UTC = 10:23 in Toronto (9:23 after 1 Nov)
+    - cron: "47 19 * * *" # 19:47 UTC = 15:47 in Toronto, backup
+  workflow_dispatch: # adds a "Run workflow" button in the Actions tab
+
+permissions:
+  contents: write # lets the workflow commit the answers
+
+concurrency:
+  group: daily-queries # never two runs at the same time
+  cancel-in-progress: false
+
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    env:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+      CONFIG: config/models.yaml
+      LAST_DAY: "2026-11-01"
+      CLOSE_RACES: AZ,GA,KS,MI,NV,OH,WI # toss-up and lean races (Cook, Sabato)
+      PYTHONUNBUFFERED: "1" # show progress lines in the log as they happen
+
+    steps:
+      - name: Check the date
+        id: check
+        run: |
+          if [[ "$(date -u +%F)" > "$LAST_DAY" ]]; then
+            echo "Past $LAST_DAY, so no queries."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "run=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v5
+        if: steps.check.outputs.run == 'true'
+
+      - uses: astral-sh/setup-uv@v6
+        if: steps.check.outputs.run == 'true'
+        with:
+          enable-cache: true
+
+      - name: Install packages
+        if: steps.check.outputs.run == 'true'
+        run: uv sync --locked
+
+      # Each query step runs even if an earlier one failed, so one bad step
+      # does not lose the others. The job still shows as failed.
+      - name: Method B, every group in every state, once
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' }}
+        run: uv run python scripts/04-query_models.py --config "$CONFIG" --method B --repeats 1 --max-cost 0.5
+
+      - name: Method C, every state, three times
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' }}
+        run: uv run python scripts/04-query_models.py --config "$CONFIG" --method C --max-cost 0.1
+
+      - name: Method V, validation checks in the close races
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' }}
+        run: uv run python scripts/04-query_models.py --config "$CONFIG" --method V --states "$CLOSE_RACES" --max-cost 0.2
+
+      # Method A is not re-asked daily, so 05a's estimates do not change.
+      - name: Rerun Method B, the forecast and the charts
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' }}
+        run: |
+          uv run python scripts/05b-method_b.py
+          uv run python scripts/05-forecast.py
+          uv run python scripts/07-plot_forecast.py
+          uv run python scripts/06-validation_checks.py
+
+      - uses: quarto-dev/quarto-actions/setup@v2
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' && hashFiles('website/index.qmd') != '' }}
+
+      - name: Rebuild the website into docs/
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' && hashFiles('website/index.qmd') != '' }}
+        env:
+          QUARTO_PYTHON: ${{ github.workspace }}/.venv/bin/python # the uv environment
+        run: quarto render website
+
+      # Saved with the run even if the push below fails, so no day's answers are lost:
+      # download the zip from the run's Summary page and commit the files by hand.
+      - name: Keep today's answers even if the push fails
+        if: ${{ always() && steps.check.outputs.run == 'true' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: answers-${{ github.run_id }}
+          path: |
+            data/02-analysis_data/responses/
+            data/02-analysis_data/run_log.csv
+          retention-days: 14
+
+      - name: Commit the answers, forecast and website
+        if: ${{ !cancelled() && steps.check.outputs.run == 'true' }}
+        run: |
+          if [ -z "$(git status --porcelain data/02-analysis_data/responses)" ]; then
+            echo "No new answers (already saved by an earlier run): nothing to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/02-analysis_data data/03-forecast other/charts
+          if [ -d docs ]; then git add docs; fi
+          if git diff --staged --quiet; then
+            echo "Nothing new to commit."
+            exit 0
+          fi
+          git commit -m "Daily model queries and forecast, $(date -u +%F)"
+          git pull --rebase origin "$GITHUB_REF_NAME"
+          git push origin "HEAD:$GITHUB_REF_NAME"
