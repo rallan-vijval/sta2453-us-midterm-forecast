@@ -1,0 +1,3 @@
+## Discussion {#discussion}
+
+This section relates our results to earlier work on silicon sampling.

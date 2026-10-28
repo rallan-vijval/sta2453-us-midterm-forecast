@@ -1,0 +1,35 @@
+## Validation, costs and timing {#validation}
+
+### Do the answers react to the right things?
+
+We changed one detail of the prompt at a time to see whether the answers changed for the right reasons.
+
+```{python}
+#| label: tbl-validation
+#| tbl-cap: "Share of governor votes that changed when one thing in the prompt was changed, for the 360 validation personas (10 per state), first full run. The top row is the baseline: the identical question asked again."
+P.tbl_validation()
+```
+
+### Do the answers hold from one day to the next?
+
+The same questions are asked every day to see how much the answers move.
+
+```{python}
+#| label: tbl-stability
+#| tbl-cap: "Day-to-day stability. Spread within a day is the standard deviation across repeats asked the same day; spread between days is the standard deviation of the daily averages; both are in points and averaged over the 36 races."
+P.tbl_stability()
+```
+
+### Costs and timing
+
+```{python}
+#| label: tbl-costs
+#| tbl-cap: "Every model call to date, by method and model: tokens, average seconds per call and cost in US dollars, as billed by OpenRouter. Seconds per call is the time for one answer; calls ran eight at a time."
+P.tbl_costs()
+```
+
+```{python}
+#| label: tbl-cost-day
+#| tbl-cap: "Calls and cost by day. The full run on 25 October asked every method; each daily run re-asks Methods B, C and the validation checks."
+P.tbl_cost_by_day()
+```

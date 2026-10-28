@@ -1,0 +1,32 @@
+# The website: one page, rendered into docs/ for GitHub Pages.
+# Render from inside this folder:  cd website  then  quarto render
+# (set QUARTO_PYTHON to the uv environment's python if Quarto picks another one;
+#  rendering from the repo root trips Quarto's check of .env.example)
+project:
+  type: default
+  output-dir: ../docs
+
+format:
+  html:
+    pagetitle: "Governors 2026: a forecast from synthetic voters"
+    description: "A forecast of the 36 governor races on 3 November 2026, built from language models answering as Cooperative Election Study respondents, combined with polls and past results."
+    lang: en
+    theme: [styles.scss]
+    page-layout: custom
+    toc: false
+    anchor-sections: false
+    smooth-scroll: true
+    link-external-newwindow: true
+    fig-align: left
+    tbl-cap-location: top
+    fig-cap-location: bottom
+    bibliography: references.bib
+    citations-hover: true
+
+execute:
+  echo: false
+  warning: false
+  message: false
+  daemon: false # start Python fresh on every render, so edits to page.py are always picked up
+
+jupyter: python3
