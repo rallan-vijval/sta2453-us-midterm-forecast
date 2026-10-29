@@ -1,5 +1,5 @@
 {
-  "run_utc": "2026-10-28T19:39:17+00:00",
+  "run_utc": "2026-10-29T19:56:38+00:00",
   "simulated_inputs": false,
   "n_simulations": 10000,
   "seed": 853,
@@ -7,10 +7,10 @@
   "poll_floor_sd": 5.0,
   "min_local_sd": 5.0,
   "fundamentals_residual_sd": 12.853689849528585,
-  "silicon_gap_to_polls": -7.178257192836127,
-  "calibration_intercept": 5.882553253225627,
-  "calibration_slope": 0.5804565698913461,
-  "silicon_sd": 6.400650596180706,
+  "silicon_gap_to_polls": -7.161281198094485,
+  "calibration_intercept": 5.869907611350328,
+  "calibration_slope": 0.5795475959097027,
+  "silicon_sd": 6.39587453602882,
   "polled_races_used_for_calibration": 33,
   "method_model_combinations": 6,
   "polls_used": 280,
@@ -20,7 +20,7 @@
     21.0,
     32.0
   ],
-  "p_dem_majority": 0.6111,
-  "p_rep_majority": 0.284,
+  "p_dem_majority": 0.6117,
+  "p_rep_majority": 0.2816,
   "flips_median": 6.0
 }
