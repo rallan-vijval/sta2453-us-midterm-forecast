@@ -371,9 +371,10 @@ def forecast_map(f: pd.DataFrame, out: Path, note: str):
                     ring, closed=True, facecolor=colour, edgecolor=PAPER, linewidth=0.8
                 )
             )
-        on_fill = text_on(colour) if fav else MUTED  # readable on this state's fill
-        # An outline in the state's own colour keeps a label readable where it runs past the border.
-        halo = [patheffects.withStroke(linewidth=2.5, foreground=colour)]
+        # Light text with a dark outline: readable on every fill, and on a dark
+        # neighbouring state where a long name runs past the border.
+        on_fill = INK if fav else MUTED
+        halo = [patheffects.withStroke(linewidth=2.8, foreground=PAPER)]
         if name in CALLOUTS:
             continue
         x, y = label_point(rings)
@@ -659,7 +660,7 @@ def place_labels(ax, xs, ys, names, fontsize=7, avoid=()):
 
 def silicon_vs_polls(f: pd.DataFrame, out: Path, note: str):
     p = f.dropna(subset=["poll_margin", "sil_margin"])
-    fig, ax = plt.subplots(figsize=(6.4, 6.2))
+    fig, ax = plt.subplots(figsize=(8.4, 8.0))  # room for 33 full state names
     if p.empty:
         ax.text(
             0.5,
@@ -674,7 +675,7 @@ def silicon_vs_polls(f: pd.DataFrame, out: Path, note: str):
         ax.plot([-lim, lim], [-lim, lim], color=INK, linewidth=0.8)
         ax.axhline(0, color=RULE, linewidth=0.8)
         ax.axvline(0, color=RULE, linewidth=0.8)
-        ax.scatter(x, y, s=55, color=ACCENT, zorder=3)
+        ax.scatter(x, y, s=38, color=ACCENT, edgecolor=PAPER, linewidth=0.8, zorder=3)
         ax.set_xlim(-lim, lim)
         ax.set_ylim(-lim, lim)
         ax.set_aspect("equal")
@@ -713,6 +714,8 @@ def silicon_vs_polls(f: pd.DataFrame, out: Path, note: str):
     fig.tight_layout()
     if not p.empty:  # names last, once the layout is fixed, so the overlap checks hold in the saved image
         place_labels(ax, x, y, list(p["race"]), fontsize=8.5)
+        for t in ax.texts:  # a dark outline keeps names readable where they cross a line
+            t.set_path_effects([patheffects.withStroke(linewidth=2.5, foreground=PAPER)])
     fig.savefig(out / "silicon_vs_polls.png", dpi=200, bbox_inches="tight")
     plt.close(fig)
 
@@ -740,6 +743,8 @@ def sources(f: pd.DataFrame, out: Path, note: str):
         s=40,
         marker="s",
         color=MUTED,
+        edgecolor=PAPER,
+        linewidth=0.8,
         label="Past results (fundamentals)",
         zorder=3,
     )
@@ -749,6 +754,8 @@ def sources(f: pd.DataFrame, out: Path, note: str):
         s=50,
         marker="^",
         color=ACCENT,
+        edgecolor=PAPER,
+        linewidth=0.8,
         label="AI surveys (calibrated)",
         zorder=3,
     )
@@ -763,14 +770,20 @@ def sources(f: pd.DataFrame, out: Path, note: str):
         label="Poll average",
         zorder=3,
     )
-    ax.scatter(
-        f["margin_mean"],
-        y,
-        s=70,
-        color=np.where(f["margin_mean"] >= 0, DEM, REP),
-        label="Forecast",
-        zorder=4,
-    )
+    for ahead, colour, label in [
+        (f["margin_mean"] >= 0, DEM, "Forecast: Democrat ahead"),
+        (f["margin_mean"] < 0, REP, "Forecast: Republican ahead"),
+    ]:
+        ax.scatter(
+            f.loc[ahead, "margin_mean"],
+            y[ahead.to_numpy()],
+            s=70,
+            color=colour,
+            edgecolor=PAPER,
+            linewidth=1,
+            label=label,
+            zorder=4,
+        )
     ax.axvline(0, color=INK, linestyle="--", linewidth=0.8)
     lim = (
         np.ceil(
