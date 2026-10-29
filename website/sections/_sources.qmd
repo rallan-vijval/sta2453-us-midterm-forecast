@@ -5,12 +5,14 @@ The forecast combines three sources: past results, the AI surveys and the polls.
 ```{python}
 #| label: fig-silicon-polls
 #| fig-cap: "AI-survey margin (Methods A and B averaged, before correction) against the poll average, one dot per state with polls. On the solid line they agree; the dashed line is the fitted correction used in the forecast."
+#| fig-alt: "Scatter plot with one dot per state, the poll average on the horizontal axis and the AI-survey margin on the vertical axis. Most dots sit below the diagonal, meaning the AI surveys lean more Republican than the polls."
 P.chart("silicon_vs_polls", scale=0.75)
 ```
 
 ```{python}
 #| label: fig-sources
 #| fig-cap: "What each source says about every race, beside the forecast that combines them. The AI surveys are shown after the correction in the figure above."
+#| fig-alt: "For each of the 36 races, a row showing the past-results estimate (grey square), the corrected AI survey (gold triangle), the poll average (white diamond) and the final forecast (blue or red dot)."
 P.chart("sources")
 ```
 

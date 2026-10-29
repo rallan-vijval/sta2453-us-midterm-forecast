@@ -1,6 +1,6 @@
 ## Reproducing this page {#reproducibility}
 
-Every number, table and chart on this page is made by the scripts in the [repository](https://github.com/rallan-vijval/sta2453-us-midterm-forecast), and its README lists the order to run them. The analysis uses Python [@python] with pandas [@pandas], NumPy [@numpy], SciPy [@scipy], Matplotlib [@matplotlib], pandera [@pandera] and great_tables [@greattables], and the page is built with Quarto [@quarto].
+Every number, table and chart on this page is made by the scripts in the [repository](https://github.com/rallan-vijval/sta2453-us-midterm-forecast), and its README lists the order to run them. The analysis uses Python [@python] with pandas [@pandas], NumPy [@numpy], SciPy [@scipy], Matplotlib [@matplotlib], pandera [@pandera], great_tables [@greattables], PyArrow [@pyarrow], Requests [@requests], HTTPX [@httpx], Beautiful Soup [@beautifulsoup], pyreadstat [@pyreadstat] and PyYAML [@pyyaml], with packages managed by uv [@uv]; the page is built with Quarto [@quarto]. The models were called through OpenRouter [@openrouter]. Polls and candidates come from Wikipedia [@wikipediapolls], and the map uses US Census state outlines [@censusoutlines]. The fonts Karla and Lekton are used under the SIL Open Font License.
 
 ```{=html}
 <details class="more"><summary>Show the settings used for this forecast</summary>

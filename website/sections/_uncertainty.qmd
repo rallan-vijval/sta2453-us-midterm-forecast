@@ -5,6 +5,7 @@ The ranges below come from 10,000 simulated elections.
 ```{python}
 #| label: fig-intervals
 #| fig-cap: "Projected margin in every race with 80% (thick) and 95% (thin) ranges across 10,000 simulated elections."
+#| fig-alt: "For each race, a dot at the forecast margin with a thick bar for the 80% range and a thin line for the 95% range, sorted from the safest Democratic race to the safest Republican one."
 P.chart("race_intervals")
 ```
 
