@@ -1,10 +1,10 @@
 method,model_slug,quantity,n_days,within_day_sd,between_day_sd,changed_vs_first_day_pct,n_pairs
 B,deepseek/deepseek-v4.1-flash,Democratic two-party margin (points),3,2.4218265601509414,1.8714176519221992,,
-B,mistralai/mistral-small-24b-instruct-2501,Democratic two-party margin (points),3,4.759757640774627,3.278682766825976,,
+B,mistralai/mistral-small-24b-instruct-2501,Democratic two-party margin (points),3,4.759757640774627,3.2390539736981308,,
 B,openai/gpt-6-luna,Democratic two-party margin (points),3,1.4881350922343974,1.106322260771098,,
 C,deepseek/deepseek-v4.1-flash,Democratic two-party share (points),3,1.3657371881218696,0.8338079402809013,,
-C,mistralai/mistral-small-24b-instruct-2501,Democratic two-party share (points),3,2.391622974235026,1.6584969782139631,,
+C,mistralai/mistral-small-24b-instruct-2501,Democratic two-party share (points),3,2.4058768266239783,1.6470199266127101,,
 C,openai/gpt-6-luna,Democratic two-party share (points),3,1.0647670469237691,0.5799745841653826,,
 V,deepseek/deepseek-v4.1-flash,vote changed vs the first day (%),3,,,5.595238095238096,840.0
-V,mistralai/mistral-small-24b-instruct-2501,vote changed vs the first day (%),3,,,8.462455303933254,839.0
+V,mistralai/mistral-small-24b-instruct-2501,vote changed vs the first day (%),3,,,8.452380952380953,840.0
 V,openai/gpt-6-luna,vote changed vs the first day (%),3,,,2.976190476190476,840.0
