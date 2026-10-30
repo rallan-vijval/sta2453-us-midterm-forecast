@@ -1,7 +1,7 @@
 """
 Purpose : Method B. Turn each demographic group's percentage split into a vote
           share per race, separately for every model, repeat and run date.
-Author  : Shrey (Member 2)
+Author  : Shrey Sati (Member 2)
 Date    : 2026-10-22
 Inputs  : data/02-analysis_data/responses/*_B_*.parquet   (every member, every day)
           data/02-analysis_data/cells.parquet, frame.parquet, candidates.parquet
@@ -33,9 +33,12 @@ KEYS = ["race", "member", "model_set", "model_slug", "repeat", "run_date"]
 def main():
     resp = load_responses("B")
     if resp.empty:
-        raise SystemExit("No Method B responses found in data/02-analysis_data/responses/.")
-    frame = pd.read_parquet(ANA / "frame.parquet")[["race", "cell_id", "share"]]
-    party = load_candidates().set_index(["race", "candidate"])["party_code"].to_dict()
+        raise SystemExit(
+            "No Method B responses found in data/02-analysis_data/responses/.")
+    frame = pd.read_parquet(
+        ANA / "frame.parquet")[["race", "cell_id", "share"]]
+    party = load_candidates().set_index(["race", "candidate"])[
+        "party_code"].to_dict()
 
     r = resp[resp["parsed"].astype(bool)].copy()
     rows = []
@@ -45,8 +48,10 @@ def main():
         total = sum(decided.values())
         if total <= 0:
             continue
-        d = sum(v for k, v in decided.items() if party.get((row.race, k)) == "D") / total
-        rp = sum(v for k, v in decided.items() if party.get((row.race, k)) == "R") / total
+        d = sum(v for k, v in decided.items()
+                if party.get((row.race, k)) == "D") / total
+        rp = sum(v for k, v in decided.items()
+                 if party.get((row.race, k)) == "R") / total
         rows.append({"race": row.race, "member": row.member, "model_set": row.model_set,
                      "model_slug": row.model_slug, "repeat": row.repeat, "run_date": row.run_date,
                      "cell_id": row.cell_id, "d": d, "r": rp, "turnout": row.turnout_percent / 100})

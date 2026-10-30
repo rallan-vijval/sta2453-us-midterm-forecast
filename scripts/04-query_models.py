@@ -1,7 +1,7 @@
 """
 Purpose : Send every prompt to every model in one member's config through
           OpenRouter, and save each answer with its cost and timing.
-Author  : Shrey (Member 2)
+Author  : Shrey Sati (Member 2)
 Date    : 2026-10-22
 Inputs  : config/models_memberX.yaml          the member's model list and settings
           prompts/*.txt, prompts/validation/*.txt
@@ -27,23 +27,6 @@ Run     : uv run python scripts/04-query_models.py --config config/models_member
           prompts without calling any model, --max-cost 2 to stop after US$2.
 """
 
-import argparse
-import asyncio
-import json
-import os
-import random
-import re
-import sys
-import time
-from datetime import UTC, date, datetime
-from pathlib import Path
-
-import httpx
-import pandas as pd
-import yaml
-from dotenv import load_dotenv
-
-sys.path.insert(0, str(Path(__file__).resolve().parent))
 from common import (
     ABBR_STATE,
     ANA,
@@ -64,6 +47,23 @@ from common import (
     stable_seed,
     strip_party_sentence,
 )
+import argparse
+import asyncio
+import json
+import os
+import random
+import re
+import sys
+import time
+from datetime import UTC, date, datetime
+from pathlib import Path
+
+import httpx
+import pandas as pd
+import yaml
+from dotenv import load_dotenv
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 URL = "https://openrouter.ai/api/v1/chat/completions"
 CHUNK = 400
@@ -89,7 +89,8 @@ def ordered_candidates(cands: pd.DataFrame, *seed_parts) -> pd.DataFrame:
 def build_jobs(method: str, cfg: dict, args, data: dict) -> list[dict]:
     cands_all = data["candidates"]
     cands_all = cands_all[cands_all["include_in_prompt"]]
-    by_race = {r: g.reset_index(drop=True) for r, g in cands_all.groupby("race")}
+    by_race = {r: g.reset_index(drop=True)
+               for r, g in cands_all.groupby("race")}
     repeats = args.repeats or cfg.get("repeats", 3)
     races = set(data["races"])
     if args.states != "all":
@@ -114,7 +115,8 @@ def build_jobs(method: str, cfg: dict, args, data: dict) -> list[dict]:
                     continue
                 if method == "A":
                     for rep in range(1, repeats + 1):
-                        c = ordered_candidates(cands, row.persona_id, slug, rep)
+                        c = ordered_candidates(
+                            cands, row.persona_id, slug, rep)
                         user = fill(
                             template,
                             persona=row.persona_text,
@@ -142,7 +144,8 @@ def build_jobs(method: str, cfg: dict, args, data: dict) -> list[dict]:
                         cands, row.persona_id, slug, 1
                     )  # same order as Method A repeat 1
                     for check in VALIDATION_CHECKS:
-                        c = base.iloc[::-1] if check == "order_reverse" else base
+                        c = base.iloc[::-
+                                      1] if check == "order_reverse" else base
                         values = {
                             "persona": row.persona_text,
                             "persona_without_party": strip_party_sentence(
@@ -159,7 +162,8 @@ def build_jobs(method: str, cfg: dict, args, data: dict) -> list[dict]:
                             ),
                             "candidate_list_reversed": candidate_lines(c),
                         }
-                        user = fill(read_prompt(f"validation/{check}.txt"), **values)
+                        user = fill(read_prompt(
+                            f"validation/{check}.txt"), **values)
                         jobs.append(
                             {
                                 "key": f"{row.persona_id}|{slug}|{check}",
@@ -189,7 +193,8 @@ def build_jobs(method: str, cfg: dict, args, data: dict) -> list[dict]:
                 for rep in range(1, repeats + 1):
                     c = ordered_candidates(cands, row.cell_id, slug, rep)
                     keys = list(c["candidate"]) + EXTRA_OPTIONS
-                    dist = "{" + ", ".join(f'"{k}": <number>' for k in keys) + "}"
+                    dist = "{" + \
+                        ", ".join(f'"{k}": <number>' for k in keys) + "}"
                     user = fill(
                         template,
                         cell_description=row.cell_description,
@@ -215,14 +220,16 @@ def build_jobs(method: str, cfg: dict, args, data: dict) -> list[dict]:
         elif method == "C":
             template = read_prompt("method_c_forecaster.txt")
             system_c = read_prompt("system_forecaster.txt")
-            all_races = set(data["races_all"]) if args.states == "all" else races
+            all_races = set(data["races_all"]
+                            ) if args.states == "all" else races
             for race in sorted(all_races):
                 cands = by_race.get(race)
                 if cands is None:
                     continue
                 for rep in range(1, repeats + 1):
                     c = ordered_candidates(cands, race, slug, rep)
-                    user = fill(template, state=race, candidate_list=candidate_lines(c))
+                    user = fill(template, state=race,
+                                candidate_list=candidate_lines(c))
                     jobs.append(
                         {
                             "key": f"{race}|{slug}|{rep}",
@@ -267,11 +274,13 @@ def parse(job: dict, text: str) -> tuple[dict, bool]:
         return {}, False
     method, check = job["method"], job["check"]
     if method == "A" or (method == "V" and check != "attention"):
-        out = {"governor_vote": match_option(obj.get("governor_vote"), job["options"])}
+        out = {"governor_vote": match_option(
+            obj.get("governor_vote"), job["options"])}
         out["turnout"] = match_option(obj.get("turnout"), TURNOUT_OPTIONS)
         needs = ["governor_vote", "turnout"]
         if method == "A" or check != "governor_only":
-            out["house_vote"] = match_option(obj.get("house_vote"), HOUSE_OPTIONS)
+            out["house_vote"] = match_option(
+                obj.get("house_vote"), HOUSE_OPTIONS)
             needs.append("house_vote")
         return out, all(out[k] is not None for k in needs)
     if check == "attention":
@@ -391,7 +400,8 @@ async def run_job(job, cfg, client, sem, headers):
             if "error" in data:
                 error = data["error"]
                 break
-            text = (data["choices"][0].get("message") or {}).get("content") or ""
+            text = (data["choices"][0].get("message")
+                    or {}).get("content") or ""
             texts.append(text)
             u = data.get("usage") or {}
             for k in ("prompt_tokens", "completion_tokens", "cost"):
@@ -470,7 +480,8 @@ async def main(args):
     out_path = RESP / f"{cfg['member']}_{method}_{run_date}{tag}.parquet"
     done = pd.read_parquet(out_path) if out_path.exists() else pd.DataFrame()
     done_keys = (
-        set(done.loc[done.get("parsed", pd.Series(dtype=bool)).astype(bool), "key"])
+        set(done.loc[done.get("parsed", pd.Series(
+            dtype=bool)).astype(bool), "key"])
         if len(done)
         else set()
     )
@@ -500,7 +511,7 @@ async def main(args):
     spent, rows = 0.0, []
     async with httpx.AsyncClient() as client:
         for i in range(0, len(todo), CHUNK):
-            chunk = todo[i : i + CHUNK]
+            chunk = todo[i: i + CHUNK]
             rows += await asyncio.gather(
                 *(run_job(j, cfg, client, sem, headers) for j in chunk)
             )
@@ -512,7 +523,8 @@ async def main(args):
                 prompt_version=args.prompt_version,
             )
             combined = pd.concat(
-                [done[~done["key"].isin(new["key"])] if len(done) else done, new],
+                [done[~done["key"].isin(new["key"])]
+                 if len(done) else done, new],
                 ignore_index=True,
             )
             combined.to_parquet(out_path, index=False)
@@ -574,7 +586,8 @@ if __name__ == "__main__":
         choices=["A", "B", "C", "V", "a", "b", "c", "v"],
         help="A personas, B groups, C forecaster, V validation checks",
     )
-    ap.add_argument("--states", default="all", help="'all' or a list such as MI,GA")
+    ap.add_argument("--states", default="all",
+                    help="'all' or a list such as MI,GA")
     ap.add_argument(
         "--limit", type=int, default=0, help="personas or groups per state (pilot)"
     )

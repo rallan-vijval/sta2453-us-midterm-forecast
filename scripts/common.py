@@ -2,7 +2,7 @@
 Purpose : Paths, constants and small helpers shared by scripts 02 to 06, so
           every script reads files from the same places and labels parties
           and answers the same way.
-Author  : Vijval (Member 1), Shrey (Member 2), Allwin Steve Paul Justin Anantharaj (Member 3)
+Author  : Vijval Rallan (Member 1), Shrey Sati (Member 2), Allwin Steve Paul Justin Anantharaj (Member 3)
 Date    : 2026-10-22
 Notes   : Not run on its own; other scripts do `from common import ...`.
 """

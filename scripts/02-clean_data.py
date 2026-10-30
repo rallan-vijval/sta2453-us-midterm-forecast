@@ -2,7 +2,7 @@
 Purpose : Combine and clean the 2024 and 2025 Cooperative Election Study (CES) records,
           select registered voters in the 36 target 2026 gubernatorial-race states, and
           draw a reproducible sample for downstream persona-prompt construction.
-Author  : Vijval Rallan 
+Author  : Vijval Rallan (Member 1)
 Date    : 2026-10-24
 Inputs  : data/01-raw_data/ces/CCES24_Common_OUTPUT_vv_topost_final.csv  (01a)
           data/01-raw_data/ces/CES25_Common.dta                            (01a)
@@ -811,7 +811,9 @@ print(f"\nFrame source: {len(frame_source):,} respondents saved to {frame_source
       f"({int(unusable.sum())} dropped for a missing age or weight)")
 print("Share of each state's weight from 2024 (lowest five):")
 from_2024 = (
-    frame_source.assign(w24=frame_source["weight"] * (frame_source["survey_year"] == 2024))
+    frame_source.assign(
+        w24=frame_source["weight"] * (frame_source["survey_year"] == 2024))
     .groupby("state")[["w24", "weight"]].sum()
 )
-print((100 * from_2024["w24"] / from_2024["weight"]).round(1).sort_values().head().to_string())
+print((100 * from_2024["w24"] / from_2024["weight"]
+       ).round(1).sort_values().head().to_string())
