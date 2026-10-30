@@ -1,6 +1,8 @@
 ## Where the AI surveys agree with the polls {#sources}
 
-The forecast combines three sources: past results, the AI surveys and the polls. This section compares them.
+AI surveys and polls generally agree on which states favour each party but they often differ on size of the lead. Across 33 states with polling data their estimates have a correlation of 0.85 and agree on the leading party in 26 states. Overall the AI estimates are about 7.2% points more Republican than the polls. 
+
+The differences are particularly large in Oklahoma, Idaho, Tennessee and South Dakota where the AI is much more Republican than the polls. New Hampshire shows the opposite pattern with the AI favouring the Democrat while the polls favour the Republican. We correct these differences before using the AI estimates in the forecast and give more weight to polls where they are available.
 
 ```{python}
 #| label: fig-silicon-polls
