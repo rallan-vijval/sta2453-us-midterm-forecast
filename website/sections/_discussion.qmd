@@ -1,3 +1,9 @@
 ## Discussion {#discussion}
 
-This section relates our results to earlier work on silicon sampling.
+Our forecast gave Democrats a median of `{python} h["dem_median"]` governorships. Democrats had a `{python} h["p_dem_majority"]` chance of winning a majority compared with `{python} h["p_rep_majority"]` for Republicans. There was also around a 10% chance that neither party would reach the 26 seats needed for a majority.
+
+In the median simulation `{python} h["flips_median"]` governorships changed party.
+
+Some races were much closer than others. Georgia was almost a coin flip with a 51% chance of a Democratic win and a 49% chance of a Republican win. Nevada had a 46% chance of a Democratic win while Ohio had a 60% chance.
+
+Kansas and Iowa were the most likely states to change party with estimated probability of around 71% each. Vermont followed at 62% with Ohio and Georgia also among the potential flips.

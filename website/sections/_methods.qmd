@@ -80,10 +80,31 @@ P.tbl_ticket_splitting()
 
 ### Combining the sources and simulating the election
 
-The corrected AI surveys, the polls and past results are blended, and the election is simulated 10,000 times.
+The corrected AI surveys, the polls and past results are blended and the election is simulated 10,000 times.
+We combined historical election results, polling data and AI survey estimates to produce the final forecast.
+
+First we use a regression model to estimate the Democratic vote margin based on the states political lean, whether an incumbent was running and which party holds the presidency. The results suggested that an incumbent running for re-election benefits their party by around 11 percentage points. The president party faces a disadvantage of approximately 3.5 points during a midterm election. The coefficient for state political lean was 0.87.
 
 ```{python}
 #| label: tbl-fundamentals
 #| tbl-cap: "The past-results regression: the Democratic margin in the 2014, 2018 and 2022 governor races on state lean, incumbency and the president's party."
 P.tbl_fundamentals()
 ```
+
+Next we compared the AI survey results with polling averages. The raw AI estimates were around 7.2 percentage points more Republican than the polls. 
+
+Using data from the 33 states with available polls, we fitted the following relationship:
+
+**Poll estimate = 5.9 + 0.58 × AI survey estimate**
+
+The slope of 0.58 suggests that the AI models produced more extreme results than the polls. Their estimates tended to exaggerate the political lean of strongly Democratic and strongly Republican states.
+
+We then combined the three sources based on their estimated precision. On average the polls received 55% of the weight, AI surveys received 33%, and historical results received 12%. These weights varied between states depending on the available data and the level of disagreement between estimates.
+
+For example, in Vermont, the three models and two methods disagreed widely. As a result, the AI surveys received only 7% of the weight, while the three polls received 80%.
+
+Finally, we simulated the election 10,000 times. Each simulation included a national swing shared across states and additional state-level uncertainty. The candidate with the most votes was considered the winner, subject to the rules of each states election.
+
+Georgia was treated differently because a candidate needs more than 50% of the vote to avoid a runoff. In our simulations when no candidate received more than 50% of the vote we counted the race as going to a runoff. The winner we show for Georgia is the candidate leading the first round.
+
+Our simulations estimated a 36% chance of a runoff. We also kept independent candidates separate from the major parties. In Rhode Island, Ken Block received approximately 34% support in the polls and won around 18% of the simulated elections.
