@@ -366,12 +366,23 @@ def _detail(r, c_margin: float) -> str:
     polls = f"{r.n_polls} polls since 1 August" if r.n_polls else "No published polls"
     weights = (f"The blend weights polls {r.weight_polls:.0%}, AI surveys {r.weight_silicon:.0%} "
                f"and past results {r.weight_fundamentals:.0%}.")  # fmt: skip
+    margin = (f"Projected margin {lean(r.margin_mean, 1)}, 80% range "
+              f"{lean(r.margin_lo80, 1)} to {lean(r.margin_hi80, 1)}.")  # fmt: skip
+    # When an independent is expected to beat one of the major-party candidates
+    # (Ken Block in Rhode Island), the Democrat-against-Republican margin is not the
+    # real contest, so lead with the gap between the top two.
+    if isinstance(r.other_candidates, str) and r.other_vote_mean > min(
+        r.dem_vote_mean, r.rep_vote_mean
+    ):
+        first, second = sorted(cands, key=lambda c: c[2], reverse=True)[:2]
+        margin = (f"{html.escape(first[1])} is expected to lead {html.escape(second[1])} by "
+                  f"{round(first[2], 1) - round(second[2], 1):.1f} points. Against the Republican alone, the margin is "
+                  f"{lean(r.margin_mean, 1)} (80% range {lean(r.margin_lo80, 1)} to {lean(r.margin_hi80, 1)}).")  # fmt: skip
     return (
         '<div class="race-detail">'
         '<table class="cands" data-quarto-disable-processing="true"><thead><tr><th>Candidate</th><th>Expected vote</th>'
         f"<th>Chance of winning</th></tr></thead><tbody>{rows}</tbody></table>"
-        f'<p class="race-note">Projected margin {lean(r.margin_mean, 1)}, 80% range '
-        f"{lean(r.margin_lo80, 1)} to {lean(r.margin_hi80, 1)}. {polls}. {weights} "
+        f'<p class="race-note">{margin} {polls}. {weights} '
         + " ".join(extra)
         + "</p>"
         + _sources_svg(r, c_margin)
@@ -465,17 +476,26 @@ def tbl_forecast() -> GT:
         "State": f["race"],
         "Democrat": f["dem_candidate"],
         "Republican": f["rep_candidate"],
-        "Rating": f["rating"],
+        "Rating": f["rating"].str.replace(" ", "\u00a0").str.replace("-", "\u2011"),  # never wrap
         "Democratic win": f["p_dem_win"].map(pct),
         "Republican win": f["p_rep_win"].map(pct),
         "Margin": f["margin_mean"].map(lambda m: lean(m, 1)),
-        "80% range": [f"{lean(a, 1)} to {lean(b, 1)}" for a, b in zip(f["margin_lo80"], f["margin_hi80"])],
+        "80% range": [f"{lean(a, 1)}\u00a0to\u00a0{lean(b, 1)}" for a, b in zip(f["margin_lo80"], f["margin_hi80"])],
         "Polls": f["n_polls"],
     })  # fmt: skip
-    return table(df).cols_align(
-        "right",
-        columns=["Democratic win", "Republican win", "Margin", "80% range", "Polls"],
-    )
+    right = ["Democratic win", "Republican win", "Margin", "80% range", "Polls"]
+    # Independents: shown only when one has a real chance (Ken Block in Rhode Island),
+    # so the three win columns add to 100% in every row.
+    if (f["p_other_win"] >= 0.005).any():
+        named = f["other_candidates"].fillna("").astype(str).str.len() > 0
+        df.insert(3, "Independent", f["other_candidates"].where(named, "").values)
+        df.insert(
+            7,
+            "Independent win",
+            np.where(named, f["p_other_win"].map(pct), "").tolist(),
+        )
+        right.insert(2, "Independent win")
+    return table(df).cols_align("right", columns=right)
 
 
 def tbl_sources() -> GT:
