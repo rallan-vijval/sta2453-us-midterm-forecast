@@ -1,6 +1,6 @@
 ## How the forecast is made {#methods}
 
-This section describes the data, the personas, the questions put to the models and how the answers become a forecast.
+We create 3,600 voter personas based on Cooperative Election Study respondents with 100 personas sampled for each state. Three language models answer survey questions as these personas or as groups of them. We adjust their responses to better represent each states voters and correct the estimates using available polls. We then combine the corrected AI estimates with polls and historical election results. Finally we simulate the election 10,000 times to explore possible outcomes. The sections below explain each step.
 
 ### Data
 

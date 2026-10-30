@@ -1,13 +1,15 @@
 ## Every race, closest first {#ratings}
 
-Each row is one of the 36 races, from the closest to the safest.
+Each row represents one of the 36 governor races ordered from the closest to the safest. A dot on the left favours the democrat while a dot on the right favours the Republican. The farther the dot is from the centre safer the race is for that party. The percentage shows the favoured candidate chance of winning not their share of the vote. Ratings are classified as Toss-up, Lean, Likely or Solid based on the candidates chance of winning. You can filter races by rating, search for a state or select the plus sign to view candidates and estimates from each source.
+
+The current forecast has 12 Solid Democratic races, 4 Likely Democratic races, 3 Lean Democratic races, 3 Toss-ups, 5 Lean Republican races, 1 Likely Republican race and 8 Solid Republican races. Georgia, Nevada and Ohio are the three Toss-ups.
 
 ```{python}
 P.ratings_strip()
 ```
 
 ::: {.credit}
-Each row opens to show the candidates and every source's estimate. The layout of this strip is adapted from the Decision Desk HQ governor ratings page.
+The layout of this strip is adapted from the Decision Desk HQ governor ratings page.
 :::
 
 ```{python}
@@ -26,7 +28,9 @@ P.chart("forecast_map", scale=0.6)
 P.chart("seat_count")
 ```
 
+Fourteen governors are not up for election this year, including six Democrats and eight Republicans. These are shown as empty squares in the bar at the top of the page. Democrats need to win 20 of the 36 contested races to reach 26 governorships, while Republicans need 18. The forecast gives Democrats a median of `{python} h["dem_median"]` governorships, with an 80% range of `{python} h["dem_lo80"]` to `{python} h["dem_hi80"]`. Democrats have a `{python} h["p_dem_majority"]` chance of holding a majority, compared with `{python} h["p_rep_majority"]` for Republicans. In about 10% of simulations, neither party reaches a majority. The results vary because a national swing can affect many states at the same time.
 ```{=html}
+
 <details class="more"><summary>Show the full forecast table</summary>
 ```
 
