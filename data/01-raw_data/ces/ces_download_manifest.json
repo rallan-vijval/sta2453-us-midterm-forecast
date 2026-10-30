@@ -1,6 +1,6 @@
 {
   "source": "https://dataverse.harvard.edu",
-  "created_at_utc": "2026-10-24T18:52:00.215935+00:00",
+  "created_at_utc": "2026-10-30T18:48:08.875831+00:00",
   "files": {
     "ces_2024": {
       "file_id": 12050325,
@@ -18,5 +18,28 @@
       "sha256": "516135d80d9fb5dbcbcea9c952c56b0847b644791d918c4ea6f1255d785033e5",
       "status": "downloaded"
     }
-  }
+  },
+  "samples": {
+    "ces_2024": {
+      "filename": "CES24_sample.csv",
+      "sampled_from": "CCES24_Common_OUTPUT_vv_topost_final.csv",
+      "rows": 1000,
+      "columns": 694,
+      "states": 51,
+      "seed": 2453,
+      "size_bytes": 2765201,
+      "sha256": "97f1a8447d4057e5051d20119b3c498f872a26d2c6e64f387ab02309cd2d8ac8"
+    },
+    "ces_2025": {
+      "filename": "CES25_sample.dta",
+      "sampled_from": "CES25_Common.dta",
+      "rows": 1000,
+      "columns": 341,
+      "states": 51,
+      "seed": 2453,
+      "size_bytes": 3210082,
+      "sha256": "f370136b78be083e670b16531c397472b9573ac880067a98502efbcdaf86b32b"
+    }
+  },
+  "samples_created_at_utc": "2026-10-30T18:48:28.511061+00:00"
 }
