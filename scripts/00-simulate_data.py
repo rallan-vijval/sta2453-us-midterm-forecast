@@ -1,7 +1,7 @@
 """
 Purpose : Simulate every dataset the pipeline will produce, so that scripts and
           tests can be written and checked before any real data exist.
-Author  : Allwin Steve Paul Justin Anantharaj (Member 3)
+Author  : Allwin Steve Paul Justin Anantharaj
 Date    : 2026-10-22
 Inputs  : none
 Outputs : data/00-simulated_data/
@@ -349,7 +349,7 @@ responses_a = resp[
 ]
 
 # ---------------------------------------------------------------------------
-# 8. Method A estimates (what Member 1's script will produce)
+# 8. Method A estimates (what Vijval Rallan's script will produce)
 # ---------------------------------------------------------------------------
 TURNOUT_WEIGHT = dict(zip(TURNOUT, [1.0, 0.7, 0.2, 0.0]))
 ok = responses_a[responses_a["parsed"]].copy()

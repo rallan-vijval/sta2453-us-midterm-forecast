@@ -1,7 +1,7 @@
 """
 Purpose : Method A. Turn individual persona answers into a vote share for each
           race, separately for every model, repeat and run date.
-Author  : Vijval Rallan (Member 1)
+Author  : Vijval Rallan
 Date    : 2026-10-22
 Inputs  : data/02-analysis_data/responses/*_A_*.parquet   (every member, every day)
           data/02-analysis_data/personas.parquet, frame.parquet, candidates.parquet

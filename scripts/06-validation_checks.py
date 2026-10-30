@@ -6,7 +6,7 @@ Purpose : Summarise how far the synthetic answers can be trusted, and what they 
             2. Stability: how much Methods B and C, and the Method V answers, move
                from one day to the next when the prompts are identical.
             3. Costs and timing of every model run.
-Author  : Shrey Sati (Member 2)
+Author  : Shrey Sati
 Date    : 2026-10-27
 Inputs  : data/02-analysis_data/responses/*_{A,C,V}_*.parquet   (04-query_models.py)
           data/02-analysis_data/method_b_estimates.parquet       (05b-method_b.py)

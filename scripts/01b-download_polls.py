@@ -1,7 +1,7 @@
 """
 Purpose : Download each 2026 state governor page on Wikipedia and extract its
           general-election polls into one table.
-Author  : Shrey Sati (Member 2)
+Author  : Shrey Sati
 Date    : 2026-10-25
 Inputs  : https://en.wikipedia.org/wiki/2026_<State>_gubernatorial_election (36 pages)
           data/01-raw_data/governor_candidates_2026.csv  candidate names and parties (01c)

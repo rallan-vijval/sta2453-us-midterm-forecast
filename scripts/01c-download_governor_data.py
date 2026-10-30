@@ -3,7 +3,7 @@ Purpose : Download and parse Wikipedia's gubernatorial election pages:
             - 2026: every race, its incumbent, Cook PVI, expert ratings and candidates;
             - 2014, 2018, 2022: past results in the same 36 states (trains Method C);
             - 2023, 2024, 2025: winners in the 14 states not voting in 2026.
-Author  : Allwin Steve Paul Justin Anantharaj (Member 3)
+Author  : Allwin Steve Paul Justin Anantharaj
 Date    : 2026-10-22
 Inputs  : https://en.wikipedia.org/wiki/<year>_United_States_gubernatorial_elections
 Outputs : data/01-raw_data/wikipedia/gubernatorial_<year>.html   page snapshots

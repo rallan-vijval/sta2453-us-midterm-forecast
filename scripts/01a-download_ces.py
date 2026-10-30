@@ -1,7 +1,7 @@
 """
 Purpose : Download the official 2024 and 2025 Cooperative Election Study (CES)
           files from Harvard Dataverse so the cleaning pipeline can use them.
-Author  : Vijval Rallan (Member 1)
+Author  : Vijval Rallan
 Date    : 2026-10-24
 Inputs  : Harvard Dataverse data files configured in FILES:
           - CES 2024: CCES24_Common_OUTPUT_vv_topost_final.csv (file ID 12050325)

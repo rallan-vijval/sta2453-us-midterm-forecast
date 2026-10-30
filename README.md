@@ -4,7 +4,7 @@ A forecast of the 36 governor races on 3 November 2026, built from **synthetic s
 
 - **Website:** https://rallan-vijval.github.io/sta2453-us-midterm-forecast/
 - **Course:** STA2453H, University of Toronto, Fall 2026, Assignment II
-- **Team:** Vijval Rallan(Member 1: CES, personas, Method A), Shrey Sati(Member 2: model queries, tests, Method B, GitHub Actions), Allwin Steve Paul Justin Anantharaj (Member 3: race data, simulation, Method C, forecast, website)
+- **Team:** Vijval Rallan (CES, personas, Method A), Shrey Sati (model queries, tests, Method B, GitHub Actions), Allwin Steve Paul Justin Anantharaj (race data, simulation, Method C, forecast, website)
 
 ## Data Sources and Licences
 
