@@ -1,6 +1,13 @@
 ## What the ranges include, and what they leave out {#uncertainty}
 
-The ranges below come from 10,000 simulated elections.
+### Understanding the Forecast Ranges
+
+We ran 10,000 election simulations to understand how much the results could vary. The 80% range covers the outcomes from 80% of the simulations, while the 95% range covers 95% of them.
+
+A 60% chance of winning does not mean that a result is guaranteed. It means the candidate could still lose in about four out of ten simulations.
+
+Our forecast gave Democrats a median of 27 governorships with an 80% range of 21 to 32. The range is quite wide because many races are competitive and a national shift in voter preferences can affect several states at once.
+
 
 ```{python}
 #| label: fig-intervals
@@ -9,3 +16,26 @@ The ranges below come from 10,000 simulated elections.
 P.chart("race_intervals")
 ```
 
+### Sources of Uncertainty
+
+One important source of uncertainty is the national swing. We assumed a standard deviation of 4 percentage points. This accounts for the possibility that polls may overestimate or underestimate support across several states in the same direction. Such errors can make the final number of seats vary considerably between simulations.
+
+We also included uncertainty for each data source. After calibration the AI surveys had an estimated standard deviation of around 6.4 points. Polling estimates had an error of at least five points, even when several polls were available. Historical results had a standard deviation of approximately 12.9 points making them the least precise source.
+
+We tested the historical model on 107 previous elections that were not used to fit it. The model identified the correct winner in 87% of these races but its average error was around 13% points. Its Brier score was 0.11 compared with 0.25 for a simple 50–50 prediction. This suggests that historical results can help identify likely winners, although they are less reliable for predicting the exact vote margin.
+
+### Limitations of Uncertainty Estimates
+
+There are several limitations to these estimates.
+
+First all three AI models may share similar biases because their training data may contain overlapping information. Using different models does not guarantee that these shared biases will disappear.
+
+Second, we calibrated the AI surveys against this year's polls. If the polls are systematically wrong, the adjusted AI estimates may also be wrong.
+
+Third, our synthetic voters were based on CES respondents from 2024 and 2025. Their views may not fully reflect changes in public opinion since then.
+
+Colorado, Wyoming and Hawaii had no polling data in our dataset. Their forecasts depend more heavily on AI surveys and historical results, so their uncertainty may be greater than the model indicates.
+
+The simulations also cannot account for events that happen after 1 November, such as late campaign developments, scandals or unexpected turnout changes.
+
+Finally, turnout was estimated using the models predictions of whether people would definitely or probably vote. This is not the same as using a dedicated likely voter model.
