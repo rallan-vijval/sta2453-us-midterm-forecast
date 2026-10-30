@@ -1,7 +1,7 @@
 """
 Purpose : Method A. Turn individual persona answers into a vote share for each
           race, separately for every model, repeat and run date.
-Author  : Vijwal (Member 1)
+Author  : Vijval Rallan (Member 1)
 Date    : 2026-10-22
 Inputs  : data/02-analysis_data/responses/*_A_*.parquet   (every member, every day)
           data/02-analysis_data/personas.parquet, frame.parquet, candidates.parquet
@@ -46,7 +46,8 @@ def main(simulated: bool):
     src = SIM if simulated else ANA
     resp = load_responses("A", simulated)
     if resp.empty:
-        raise SystemExit("No Method A responses found in data/02-analysis_data/responses/.")
+        raise SystemExit(
+            "No Method A responses found in data/02-analysis_data/responses/.")
     personas = pd.read_parquet(src / "personas.parquet")[["persona_id"] + CELL]
     frame = pd.read_parquet(src / "frame.parquet")[["race"] + CELL + ["share"]]
     cands = load_candidates(simulated)[["race", "candidate", "party_code"]]
@@ -55,8 +56,10 @@ def main(simulated: bool):
     if "run_date" not in r:
         r["run_date"] = "unknown"
     r = r.merge(personas, on="persona_id", how="left")
-    r = r.merge(cands.rename(columns={"candidate": "governor_vote"}), on=["race", "governor_vote"], how="left")
-    r["party"] = r["party_code"].fillna(r["governor_vote"].map({"Other": "O", "Don't know": "DK"}))
+    r = r.merge(cands.rename(columns={"candidate": "governor_vote"}), on=[
+                "race", "governor_vote"], how="left")
+    r["party"] = r["party_code"].fillna(
+        r["governor_vote"].map({"Other": "O", "Don't know": "DK"}))
     r["w"] = r["turnout"].map(TURNOUT_WEIGHT).fillna(0)
     r["wd"] = r["w"] * (r["party"] == "D")
     r["wr"] = r["w"] * (r["party"] == "R")
@@ -64,12 +67,14 @@ def main(simulated: bool):
 
     # Rates at three levels: group, party group, state.
     cell = summarise(r, KEYS + CELL)
-    pg = summarise(r, KEYS + ["party_group"]).rename(columns={s: f"{s}_pg" for s in STATS})
+    pg = summarise(r, KEYS + ["party_group"]
+                   ).rename(columns={s: f"{s}_pg" for s in STATS})
     st = summarise(r, KEYS).rename(columns={s: f"{s}_st" for s in STATS})
 
     # Every group in the frame, for every race x model x repeat x day.
     grid = st[KEYS].merge(frame, on="race")
-    grid = grid.merge(cell, on=KEYS + CELL, how="left").merge(pg, on=KEYS + ["party_group"], how="left")
+    grid = grid.merge(cell, on=KEYS + CELL, how="left").merge(pg,
+                                                              on=KEYS + ["party_group"], how="left")
     grid = grid.merge(st, on=KEYS, how="left")
     for s in STATS:  # fall back: group -> party group -> state
         grid[s] = grid[s].fillna(grid[f"{s}_pg"]).fillna(grid[f"{s}_st"])
@@ -87,7 +92,8 @@ def main(simulated: bool):
     est["dem_share"] = 100 * est["D"] / total
     est["rep_share"] = 100 * est["R"] / total
     est["other_share"] = 100 * est["O"] / total
-    est = est.merge(cell.groupby(KEYS)["n"].sum().rename("n_personas").reset_index(), on=KEYS)
+    est = est.merge(cell.groupby(KEYS)["n"].sum().rename(
+        "n_personas").reset_index(), on=KEYS)
     est = est.drop(columns=["D", "R", "O"]).dropna(subset=["dem_share"])
     est.insert(0, "method", "A")
 
