@@ -1,6 +1,6 @@
 """
 Purpose : Test the simulated datasets before any real data exist.
-Author  : Shrey Sati (Member 2)
+Author  : Shrey Sati
 Date    : 2026-10-24
 Inputs  : data/00-simulated_data/*.parquet (from scripts/00-simulate_data.py)
 Run     : uv run pytest tests/test_simulated_data.py -v

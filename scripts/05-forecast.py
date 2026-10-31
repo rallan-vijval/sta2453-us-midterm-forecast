@@ -8,7 +8,7 @@ Purpose : Turn everything into one forecast for every 2026 governor race.
             3. Polls: a recency- and size-weighted average where polls exist.
             4. The three are combined by inverse-variance weighting, then the
                election is simulated 10,000 times with a shared national swing.
-Author  : Allwin Steve Paul Justin Anantharaj (Member 3)
+Author  : Allwin Steve Paul Justin Anantharaj
 Date    : 2026-10-22
 Inputs  : real mode (default)
             data/01-raw_data/governor_races_2026.csv

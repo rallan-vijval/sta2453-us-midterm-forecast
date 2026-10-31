@@ -1,7 +1,7 @@
 """
 Purpose : Test the real data: the downloads, the personas and frame, every model
           answer, the estimates built from them, and the forecast.
-Author  : Shrey Sati (Member 2)
+Author  : Shrey Sati
 Date    : 2026-10-27
 Inputs  : data/01-raw_data/, data/02-analysis_data/, data/03-forecast/
 Run     : uv run pytest tests/test_analysis_data.py -v

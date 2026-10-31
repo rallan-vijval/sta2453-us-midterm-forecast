@@ -1,7 +1,7 @@
 """
 Purpose : Method B. Turn each demographic group's percentage split into a vote
           share per race, separately for every model, repeat and run date.
-Author  : Shrey Sati (Member 2)
+Author  : Shrey Sati
 Date    : 2026-10-22
 Inputs  : data/02-analysis_data/responses/*_B_*.parquet   (every member, every day)
           data/02-analysis_data/cells.parquet, frame.parquet, candidates.parquet

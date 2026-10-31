@@ -2,7 +2,7 @@
 Purpose : Combine and clean the 2024 and 2025 Cooperative Election Study (CES) records,
           select registered voters in the 36 target 2026 gubernatorial-race states, and
           draw a reproducible sample for downstream persona-prompt construction.
-Author  : Vijval Rallan (Member 1)
+Author  : Vijval Rallan
 Date    : 2026-10-24
 Inputs  : data/01-raw_data/ces/CCES24_Common_OUTPUT_vv_topost_final.csv  (01a)
           data/01-raw_data/ces/CES25_Common.dta                            (01a)

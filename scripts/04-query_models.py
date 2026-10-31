@@ -1,7 +1,7 @@
 """
 Purpose : Send every prompt to every model in one member's config through
           OpenRouter, and save each answer with its cost and timing.
-Author  : Shrey Sati (Member 2)
+Author  : Shrey Sati
 Date    : 2026-10-22
 Inputs  : config/models_memberX.yaml          the member's model list and settings
           prompts/*.txt, prompts/validation/*.txt

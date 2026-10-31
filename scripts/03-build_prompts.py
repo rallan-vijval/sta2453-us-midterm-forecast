@@ -2,7 +2,7 @@
 Purpose : Turn Vijwal's cleaned CES sample into the persona prompts that
           04-query_models.py sends, plus the 24 demographic groups per state
           used by Method B and the weighting frame used by Methods A and B.
-Author  : Allwin Steve Paul Justin Anantharaj (Member 3)
+Author  : Allwin Steve Paul Justin Anantharaj
 Date    : 2026-10-24
 Inputs  : data/01-raw_data/governor_candidates_2026.csv   (01c)
           data/02-analysis_data/personas.parquet   (02-clean_data.py: one row per sampled

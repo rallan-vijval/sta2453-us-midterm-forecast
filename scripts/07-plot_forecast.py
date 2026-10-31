@@ -6,7 +6,7 @@ Purpose : Draw the sketched charts from the forecast output. Every chart treats
           3. silicon_vs_polls.png  AI-survey margin against the poll-average margin, where polls exist
           4. seat_count.png        governorships each party holds, across all simulated elections
           5. sources.png           past results, AI surveys and polls for each race, beside the forecast
-Author  : Allwin Steve Paul Justin Anantharaj (Member 3)
+Author  : Allwin Steve Paul Justin Anantharaj
 Date    : 2026-10-24
 Inputs  : data/03-forecast/forecast.parquet, simulations.parquet   (05-forecast.py)
           with --llm-test: data/03-forecast-llm-test/forecast.parquet
