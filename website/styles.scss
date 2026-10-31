@@ -42,7 +42,7 @@ $table-bg: transparent;
   --text: #{$text}; --muted: #{$muted};
   --dem: #{$dem}; --rep: #{$rep}; --toss: #{$toss};
   --wide: 68rem;      // charts, tables, the ratings strip
-  --measure: 42rem;   // prose
+  --measure: 68rem;   // prose
 }
 
 html { scroll-padding-top: 4.5rem; }
@@ -285,3 +285,14 @@ span.todo { display: inline-block; padding: 0 .4rem; margin-right: .3rem; font-s
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+// Centre charts and tables in the column
+.cell-output-display img,
+.quarto-figure img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.gt_table { margin: .5rem auto 1rem !important; }
+
+figcaption, .figure-caption, .quarto-float-caption { text-align: center; }
