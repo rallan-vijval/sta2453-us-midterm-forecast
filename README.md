@@ -2,7 +2,7 @@
 
 A forecast of the 36 governor races on 3 November 2026, built from **synthetic survey responses**: large language models answering an election survey while playing real respondents to the Cooperative Election Study (CES). The synthetic answers are combined with past results and published polls, and the election is simulated 10,000 times.
 
-- **Website:** https://rallan-vijval.github.io/sta2453-us-midterm-forecast/
+- **Website:** https://rallan-vijval.github.io/us-midterm-gubernatorial-forecast/
 - **Course:** STA2453H, University of Toronto, Fall 2026, Assignment II
 - **Team:** Vijval Rallan (CES, personas, Method A), Shrey Sati (model queries, tests, Method B, GitHub Actions), Allwin Steve Paul Justin Anantharaj (race data, simulation, Method C, forecast, website)
 
@@ -70,10 +70,7 @@ Each of us used AI assistants while building the project. We made the analysis d
 
 ### Writing
 
-The written analysis on the website (Methods, Uncertainty and Discussion) was written by us. [If an AI tool reworded or edited any of it, say which tool and for which sections.]
-
-
-
+The written analysis on the website (Methods, Uncertainty and Discussion) was written by us. 
 ## Repository layout
 
 - `data/00-simulated_data/` simulated inputs used to test the pipeline
