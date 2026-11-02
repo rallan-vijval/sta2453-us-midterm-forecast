@@ -7,7 +7,7 @@ We create 3,600 voter personas based on Cooperative Election Study respondents w
 The data come from the Cooperative Election Study [@ces2024; @ces2025], the polls listed on Wikipedia, and past governor results.
 
 ```{=html}
-<details class="more"><summary>Show the polls by state</summary>
+<!-- <details class="more"><summary>Show the polls by state</summary> -->
 ```
 
 ```{python}
@@ -17,7 +17,7 @@ P.tbl_polls()
 ```
 
 ```{=html}
-</details>
+<!-- </details> -->
 ```
 
 ### Personas and the weighting frame
@@ -31,7 +31,7 @@ P.tbl_composition()
 ```
 
 ```{=html}
-<details class="more"><summary>Show the frame for each state</summary>
+<!-- <details class="more"><summary>Show the frame for each state</summary> -->
 ```
 
 ```{python}
@@ -41,7 +41,7 @@ P.tbl_frame_states()
 ```
 
 ```{=html}
-</details>
+<!-- </details> -->
 ```
 
 ### Asking the models
@@ -55,7 +55,7 @@ P.tbl_models()
 ```
 
 ```{=html}
-<details class="more"><summary>Show the exact prompt one persona received, and the reply</summary>
+<!-- <details class="more"><summary>Show the exact prompt one persona received, and the reply</summary> -->
 ```
 
 ```{python}
@@ -63,7 +63,7 @@ P.example_prompt()
 ```
 
 ```{=html}
-</details>
+<!-- </details> -->
 ```
 
 ```{python}

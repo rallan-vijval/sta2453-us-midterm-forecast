@@ -29,10 +29,12 @@ P.chart("seat_count")
 ```
 
 Fourteen governors are not up for election this year, including six Democrats and eight Republicans. These are shown as empty squares in the bar at the top of the page. Democrats need to win 20 of the 36 contested races to reach 26 governorships, while Republicans need 18. The forecast gives Democrats a median of `{python} h["dem_median"]` governorships, with an 80% range of `{python} h["dem_lo80"]` to `{python} h["dem_hi80"]`. Democrats have a `{python} h["p_dem_majority"]` chance of holding a majority, compared with `{python} h["p_rep_majority"]` for Republicans. In about 10% of simulations, neither party reaches a majority. The results vary because a national swing can affect many states at the same time.
-```{=html}
 
-<details class="more"><summary>Show the full forecast table</summary>
+```{=html}
+<!--
+<details class="more"><summary>Show the full forecast table</summary>   -->
 ```
+
 
 ```{python}
 #| label: tbl-forecast
@@ -41,5 +43,5 @@ P.tbl_forecast()
 ```
 
 ```{=html}
-</details>
+<!-- </details> -->
 ```
