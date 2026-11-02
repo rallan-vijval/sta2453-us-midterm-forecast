@@ -24,11 +24,11 @@ info = P.run_info()
 
 ::: {.hero #top}
 
-::: {.kicker}
-The Synthetic Governor Poll
-:::
+# The Synthetic Governor Poll
 
-# `{python} h["lead_party"]` are favoured in `{python} h["lead_count"]` of `{python} h["n_races"]` governor's races
+::: {.standfirst}
+`{python} h["lead_party"]` are favoured in `{python} h["lead_count"]` of `{python} h["n_races"]` governor's races
+:::
 
 ::: {.disclosure}
 Every number on this page starts from synthetic survey answers: three language models answering as 3,600 real respondents to the Cooperative Election Study. No real voter was asked anything. We combine those answers with published polls and past results, then simulate the election `{python} h["n_sims"]` times.
