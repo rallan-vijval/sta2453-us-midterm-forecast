@@ -296,3 +296,15 @@ span.todo { display: inline-block; padding: 0 .4rem; margin-right: .3rem; font-s
 .gt_table { margin: .5rem auto 1rem !important; }
 
 figcaption, .figure-caption, .quarto-float-caption { text-align: center; }
+
+
+// Centred headline
+.hero h1 {
+  text-align: center;
+  max-width: none;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(2.3rem, 6vw, 3.8rem);
+}
+.hero .disclosure,
+.hero .updated p { text-align: center; margin-left: auto; margin-right: auto; }
