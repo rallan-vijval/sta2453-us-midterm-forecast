@@ -12,7 +12,7 @@ info = P.run_info()
 
 ```{=html}
 <nav class="topbar" aria-label="Sections">
-  <a class="site-name" href="#top">Governors 2026</a>
+  <a class="Every number on this page starts from silicon sampling, synthetic survey answers:site-name" href="#top">Governors 2026</a>
   <a href="#ratings">Ratings</a>
   <a href="#sources">AI surveys and polls</a>
   <a href="#methods">Methods</a>
@@ -27,7 +27,7 @@ info = P.run_info()
 # `{python} h["lead_party"]` are favoured in `{python} h["lead_count"]` of `{python} h["n_races"]` governor's races
 
 ::: {.disclosure}
-Every number on this page starts from synthetic survey answers: three language models answering as 3,600 real respondents to the Cooperative Election Study. We combine those answers with published polls and past results, then simulate the election `{python} h["n_sims"]` times.
+ three language models answering as 3,600 real respondents to the Cooperative Election Study. We combine those answers with published polls and past results, then simulate the election `{python} h["n_sims"]` times.
 :::
 
 ::: {.updated}
