@@ -14,7 +14,7 @@ P.tbl_config()
 ```
 
 ```{=html}
-</details>
+<!-- </details> -->
 ```
 
 ### References
