@@ -46,7 +46,38 @@ P.tbl_frame_states()
 
 ### Asking the models
 
-Three language models from three companies answered as each persona.
+We sent all prompts through OpenRouter to three models (@tbl-models): OpenAI's
+GPT-6 Luna, DeepSeek V4.1 Flash, and Mistral Small 24B. Every model was locked
+to a single host provider so that our daily runs always hit the same
+deployment. For DeepSeek and Mistral, we set the temperature to 1.0. GPT-6
+Luna blocks custom temperature settings, so we left it on its default
+temperature with reasoning set to minimal. Pulling from three separate model
+families keeps our forecast from leaning entirely on one lab's training
+decisions, even if biases common to all three models still carry over.
+
+We ran three different prompt formats:
+
+* **Method A (individual personas):** we fed individual voter personas into
+  each model and asked three things: how likely they were to vote in the 2026
+  midterms, who they would pick for governor, and who they would back for the
+  U.S. House. Each persona went to every model three times.
+
+* **Method B (groups):** rather than prompting one voter at a time, we broke
+  each state's electorate into 24 buckets by party (3), age (4), and college
+  degree (2). We then asked the models to give the turnout and candidate vote
+  split for each bucket, adding up to 864 calls per model a day.
+
+* **Method C (direct forecasting):** we asked the models to act as election
+  forecasters directly. For every race, they gave the Democratic two-party vote
+  share, the uncertainty around that number, and each candidate's chance of
+  winning. This ran three times per state every day.
+
+In every method, we shuffled the candidate order using a fixed seed to keep
+the prompts reproducible, and required the models to reply in JSON using only
+a preset list of valid values. Whenever a reply came back blank or broken, we
+ran that prompt one more time and saved all raw outputs. Taking all days and
+methods together, 100% of DeepSeek's replies were usable, while GPT-6 Luna and
+Mistral both came in at 99.8%.
 
 ```{python}
 #| label: tbl-models
