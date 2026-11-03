@@ -17,8 +17,8 @@ barely react to ballot position, and their responses mostly follow the
 persona's party. Argyle et al. [-@argyle2023] found that models conditioned on
 a person's background reproduce how groups vote, and Wang et al. [-@wang2025]
 found that they also make members of a group more alike than they are. Our
-party-drop result shows both, and it fits the AI surveys spreading states too
-far apart: in our AI surveys, a persona's party appears to decide its vote
+party-drop result shows both, and it fits the AI surveys spreading the states
+too far apart: in our AI surveys, a persona's party appears to decide its vote
 more often than it does for real voters.
 
 ```{python}

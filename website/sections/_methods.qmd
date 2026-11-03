@@ -1,6 +1,6 @@
 ## How the forecast is made {#methods}
 
-We create 3,600 voter personas based on Cooperative Election Study respondents with 100 personas sampled for each state. Three language models answer survey questions as these personas or as groups of them. We adjust their responses to better represent each states voters and correct the estimates using available polls. We then combine the corrected AI estimates with polls and historical election results. Finally we simulate the election 10,000 times to explore possible outcomes. The sections below explain each step.
+We create 3,600 voter personas based on Cooperative Election Study respondents with 100 personas sampled for each state. Three language models answer survey questions as these personas or as groups of them. We adjust their responses to better represent each state's voters and correct the estimates using available polls. We then combine the corrected AI estimates with polls and historical election results. Finally we simulate the election 10,000 times to explore possible outcomes. The sections below explain each step.
 
 ### Data
 
@@ -111,10 +111,9 @@ P.tbl_ticket_splitting()
 
 ### Combining the sources and simulating the election
 
-The corrected AI surveys, the polls and past results are blended and the election is simulated 10,000 times.
 We combined historical election results, polling data and AI survey estimates to produce the final forecast.
 
-First we use a regression model to estimate the Democratic vote margin based on the states political lean, whether an incumbent was running and which party holds the presidency. The results suggested that an incumbent running for re-election benefits their party by around 11 percentage points. The president party faces a disadvantage of approximately 3.5 points during a midterm election. The coefficient for state political lean was 0.87.
+First, we used a regression model to estimate the Democratic vote margin based on the state's political lean, whether an incumbent was running and which party holds the presidency. The results suggested that an incumbent running for re-election benefits their party by around 11 percentage points. The president's party faces a disadvantage of approximately 3.5 points during a midterm election. The coefficient for state political lean was 0.87.
 
 ```{python}
 #| label: tbl-fundamentals
@@ -134,7 +133,7 @@ We then combined the three sources based on their estimated precision. On averag
 
 For example, in Vermont, the three models and two methods disagreed widely. As a result, the AI surveys received only 7% of the weight, while the three polls received 80%.
 
-Finally, we simulated the election 10,000 times. Each simulation included a national swing shared across states and additional state-level uncertainty. The candidate with the most votes was considered the winner, subject to the rules of each states election.
+Finally, we simulated the election 10,000 times. Each simulation included a national swing shared across states and additional state-level uncertainty. The candidate with the most votes was considered the winner, subject to the rules of each state's election.
 
 Georgia was treated differently because a candidate needs more than 50% of the vote to avoid a runoff. In our simulations when no candidate received more than 50% of the vote we counted the race as going to a runoff. The winner we show for Georgia is the candidate leading the first round.
 
