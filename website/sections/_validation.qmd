@@ -2,7 +2,24 @@
 
 ### Do the answers react to the right things?
 
-We changed one detail of the prompt at a time to see whether the answers changed for the right reasons.
+To see what the answers depend on, we took 10 personas per state with a 2026
+governor's race (360 personas in total) and asked them again with one detail
+of the prompt changed. To establish a baseline, we also asked the identical
+question a second time, which changed 3.9% to 4.7% of governor votes
+(@tbl-validation). The most impactful change came from removing the persona's
+party, which changed 16% to 20% of votes (four to five times the baseline),
+and party-line voting fell from 97% to 80%. Removing party labels from the
+candidates changed 5% to 12% of votes, with the greatest movement in Mistral's
+responses. Reversing the candidate order or hiding the incumbent label altered
+3% to 7% of votes, similar to the baseline, and every persona was able to
+identify their own state when asked. Our experiments show that the models
+barely react to ballot position, and their responses mostly follow the
+persona's party. Argyle et al. [-@argyle2023] found that models conditioned on
+a person's background reproduce how groups vote, and Wang et al. [-@wang2025]
+found that they also make members of a group more alike than they are. Our
+party-drop result shows both, and it fits the AI surveys spreading states too
+far apart: in our AI surveys, a persona's party appears to decide its vote
+more often than it does for real voters.
 
 ```{python}
 #| label: tbl-validation
@@ -12,7 +29,18 @@ P.tbl_validation()
 
 ### Do the answers hold from one day to the next?
 
-The same questions are asked every day to see how much the answers move.
+Synthetic answers can drift with small changes to wording or timing, as Bisbee
+et al. [-@bisbee2024] found. We asked the models the same Method B, Method C
+and validation questions over six days: the full run on 25 October, followed
+by daily GitHub Actions runs from 28 October to 1 November (@tbl-stability).
+On all measures, Mistral was the least stable model. Between days, a race's
+margin in Method B shifted by 3.8 points for Mistral, 2.1 for DeepSeek and 1.4
+for GPT-6 Luna. Method C was more consistent, moving 0.7 to 1.5 points between
+days, and 4% to 8% of the validation personas' votes differed from the first
+run. The Method B shifts are slightly smaller than the spread between repeats
+on the same day, so most of the movement comes from the models' own
+randomness rather than a change over time, and all of it is small next to the
+7.2-point gap between the AI surveys and the polls.
 
 ```{python}
 #| label: tbl-stability
@@ -21,6 +49,17 @@ P.tbl_stability()
 ```
 
 ### Costs and timing
+
+The 67,934 model calls over the six-day period cost US$3.55 in total
+(@tbl-costs, @tbl-cost-day). Of that, $2.39 was for the full run on 25
+October, when we asked every method. Method A on its own made 32,440 calls and
+took 107 minutes to complete, with eight calls running at a time. On the other
+days we re-ran Methods B and C with the validation checks, and each of those
+runs took about 14 minutes and cost about $0.23. By model, GPT-6 Luna cost
+$1.95, because its reasoning tokens are billed as output, DeepSeek $1.18 and
+Mistral $0.43. By method, A cost $1.61, B $1.27, the validation checks $0.58
+and C $0.10. The GitHub schedule was set for 10:23, but the job usually
+started about five hours late, which made no difference to a daily forecast.
 
 ```{python}
 #| label: tbl-costs
