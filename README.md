@@ -84,7 +84,6 @@ Each of us used AI assistants while building the project. We made the analysis d
 ### Writing
 
 The written analysis on the website (Methods, Uncertainty and Discussion) was written by us. 
-
 ## Repository layout
 
 - `data/00-simulated_data/` simulated inputs used to test the pipeline
