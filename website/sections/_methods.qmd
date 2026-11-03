@@ -4,7 +4,15 @@ We create 3,600 voter personas based on Cooperative Election Study respondents w
 
 ### Data
 
-The data come from the Cooperative Election Study [@ces2024; @ces2025], the polls listed on Wikipedia, and past governor results.
+The personas and the weighting frame come from the 2024 and 2025 Cooperative
+Election Study [@ces2024; @ces2025], which `01a` downloads from Harvard
+Dataverse and checks against stored checksums. Candidates, race ratings and
+past results for 2014, 2018 and 2022 come from Wikipedia [@wikipediapolls]
+through `01c`, and `01b` scrapes each state's table of polls. Of the 443 polls
+scraped, the 280 with fieldwork ending on or after 1 August 2026 are used in
+the forecast (@tbl-polls). The poll average weights each poll by its sample
+size and its age, so a poll a month older counts half as much. Colorado,
+Hawaii and Wyoming had no polls.
 
 ```{=html}
 <!-- <details class="more"><summary>Show the polls by state</summary> -->
@@ -22,7 +30,32 @@ P.tbl_polls()
 
 ### Personas and the weighting frame
 
-Each state's AI survey uses 100 personas built from real survey respondents, weighted to match the state's voters.
+For each of the 36 states, 100 registered voters were selected from the CES in 
+proportion to their survey weight (without replacement, fixed seed). Respondents 
+from 2025 were prioritized, and in the 10 states where the 2025 survey included 
+fewer than 100 individuals, additional respondents were drawn from 2024. As a 
+result, 3,068 personas are from 2025 and 532 are from 2024. Each persona consists 
+of a short description based on age, gender, state, race and ethnicity, education, 
+family income, party affiliation, and ideology. Additionally, 10 personas per 
+state were used for validation checks. 
+
+The personas illustrate how each voter type would respond, and the weighting frame indicates the number of each type 
+present in the state. The frame divides each state into 24 groups by party 
+(three categories), age (four bands), and whether the individual holds a four-year 
+degree. It is constructed from all 54,764 eligible CES respondents, with weights 
+from each year rescaled to average one prior to pooling the two years. The 2024 
+survey contributes 76–88% of the weight for each state. In Method A, persona 
+responses are weighted by their stated likelihood of voting 
+(definitely 1, probably 0.7, unlikely 0.2, will not 0), averaged within each 
+group, and the groups are then combined according to their share of the state's 
+frame. Method B’s group answers are combined the same way. In Method A, 
+a group with no personas borrows the rate of its party group within that state. 
+The frame matters as much as the models. CES 2025 included only 113 Arkansan 
+respondents, who leaned Democratic; consequently, half of the Arkansas personas are Democrats 
+(compared to 34% in the frame; @tbl-frame). Before the frame 
+was built from all eligible respondents, the Method A estimate for Arkansas was D+12; with the pooled frame, it is R+24. Effective 
+sample sizes range from 47 in Alaska to 2,708 in California, indicating that 
+frames for smaller states are also subject to greater uncertainty.
 
 ```{python}
 #| label: tbl-composition
