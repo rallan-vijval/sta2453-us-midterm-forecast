@@ -3,7 +3,6 @@
 A forecast of the 36 governor races on 3 November 2026, built from **synthetic survey responses**: large language models answering an election survey while playing real respondents to the Cooperative Election Study (CES). The synthetic answers are combined with past results and published polls, and the election is simulated 10,000 times.
 
 - **Website:** https://rallan-vijval.github.io/us-midterm-gubernatorial-forecast/
-- **Course:** STA2453H, University of Toronto, Fall 2026, Assignment II
 - **Team:** Vijval Rallan (CES, personas, Method A), Shrey Sati (model queries, tests, Method B, GitHub Actions), Allwin Steve Paul Justin Anantharaj (race data, simulation, Method C, forecast, website)
 
 ## Data Sources and Licences
@@ -18,6 +17,18 @@ This project uses data from the 2024 and 2025 Cooperative Election Study (CES) C
 Small samples of the CES data are included in this repository for reproducibility and development. Please consult the original datasets and their documentation for full details.
 
 The samples are intended for development and testing. Results based on sampled data may not be representative of the full CES datasets or the electorate.
+
+### Wikipedia
+
+Polls, candidates, past governor results (2014, 2018, 2022) and each state's Cook PVI come from the English Wikipedia pages "<year> United States gubernatorial elections" and the 2026 state race pages, saved as snapshots in `data/01-raw_data/wikipedia/`. Wikipedia text is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+
+### State outlines
+
+The map uses simplified US Census Bureau state boundaries (public domain), as published by [PublicaMundi/MappingAPI](https://github.com/PublicaMundi/MappingAPI), saved as `data/01-raw_data/us_states.geojson`.
+
+### Synthetic data
+
+All model answers in `data/02-analysis_data/responses/` are synthetic: they were written by language models role-playing CES respondents, not by real voters.
 
 ## Use of AI tools
 
@@ -36,7 +47,7 @@ The exact identifiers and settings are in `config/models.yaml`, and every call's
 Each of us used AI assistants while building the project. We made the analysis decisions, ran every script ourselves, checked the outputs against the data, and reviewed every change before merging.
 
 **Allwin Steve Paul Justin Anantharaj**
-- Tools: Claude (Anthropic), model `claude-opus-5-5`, used through the Claude app's agentic coding workspace (built on Claude Code); GitHub Copilot, for one commit that replaced member labels with full names in script headers. [Add any other assistant you used, for example to reword drafts.]
+- Tools: Claude (Anthropic), model `claude-opus-5-5`, used through the Claude app's agentic coding workspace (built on Claude Code); GitHub Copilot, for one commit that replaced member labels with full names in script headers. 
 - What the tools did:
   - Wrote and debugged code for the prompt builder (`03`): the persona f-strings and label mappings.
   - Wrote and debugged code for the forecast (`05`): the fundamentals regression, poll average, calibration line, inverse-variance blend, Monte Carlo simulation, plurality rule, and the Georgia, Alaska and Maine rules.
@@ -66,7 +77,9 @@ Each of us used AI assistants while building the project. We made the analysis d
 - What I did myself:
   - Ran the full model run and the API calls with my own OpenRouter key, and set up the repository secret and spending limit.
   - Ran every script and test locally and checked the outputs.
-  - Made the design choices: the dar[…paste the rest of Shrey's text here]
+  - Made the design choices: the dark theme, Karla and Lekton from fiftyplusone, and the ratings layout adapted from Decision Desk HQ.
+  - Decided which checks to keep, and reviewed and merged pull requests.
+  - Wrote the final text of my sections.
 
 ### Writing
 
@@ -84,7 +97,7 @@ The written analysis on the website (Methods, Uncertainty and Discussion) was wr
 
 ## Running it
 
-1. Install [uv](https://github.com/astral-sh/uv), then run `uv sync`.
+1. Install Python 3.12, [uv](https://github.com/astral-sh/uv) and [Quarto](https://quarto.org), then run `uv sync`.
 2. Copy `.env.example` to `.env` and add your own OpenRouter key. Never commit `.env`.
 3. Run the scripts in order:
    ```
