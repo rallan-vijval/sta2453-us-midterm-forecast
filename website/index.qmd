@@ -79,7 +79,7 @@ P.seat_bar()
 
 ```{=html}
 <footer class="site-footer">
-  <p>By Vijval Rallan, Shrey Sati and Allwin Steve Paul Justin Anantharaj, for STA2453 at the University of Toronto, fall 2026.</p>
+  <p>By: Vijval Rallan, Shrey Sati and Allwin Steve Paul Justin Anantharaj</p>
   <p>Code and data: <a href="https://github.com/rallan-vijval/us-midterm-gubernatorial-forecast">https://github.com/rallan-vijval/us-midterm-gubernatorial-forecast</a></p>
   <p>Every forecast on this page comes from synthetic survey answers written by language models, combined with real polls and past results. They are not answers from real voters.</p>
 </footer>
