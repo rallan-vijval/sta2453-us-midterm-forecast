@@ -18,6 +18,8 @@ Small samples of the CES data are included in this repository for reproducibilit
 
 The samples are intended for development and testing. Results based on sampled data may not be representative of the full CES datasets or the electorate.
 
+The full CES files are not committed because of their size. `scripts/01a-download_ces.py` downloads them from Harvard Dataverse into `data/01-raw_data/ces/` (`CCES24_Common_OUTPUT_vv_topost_final.csv` and `CES25_Common.dta`, both gitignored) and records their checksums in `ces_download_manifest.json`. If the full files are absent, `scripts/02-clean_data.py` falls back to the committed samples (`CES24_sample.csv` and `CES25_sample.dta`), which have the same columns, so the pipeline still runs.
+
 ### Wikipedia
 
 Polls, candidates, past governor results (2014, 2018, 2022) and each state's Cook PVI come from the English Wikipedia pages "<year> United States gubernatorial elections" and the 2026 state race pages, saved as snapshots in `data/01-raw_data/wikipedia/`. Wikipedia text is licensed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
@@ -115,7 +117,9 @@ The written analysis on the website (Methods, Uncertainty and Discussion) was wr
    uv run python scripts/05-forecast.py
    uv run python scripts/06-validation_checks.py
    uv run python scripts/07-plot_forecast.py
-   uv run quarto render website
+   cd website
+   uv run quarto render       # run from inside website/; writes the site to docs/
+   cd ..
    ```
    Add `--dry-run` to any `04` command to print the first prompt without calling a model. `config/models_template.yaml` shows the config format.
 4. Run the tests with `uv run pytest`.
