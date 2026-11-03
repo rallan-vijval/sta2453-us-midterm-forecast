@@ -117,6 +117,12 @@ a:hover { text-decoration-color: var(--text); }
 }
 .hero .updated p { color: var(--muted); font-family: $font-family-monospace; font-size: 1rem; margin-bottom: 2.25rem; }
 .hero .disclosure p { margin: 0; }
+// The forecast sentence under the title.
+.hero .standfirst p {
+  font-size: clamp(1.4rem, 3.2vw, 2rem); font-weight: 600;
+  line-height: 1.2; letter-spacing: -0.015em; color: var(--text);
+  margin: 0 0 1.25rem;
+}
 
 .seat-bar {
   display: grid; grid-template-columns: repeat(25, 1fr) 6px repeat(25, 1fr);
@@ -306,5 +312,6 @@ figcaption, .figure-caption, .quarto-float-caption { text-align: center; }
   margin-right: auto;
   font-size: clamp(2.3rem, 6vw, 3.8rem);
 }
+.hero .standfirst p,
 .hero .disclosure,
 .hero .updated p { text-align: center; margin-left: auto; margin-right: auto; }
