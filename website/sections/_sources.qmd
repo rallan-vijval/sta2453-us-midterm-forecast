@@ -20,7 +20,18 @@ P.chart("sources")
 
 ### Asking the model for a forecast instead
 
-We also asked the same models to act as forecasters. Their answers are shown here for comparison and are not used in the forecast.
+We also asked the same three models to function as forecasters (Method C) and 
+compared their answers to the polls in the 33 states that have them (@tbl-sources). 
+Method C favoured the same candidate as the polls in 30 of the 33 states, 
+compared to 26 for the raw AI surveys. It was 10.3 points from the poll margin 
+on average (vs 12.4 for the raw AI surveys and 6.2 after their correction). 
+Like the AI surveys, it leaned Republican (9.3 points on average). Its worst 
+performances were in Vermont (R+27.7 vs R+2.5 in the polls), Nebraska (R+27.2 vs R+3.2), 
+Oklahoma (R+26.3 vs R+4.8) and Rhode Island, where it had the Democrat 
+only 19 points ahead of the Republican (vs 48 in the polls). We report Method C 
+purely for comparison and avoid including it in the forecast. This is because a model asked to 
+forecast is likely to be drawing on the polls, the ratings and past results it 
+has already seen, which are sources the forecast already uses.
 
 ```{python}
 #| label: tbl-sources
