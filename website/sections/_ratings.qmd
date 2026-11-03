@@ -1,6 +1,6 @@
 ## Every race, closest first {#ratings}
 
-Each row represents one of the 36 governor races ordered from the closest to the safest. A dot on the left favours the Democrat while a dot on the right favours the Republican. The farther the dot is from the centre, the safer the race is for that party. The percentage shows the favoured candidate chance of winning not their share of the vote. Ratings are classified as Toss-up, Lean, Likely or Solid based on the candidate's chance of winning. You can filter races by rating, search for a state or select the plus sign to view candidates and estimates from each source.
+Each row represents one of the 36 governor races ordered from the closest to the safest. A dot on the left favours the Democrat while a dot on the right favours the Republican. The farther the dot is from the centre, the safer the race is for that party. The percentage shows the favoured candidate's chance of winning not their share of the vote. Ratings are classified as Toss-up, Lean, Likely or Solid based on the candidate's chance of winning. You can filter races by rating, search for a state or select the plus sign to view candidates and estimates from each source.
 
 The current forecast has 12 Solid Democratic races, 4 Likely Democratic races, 3 Lean Democratic races, 3 Toss-ups, 5 Lean Republican races, 1 Likely Republican race and 8 Solid Republican races. Georgia, Nevada and Ohio are the three Toss-ups.
 
